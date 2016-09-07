@@ -6,3 +6,6 @@ jQuery(document).ready ->
   $('#go-down').click ->
     scrollHeight = $('#about').height() + $('#menus').height() + $('#for-owner').height()
     $("html, body").animate({ scrollTop: $(document).height() - scrollHeight }, 'slow');
+
+  #로그인 모달
+  $('.ui.basic.sign_in.modal').modal('show');

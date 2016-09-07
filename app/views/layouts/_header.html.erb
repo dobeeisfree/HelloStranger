@@ -1,4 +1,4 @@
-<div class="ui top fixed  menu">
+<header class="ui top fixed  menu">
   <div class="header item" id="brand">
     <%= link_to "Hello, stranger!", root_path %>
   </div>
@@ -9,8 +9,8 @@
     <%= link_to "매장현황", root_path , class: "ui item" %>
     <%= link_to "로그아웃", destroy_owner_session_path, method: 'delete', class: "ui item" %>
     <% else %>
-    <%= link_to "로그인",  new_owner_session_path, class: "ui item" %>
+    <%= link_to "로그인",  new_owner_session_path, class: "ui item", id: "sign_in" %>
     <%= link_to "회원가입", new_owner_registration_path, class: "ui item" %>
     <% end %>
   </div>
-</div>
+</header>
