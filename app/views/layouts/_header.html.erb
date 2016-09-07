@@ -7,7 +7,17 @@
     <%= link_to "메뉴판 등록하기", menus_path , class: "ui item" %>
     <% if owner_signed_in? %>
     <%= link_to "매장현황", root_path , class: "ui item" %>
-    <%= link_to "로그아웃", destroy_owner_session_path, method: 'delete', class: "ui item" %>
+    <div class="ui pointing dropdown link item">
+      <span><%= current_owner.name %></span>
+      <i class="dropdown icon"></i>
+      <div class="menu">
+         <div class="header">오너님 안녕하세요</div>
+         <div class="item">마이페이지</div>
+         <div class="item">
+           <%= link_to "로그아웃", destroy_owner_session_path, style: 'color:black', method: 'delete' %>
+         </div>
+      </div>
+    </div>
     <% else %>
     <%= link_to "로그인",  new_owner_session_path, class: "ui item", id: "sign_in" %>
     <%= link_to "회원가입", new_owner_registration_path, class: "ui item" %>

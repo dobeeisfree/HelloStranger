@@ -5,8 +5,8 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
    protected
-   # 회원가입시, 전화번호 필드를 허용
+   # 회원가입시, 특정 필드를 허용
    def configure_permitted_parameters
-     devise_parameter_sanitizer.permit(:sign_up, keys: [:contact_number])
+     devise_parameter_sanitizer.permit(:sign_up, keys: [:contact_number, :name])
    end
 end
