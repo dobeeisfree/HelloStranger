@@ -4,8 +4,8 @@ class DeviseCreateOwners < ActiveRecord::Migration
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
-      t.string :name #추가해줌
-      t.string :contact_number #추가해줌
+      t.string :name,               null: false, default: "" #추가해줌
+      t.string :contact_number,     null: false, default: "" #추가해줌
 
       ## Recoverable
       t.string   :reset_password_token

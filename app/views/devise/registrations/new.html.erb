@@ -10,6 +10,13 @@
     </div>
   </div>
   <div class="field">
+    <%= f.label :contact_number %>
+    <div class="ui left icon input">
+    <%= f.text_field :contact_number, autofocus: true, placeholder: "개인 전화번호를 '-'를 생락하여 입력해주세요" %>
+      <i class="user icon"></i>
+    </div>
+  </div>
+  <div class="field">
     <%= f.label :password %>
     <div class="ui left icon input">
     <%= f.password_field :password, autocomplete: "off", placeholder: "비밀번호를 입력해주세요" %>
