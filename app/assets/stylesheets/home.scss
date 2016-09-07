@@ -1,0 +1,38 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/;
+
+// 메뉴바의 hello, stranger
+#brand {
+  font-size: 1em;
+  a {
+    color : black;
+  }
+}
+// 홈의 모든 텍스트는 중앙정렬
+div {
+  text-align: center;
+}
+// 홈의 이미지
+.ui.image {
+   position: relative;
+   width: 100%;
+   // 그안의 글자 정렬
+   span {
+     font-weight: bold;
+     font-size: 3.5em;
+     color: white;
+
+     position: absolute;
+     top: 200px;
+     left: 0px;
+     right: 0px;
+     width: 100%;
+
+     // 첫번 쨰 사진
+     #go-down {
+       margin-top: 250px;
+       font-size: 1.0em;
+     }
+   }
+}
