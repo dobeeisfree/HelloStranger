@@ -4,15 +4,15 @@
   <title>HelloStranger</title>
   <%= stylesheet_link_tag    'application' %>
   <%= javascript_include_tag 'application' %>
-
+  <%= favicon_link_tag 'temp.ico' %>
   <link rel="stylesheet" type="text/css" href="/semantic/dist/semantic.min.css">
   <script src="/semantic/dist/semantic.min.js"></script>
   <%= csrf_meta_tags %>
 </head>
-<body>
 
-  <%= render partial: "layouts/header" %>
-  <%= yield %>
-
-</body>
+  <body>
+    <%= render partial: "layouts/header" %>
+    <%= render partial: "/devise/sessions/new" %>
+    <%= yield %>
+  </body>
 </html>

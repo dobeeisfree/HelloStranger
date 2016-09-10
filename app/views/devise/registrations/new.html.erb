@@ -8,11 +8,13 @@
 </div>
 
 <div class="ui massive floating sign_up message">
-  <h2 class="ui header">1 &nbsp;&nbsp; <small><%= @step1 %></small></h2>
+  <h2 class="ui header">1 &nbsp;&nbsp; 
+    <small>간단히 계정을 만듭니다.</small>
+  </h2>
 </div>
 
 <div class="step1 signup" id="sign_up_devise">
-  <%= render partial: "layouts/registrations/signUp" %>
+  <%= render partial: "layouts/devise/signUp" %>
 </div>
 
 <div class="step2">

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # 메인 라우트
   root 'home#index'
   # 계정
-  devise_for :owners, controllers: { sessions: 'owners/sessions' }
+  devise_for :owners
 
   # 리소스 모음
   # 메뉴

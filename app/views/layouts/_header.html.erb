@@ -4,8 +4,8 @@
   </div>
   <div class="right menu">
     <a class="item" href="/#about">어바웃</a>
-    <%= link_to "메뉴판 등록하기", menus_path , class: "ui item" %>
     <% if owner_signed_in? %>
+    <%= link_to "메뉴판 등록하기", menus_path , class: "ui item" %>
     <%= link_to "매장현황", root_path , class: "ui item" %>
     <div class="ui pointing dropdown link item">
       <span><%= current_owner.name %>님</span>
@@ -22,7 +22,8 @@
       </div>
     </div>
     <% else %>
-    <%= link_to "로그인",  new_owner_session_path, class: "ui item", id: "sign_in" %>
+    <a class="ui item" id="menu-pan">메뉴판 등록하기</a>
+    <a class="ui item" id="sign_in">로그인</a>
     <%= link_to "회원가입", new_owner_registration_path, class: "ui item" %>
     <% end %>
   </div>
