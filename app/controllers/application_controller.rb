@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
    protected
    # 회원가입시, 특정 필드를 허용
    def configure_permitted_parameters
-     devise_parameter_sanitizer.permit(:sign_up, keys: [:contact_number, :name])
+     devise_parameter_sanitizer.permit(:sign_up,
+     keys: [:name, :contact_number, :email, :password, :password_confirmation])
    end
 end

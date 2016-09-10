@@ -1,8 +1,37 @@
-#sign_in_devise, #sign_up_devise {
+// 로그인
+#sign_in_devise {
   margin-top: 100px;
   width: 50%;
 }
-// 스크롤바 없앰
-body {
-    overflow-y: hidden;
+// 회원가입 1단계의 전체 디브
+#sign_up_devise {
+  width: 30%;
+  margin-top: 50px;
+  margin-left: 100px;
+}
+// 회원가입의 메세지
+#registrations {
+  text-align: center;
+  // 상단의 이미지
+  .ui.image {
+     position: relative;
+     width: 100%;
+     // 그안의 글자 정렬
+     span {
+       font-weight: bold;
+       font-size: 5.5em;
+       color: white;
+       line-height: 2em;
+
+       position: absolute;
+       top: 200px;
+       left: 0px;
+       right: 0px;
+       width: 100%;
+     }
+   }
+}
+// 회원가입의 1단계 메세지
+.ui.floating.sign_up.message {
+  margin: 0 auto;
 }

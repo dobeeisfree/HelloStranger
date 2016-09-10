@@ -3,19 +3,22 @@
     <%= link_to "Hello, stranger!", root_path %>
   </div>
   <div class="right menu">
-    <a class="item" href="#about">어바웃</a>
+    <a class="item" href="/#about">어바웃</a>
     <%= link_to "메뉴판 등록하기", menus_path , class: "ui item" %>
     <% if owner_signed_in? %>
     <%= link_to "매장현황", root_path , class: "ui item" %>
     <div class="ui pointing dropdown link item">
-      <span><%= current_owner.name %></span>
+      <span><%= current_owner.name %>님</span>
       <i class="dropdown icon"></i>
       <div class="menu">
-         <div class="header">오너님 안녕하세요</div>
-         <div class="item">마이페이지</div>
-         <div class="item">
-           <%= link_to "로그아웃", destroy_owner_session_path, style: 'color:black', method: 'delete' %>
-         </div>
+        <div class="header">오너님 안녕하세요</div>
+        <div class="item">
+          <%= link_to "마이페이지", mypage_path, style: 'color:black', method: 'get' %>
+        </div>
+        <div class="divider"></div>
+        <div class="item">
+         <%= link_to "로그아웃", destroy_owner_session_path, style: 'color:black', method: 'delete' %>
+        </div>
       </div>
     </div>
     <% else %>

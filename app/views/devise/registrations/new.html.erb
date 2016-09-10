@@ -1,44 +1,19 @@
-<div class="ui container" id="sign_up_devise">
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html:{class: "ui form"}) do |f| %>
-  <%= devise_error_messages! %>
-  <h1>회원가입</h1>
-  <div class="field">
-    <%= f.label :name %>
-    <div class="ui left icon input">
-    <%= f.text_field :name, autofocus: true, placeholder: "이름을 입력해주세요" %>
-      <i class="user icon"></i>
-    </div>
+<div id="registrations">
+  <div class="ui image">
+    <%= image_tag "owners_sign_up.jpg", class: "ui fluid image" %>
+    <span>
+      오너가 되어,<br>매장 관리를 해보세요!
+    </span>
   </div>
-  <div class="field">
-    <%= f.label :email %>
-    <div class="ui left icon input">
-    <%= f.email_field :email, autofocus: true, placeholder: "이메일을 입력해주세요" %>
-      <i class="user icon"></i>
-    </div>
-  </div>
-  <div class="field">
-    <%= f.label :contact_number %>
-    <div class="ui left icon input">
-    <%= f.text_field :contact_number, autofocus: true, placeholder: "개인 전화번호를 '-'를 생락하여 입력해주세요" %>
-      <i class="user icon"></i>
-    </div>
-  </div>
-  <div class="field">
-    <%= f.label :password %>
-    <div class="ui left icon input">
-    <%= f.password_field :password, autocomplete: "off", placeholder: "비밀번호를 입력해주세요" %>
-      <i class="lock icon"></i>
-    </div>
-  </div>
-  <div class="field">
-    <%= f.label :password_confirmation %>
-    <div class="ui left icon input">
-    <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "비밀번호를 한 번 더 입력해주세요" %>
-      <i class="lock icon"></i>
-    </div>
-  </div>
-  <%= f.submit "회원가입", class: "ui fluid button" %>
-<% end %>
-<br>
-<%= render "devise/shared/links" %>
+</div>
+
+<div class="ui massive floating sign_up message">
+  <h2 class="ui header">1 &nbsp;&nbsp; <small><%= @step1 %></small></h2>
+</div>
+
+<div class="step1 signup" id="sign_up_devise">
+  <%= render partial: "layouts/registrations/signUp" %>
+</div>
+
+<div class="step2">
 </div>
