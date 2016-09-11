@@ -3,7 +3,7 @@
     <div class="ui image">
       <%= image_tag "1.jpg", class: "ui fluid image" %>
       <span>
-        외국인에게 메뉴를 퀵뷰로 제공하세요!<br>
+        <b class="header-msg">외국인에게 메뉴를<br>퀵뷰로 제공하세요!</b><br>
         <button class="huge ui circular icon inverted button" id="go-down">
           <i class="angle double down icon"></i>
         </button>
@@ -15,8 +15,13 @@
     <div class="ui image">
       <%= image_tag "3.jpg", class: "ui fluid image" %>
       <span>
-        Hello, Stranger!
-        우리의 서비스는 이러이러합니다.
+        <b class="msg">Hello, Stranger!<b>
+        <p class="description">
+          이 어플리케이션은 외국인들을 위한 메뉴판 번역 서비스입니다.<br>
+          길거리 밖에서도, 비콘이 설치된 매장이라면 메뉴판을 쉽게 접할 수 있습니다.<br>
+          올바른 정보제공을 위해서 만들어진,<br>
+          이 웹페이지는 오너에게 매장을 관리할 수 있도록 도와줍니다.
+        </p>
       </span>
     </div>
   </div>
@@ -24,14 +29,34 @@
   <div id="menus">
     <div class="ui image">
       <%= image_tag "4.jpg", class: "ui fluid image" %>
-      <span>메뉴판 등록하기</span>
+      <span>
+        <b class="msg">메뉴판 등록하기<b>
+        <p class="description">
+        메뉴의 사진, 재료, 맛, 가격, 이름을 입력하세요!<br>
+        몇가지 단계만 거치면 멋진 폼을 만들 수 있습니다.<br>
+        </p>
+
+        <% if owner_signed_in? %>
+        <%= link_to "메뉴판 등록하기", menus_path, class: "massive ui inverted button quick" %>
+        <% end %>
+      </span>
     </div>
   </div>
 
   <div id="for-owner">
     <div class="ui image">
       <%= image_tag "2.jpg", class: "ui fluid image" %>
-      <span>오너를 위한 기능</span>
+      <span>
+        <b class="msg">오너를 위한 기능<b>
+        <p class="description">
+          음식의 선호도와 평점을 알 수 있습니다.<br>
+          통계 보고서를 통해 가게 운영과 마케팅을 개선해보세요!<br>
+        </p>
+
+        <% if owner_signed_in? %>
+        <%= link_to "매장현황", root_path, class: "massive ui inverted button quick" %>
+        <% end %>
+      </span>
     </div>
   </div>
 

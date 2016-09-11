@@ -12,10 +12,12 @@
 // 홈의 모든 텍스트는 중앙정렬
 .home {
   text-align: center;
+
   // 홈의 이미지
   .ui.image {
      position: relative;
      width: 100%;
+
      // 그안의 글자 정렬
      span {
        font-weight: bold;
@@ -28,10 +30,35 @@
        right: 0px;
        width: 100%;
 
-       // 첫번 쨰 사진
+       // 첫번 쨰 사진의 버튼
        #go-down {
-         margin-top: 250px;
+         margin-top: 80px;
          font-size: 1.0em;
+       }
+
+       .header-msg {
+        color:white;
+        background-color: rgba(0, 0, 0, 0.15);
+        font-size: 1.5em;
+        line-height: 1.5em;
+       }
+
+       .msg {
+         font-size: 1.5em;
+         color:rgba(0,181,173,0.85);
+       }
+
+       .description {
+         color : white;
+         background-color: rgba(0, 0, 0, 0.15);
+
+         font-size: 0.3em;
+         line-height: 1.5em;
+         margin-top: 100px;
+       }
+
+       .quick {
+         margin-top: 100px;
        }
      }
   }
