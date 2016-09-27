@@ -27,3 +27,4 @@ jQuery(document).ready ->
 
   #계정의 드롭다운
   $('.ui.pointing.dropdown').dropdown();
+  $('.ui.fluid.dropdown').dropdown();

@@ -1,3 +1,4 @@
+$space : 50px;
 // 로그인
 #sign_in_devise {
   width: 30%;
@@ -9,10 +10,10 @@
   }
 }
 // 회원가입 1단계의 전체 디브
-#sign_up_devise {
+#step1 {
   width: 30%;
-  margin-top: 50px;
-  margin-left: 100px;
+  margin-top: $space;
+  margin-left: $space * 2;
 }
 // 회원가입의 메세지
 #registrations {
@@ -25,7 +26,7 @@
      span {
        font-weight: bold;
        font-size: 5.5em;
-       color: white;
+       color: rgba(0, 0, 0, 0.7);
        line-height: 2em;
 
        position: absolute;
@@ -37,7 +38,22 @@
    }
 }
 
-// 회원가입의 1단계 메세지
-.ui.floating.sign_up.message {
+// 회원가입의 메세지
+.ui.floating.message {
+  margin: 0 auto;
+}
+.step2 {
+  margin-top: $space !important;
+}
+#step2 {
+  width: 60%;
+  margin-top: $space;
+  margin-left: $space * 2;
+}
+
+#confirm {
+  width: 30%;
+  padding-top: $space * 2;
+  padding-bottom: $space;
   margin: 0 auto;
 }

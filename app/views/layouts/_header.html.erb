@@ -8,7 +8,7 @@
     <%= link_to "메뉴판 등록하기", menus_path , class: "ui item" %>
     <%= link_to "매장현황", root_path , class: "ui item" %>
     <div class="ui pointing dropdown link item">
-      <span><%= current_owner.name %>님</span>
+      <span id="owner-name"><%= current_owner.name %></span>님
       <i class="dropdown icon"></i>
       <div class="menu">
         <div class="header">오너님 안녕하세요</div>

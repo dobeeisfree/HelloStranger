@@ -14,12 +14,15 @@
 ActiveRecord::Schema.define(version: 20160909183121) do
 
   create_table "menus", force: :cascade do |t|
-    t.string   "picture",          limit: 255
-    t.integer  "price",            limit: 4
-    t.string   "name",             limit: 255
+    t.string   "picture",           limit: 255
+    t.integer  "tag_taste",         limit: 4
+    t.integer  "tag_foodstuff",     limit: 4
+    t.integer  "tag_cookingmethod", limit: 4
+    t.integer  "price",             limit: 4
+    t.string   "name",              limit: 255
     t.boolean  "recommended_menu"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   create_table "owners", force: :cascade do |t|
@@ -43,8 +46,15 @@ ActiveRecord::Schema.define(version: 20160909183121) do
   add_index "owners", ["reset_password_token"], name: "index_owners_on_reset_password_token", unique: true, using: :btree
 
   create_table "stores", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",        limit: 255
+    t.string   "location",    limit: 255
+    t.integer  "category",    limit: 4
+    t.string   "beacon_id",   limit: 255
+    t.string   "business_id", limit: 255
+    t.datetime "open_time"
+    t.datetime "close_time"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
 end

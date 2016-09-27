@@ -1,3 +1,4 @@
+
 <div id="registrations">
   <div class="ui image">
     <%= image_tag "owners_sign_up.jpg", class: "ui fluid image" %>
@@ -7,15 +8,155 @@
   </div>
 </div>
 
-<div class="ui massive floating sign_up message">
-  <h2 class="ui header">1 &nbsp;&nbsp; 
-    <small>간단히 계정을 만듭니다.</small>
-  </h2>
-</div>
+<div class="signup">
 
-<div class="step1 signup" id="sign_up_devise">
-  <%= render partial: "layouts/devise/signUp" %>
-</div>
+  <div class="ui massive floating step1 message">
+    <h2 class="ui header">1 &nbsp;&nbsp;
+      <small>간단히 계정을 만듭니다.</small>
+    </h2>
+  </div>
 
-<div class="step2">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html:{class: "ui form"}) do |f| %>
+  <div id="step1">
+    <%= devise_error_messages! %>
+    <h1>오너의 계정정보</h1>
+    <div class="required field">
+      <%= f.label :이름 %>
+      <div class="ui left icon input">
+      <%= f.text_field :name, autofocus: true, placeholder: "이름을 입력해주세요" %>
+        <i class="user icon"></i>
+      </div>
+    </div>
+    <div class="required field">
+      <%= f.label :이메일 %>
+      <div class="ui left icon input">
+      <%= f.email_field :email, autofocus: true, placeholder: "이메일을 입력해주세요" %>
+        <i class="mail icon"></i>
+      </div>
+    </div>
+    <div class="required field">
+      <%= f.label :비밀번호 %>
+      <div class="ui left icon input">
+      <%= f.password_field :password, autocomplete: "off", placeholder: "비밀번호를 입력해주세요" %>
+        <i class="lock icon"></i>
+      </div>
+    </div>
+    <div class="required field">
+      <div class="ui left icon input">
+      <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "비밀번호를 한 번 더 입력해주세요" %>
+        <i class="lock icon"></i>
+      </div>
+    </div>
+    <div class="required field">
+      <%= f.label :연락처 %>
+      <div class="ui left icon input">
+      <%= f.text_field :contact_number, autofocus: true, placeholder: "개인 전화번호를 '-'를 생락하여 입력해주세요" %>
+        <i class="text telephone icon"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui massive floating step2 message">
+    <h2 class="ui header">2 &nbsp;&nbsp;
+      <small>하나의 매장을 등록합니다.</small>
+    </h2>
+  </div>
+
+  <div id="step2">
+    <%= form_tag('/stores') do %>
+    <form class="ui form">
+      <h4 class="ui dividing header">매장정보</h4>
+
+        <div class="fields">
+          <div class="twelve wide field required">
+            <label>매장명</label>
+            <input type="text" name="shipping[first-name]" placeholder="상호명을 정확히 입력해주세요">
+          </div>
+          <div class="four wide field required">
+            <label>Category</label>
+            <select class="ui fluid dropdown">
+              <option value="">가계유형 선택</option>
+              <option value="0">Traditional</option>
+              <option value="1">Rice</option>
+              <option value="2">Noodle</option>
+              <option value="3">BBQ</option>
+              <option value="4">Snack</option>
+              <option value="5">Fast Food</option>
+            </select>
+          </div>
+        </div>
+
+
+      <div class="field required">
+        <label>사업자등록번호</label>
+        <input type="text" name="card[number]" maxlength="10" placeholder="10자리를 공백없이 입력해주세요">
+      </div>
+
+      <div class="field required">
+        <label>Beacon UUID</label>
+        <input type="text" name="card[number]" placeholder="예시> 24DDF411-8CF1-440C-87CD-E368DAF9C93E">
+      </div>
+
+      <div class="eight wide field required">
+        <label>매장 주소</label>
+        <div class="ui action input">
+          <div class="ui disabled input">
+            <input type="text" name="card[number]" placeholder="먼저 우편 검색을 해주세요">
+          </div>
+          <button class="ui button">우편번호 찾기</button>
+        </div>
+      </div>
+
+      <div class="eight wide field">
+        <input type="text" name="card[number]" placeholder="상세 주소를 입력해주세요">
+      </div>
+
+      <h4 class="ui dividing header">영업시간</h4>
+      <div class="fields">
+        <% time_picker = %w(12:00am 12:30am 1:00am 1:30am 2:00am 2:30am 3:00am 3:30am 4:00am 4:30am 5:00am 5:30am 6:00am 6:30am 7:00am 7:30am 8:00am 8:30am 9:00am 9:30am 10:00am 10:30am 11:00am 11:30am 12:00pm 12:30pm 1:00pm 1:30pm 2:00pm 2:30pm 3:00pm 3:30pm 4:00pm 4:30pm 5:00pm 5:30pm 6:00pm 6:30pm 7:00pm 7:30pm 8:00pm 8:30pm 9:00pm 9:30pm 10:00pm 10:30pm 11:00pm 11:30pm) %>
+        <div class="five wide field required">
+          <label>시작</label>
+          <select class="ui fluid dropdown">
+            <option value="">시간 선택</option>
+            <% time_picker.each do |t| %>
+            <option value="<%= t %>"><%= t %></option>
+            <% end %>
+          </select>
+        </div>
+
+        <div class="five wide field required">
+          <label>종료</label>
+          <select class="ui fluid dropdown">
+            <option value="">시간 선택</option>
+            <% time_picker.each do |t| %>
+            <option value="<%= t %>"><%= t %></option>
+            <% end %>
+          </select>
+        </div>
+      </div>
+
+      <div class="five wide field">
+        <label>매장사진</label>
+        <label for="file" class="green ui icon inverted button">
+           <i class="file icon"></i>
+        사진선택
+        </label>
+       <input type="file" id="file" style="display:none">
+      </div>
+
+    </form>
+    <% end %>
+  </div>
+
+
+  <div id="confirm">
+    <div class="field">
+      <div class="ui checkbox">
+        <input type="checkbox">
+        <label>I agree to the Terms and Conditions</label>
+      </div>
+    </div>
+    <%= f.submit "가입하기", class: "huge ui fluid primary button" %>
+  </div>
+  <% end %>
 </div>
