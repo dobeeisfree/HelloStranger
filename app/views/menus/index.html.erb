@@ -38,12 +38,29 @@
   <div class="ui three column grid">
     <% @menus.each do |m| %>
     <div class="column">
-      <div class="ui fluid card">
+      <div class="ui card">
         <div class="image">
           <img src="http://semantic-ui.com/images/avatar/large/daniel.jpg">
         </div>
         <div class="content">
-          <a class="header"><%= m.name %></a>
+          <span class="header"><%= m.name %></span>
+          <div class="description">
+            <p><%= m.tag_taste %></p>
+            <p><%= m.tag_foodstuff %></p>
+            <p><%= m.tag_cookingmethod %></p>
+          </div>
+          <div class="meta">
+            <span><%= m.price %></span>
+          </div>
+        </div>
+        <div class="extra content">
+          <% if m.recommended_menu == true %>
+          <i class="orange star icon"></i>
+          추천 메뉴
+          <% else %>
+          <i class="orange empty star icon"></i>
+          일반 메뉴
+          <% end %>
         </div>
       </div>
     </div>
