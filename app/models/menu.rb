@@ -1,4 +1,4 @@
 class Menu < ActiveRecord::Base
-  belongs_to  :store, foreign_key: 'store_id'
+  belongs_to  :store
   has_many    :review
 end

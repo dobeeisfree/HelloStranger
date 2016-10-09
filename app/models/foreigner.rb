@@ -1,3 +1,3 @@
 class Foreigner < ActiveRecord::Base
-  has_many :review, foreign_key: 'review_id'
+  has_many :review
 end
