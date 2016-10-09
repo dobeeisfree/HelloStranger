@@ -11,15 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160909183121) do
+ActiveRecord::Schema.define(version: 20161008171700) do
+
+  create_table "foreigners", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "password",   limit: 255
+    t.integer  "lang",       limit: 4
+    t.integer  "keep",       limit: 4
+    t.integer  "for_taboo",  limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "menus", force: :cascade do |t|
     t.string   "picture",           limit: 255
+    t.string   "name",              limit: 255
     t.integer  "tag_taste",         limit: 4
     t.integer  "tag_foodstuff",     limit: 4
     t.integer  "tag_cookingmethod", limit: 4
     t.integer  "price",             limit: 4
-    t.string   "name",              limit: 255
+    t.boolean  "checked_menu"
     t.boolean  "recommended_menu"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
@@ -45,16 +56,24 @@ ActiveRecord::Schema.define(version: 20160909183121) do
   add_index "owners", ["email"], name: "index_owners_on_email", unique: true, using: :btree
   add_index "owners", ["reset_password_token"], name: "index_owners_on_reset_password_token", unique: true, using: :btree
 
+  create_table "reviews", force: :cascade do |t|
+    t.boolean  "is_eval"
+    t.string   "content",    limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "stores", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "location",    limit: 255
-    t.integer  "category",    limit: 4
-    t.string   "beacon_id",   limit: 255
-    t.string   "business_id", limit: 255
+    t.string   "name",         limit: 255
+    t.string   "location",     limit: 255
+    t.string   "beacon_id",    limit: 255
+    t.string   "business_id",  limit: 255
+    t.string   "main_picture", limit: 255
+    t.integer  "category",     limit: 4
     t.datetime "open_time"
     t.datetime "close_time"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
 end
