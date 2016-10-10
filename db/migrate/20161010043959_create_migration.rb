@@ -51,7 +51,7 @@ class CreateMigration < ActiveRecord::Migration
       t.integer  "tag_foodstuff",     limit: 4
       t.integer  "tag_cookingmethod", limit: 4
       t.integer  "price",             limit: 4
-      t.boolean  "checked_menu"
+      t.boolean  "quick_menu"
       t.boolean  "recommended_menu"
       t.datetime "created_at",                    null: false
       t.datetime "updated_at",                    null: false

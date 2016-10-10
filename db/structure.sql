@@ -114,7 +114,7 @@ CREATE TABLE `menus` (
   `tag_cookingmethod` int(11) DEFAULT NULL,
   `price` int(11) DEFAULT NULL,
   `checked_menu` tinyint(1) DEFAULT NULL,
-  `recommended_menu` tinyint(1) DEFAULT NULL,
+  `quick_menu` tinyint(1) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   `rev_id` int(11) DEFAULT NULL,
@@ -159,7 +159,7 @@ CREATE TABLE `owners` (
   UNIQUE KEY `index_owners_on_reset_password_token` (`reset_password_token`) USING BTREE,
   KEY `store_id` (`sto_id`) USING BTREE,
   CONSTRAINT `owners_ibfk_1` FOREIGN KEY (`sto_id`) REFERENCES `stores` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -226,7 +226,7 @@ CREATE TABLE `stores` (
   KEY `rev_id` (`rev_id`) USING BTREE,
   CONSTRAINT `stores_ibfk_1` FOREIGN KEY (`rev_id`) REFERENCES `reviews` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `stores_ibfk_2` FOREIGN KEY (`men_id`) REFERENCES `menus` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -258,7 +258,7 @@ CREATE TABLE `tastes` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-10-10 17:39:55
+-- Dump completed on 2016-10-11  0:10:53
 INSERT INTO schema_migrations (version) VALUES ('20160903143132');
 
 INSERT INTO schema_migrations (version) VALUES ('20160903181957');

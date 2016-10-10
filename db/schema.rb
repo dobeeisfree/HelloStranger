@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 20161010043959) do
     t.integer  "tag_cookingmethod", limit: 4
     t.integer  "price",             limit: 4
     t.boolean  "checked_menu"
-    t.boolean  "recommended_menu"
+    t.boolean  "quick_menu"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.integer  "rev_id",            limit: 4
