@@ -52,7 +52,7 @@ CREATE TABLE `foodglossaries` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8192 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,10 +91,7 @@ CREATE TABLE `foreigners` (
   `for_taboo` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
-  `rev_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `foreigners_reviews__fk` (`rev_id`) USING BTREE,
-  CONSTRAINT `foreigners_ibfk_1` FOREIGN KEY (`rev_id`) REFERENCES `reviews` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -108,25 +105,19 @@ DROP TABLE IF EXISTS `menus`;
 CREATE TABLE `menus` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `picture` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `kor_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `tag_taste` int(11) DEFAULT NULL,
   `tag_foodstuff` int(11) DEFAULT NULL,
   `tag_cookingmethod` int(11) DEFAULT NULL,
   `price` int(11) DEFAULT NULL,
   `checked_menu` tinyint(1) DEFAULT NULL,
-  `quick_menu` tinyint(1) DEFAULT NULL,
+  `recommended_menu` tinyint(1) DEFAULT NULL,
+  `store_id` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
-  `rev_id` int(11) DEFAULT NULL,
-  `sto_id` int(11) DEFAULT NULL,
-  `eng_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `jpn_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `chn_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `review_id` (`rev_id`) USING BTREE,
-  KEY `store_id` (`sto_id`) USING BTREE,
-  CONSTRAINT `menus_ibfk_1` FOREIGN KEY (`sto_id`) REFERENCES `stores` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `menus_ibfk_2` FOREIGN KEY (`rev_id`) REFERENCES `reviews` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `fk_rails_20b0ce4e50` (`store_id`),
+  CONSTRAINT `fk_rails_20b0ce4e50` FOREIGN KEY (`store_id`) REFERENCES `stores` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -153,13 +144,10 @@ CREATE TABLE `owners` (
   `last_sign_in_ip` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
-  `sto_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `index_owners_on_email` (`email`) USING BTREE,
-  UNIQUE KEY `index_owners_on_reset_password_token` (`reset_password_token`) USING BTREE,
-  KEY `store_id` (`sto_id`) USING BTREE,
-  CONSTRAINT `owners_ibfk_1` FOREIGN KEY (`sto_id`) REFERENCES `stores` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  UNIQUE KEY `index_owners_on_email` (`email`),
+  UNIQUE KEY `index_owners_on_reset_password_token` (`reset_password_token`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -171,19 +159,17 @@ DROP TABLE IF EXISTS `reviews`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `reviews` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `foreigner_id` int(11) DEFAULT NULL,
+  `menu_id` int(11) DEFAULT NULL,
   `is_eval` tinyint(1) DEFAULT NULL,
   `content` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
-  `men_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `men_picture` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `men_id` int(11) NOT NULL,
-  `for_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `for_id` (`for_id`) USING BTREE,
-  KEY `men_id` (`men_id`) USING BTREE,
-  CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`men_id`) REFERENCES `menus` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`for_id`) REFERENCES `foreigners` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `fk_rails_be6d6ab568` (`menu_id`),
+  KEY `fk_rails_402b8f23c3` (`foreigner_id`),
+  CONSTRAINT `fk_rails_402b8f23c3` FOREIGN KEY (`foreigner_id`) REFERENCES `foreigners` (`id`),
+  CONSTRAINT `fk_rails_be6d6ab568` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -209,6 +195,7 @@ DROP TABLE IF EXISTS `stores`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `stores` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `owner_id` int(11) DEFAULT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `location` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `beacon_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -219,14 +206,10 @@ CREATE TABLE `stores` (
   `close_time` datetime DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
-  `rev_id` int(11) DEFAULT NULL,
-  `men_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `men_id` (`men_id`) USING BTREE,
-  KEY `rev_id` (`rev_id`) USING BTREE,
-  CONSTRAINT `stores_ibfk_1` FOREIGN KEY (`rev_id`) REFERENCES `reviews` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `stores_ibfk_2` FOREIGN KEY (`men_id`) REFERENCES `menus` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  KEY `fk_rails_dabcef777e` (`owner_id`),
+  CONSTRAINT `fk_rails_dabcef777e` FOREIGN KEY (`owner_id`) REFERENCES `owners` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -258,7 +241,7 @@ CREATE TABLE `tastes` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-10-11  0:10:53
+-- Dump completed on 2016-10-12  3:05:49
 INSERT INTO schema_migrations (version) VALUES ('20160903143132');
 
 INSERT INTO schema_migrations (version) VALUES ('20160903181957');

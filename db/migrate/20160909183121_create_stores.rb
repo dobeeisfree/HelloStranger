@@ -2,6 +2,10 @@ class CreateStores < ActiveRecord::Migration
   def change
     create_table :stores do |t|
 
+      ## db associations
+      t.belongs_to  :owner
+      t.integer     :owner_id
+
       t.string      :name
       t.string      :location
       t.string      :beacon_id

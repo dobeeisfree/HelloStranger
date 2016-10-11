@@ -1,5 +1,4 @@
 class Review < ActiveRecord::Base
-    belongs_to :store
-    belongs_to :menu
-    belongs_to :foreigner
+    belongs_to :menus
+    has_many   :foreigners
 end

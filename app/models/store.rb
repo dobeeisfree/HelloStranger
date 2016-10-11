@@ -1,4 +1,4 @@
 class Store < ActiveRecord::Base
-  has_many    :menu
-  belongs_to  :owner
+  has_many    :menus
+  belongs_to  :owners
 end

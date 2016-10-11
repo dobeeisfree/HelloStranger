@@ -1,4 +1,4 @@
 class Menu < ActiveRecord::Base
-  belongs_to  :store
-  has_many    :review
+  belongs_to  :stores
+  has_many    :reviews
 end

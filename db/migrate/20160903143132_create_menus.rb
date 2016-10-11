@@ -13,6 +13,9 @@ class CreateMenus < ActiveRecord::Migration
       t.boolean     :checked_menu
       t.boolean     :recommended_menu
 
+      ## db associations
+      t.integer     :store_id
+
       t.timestamps null: false
     end
   end
