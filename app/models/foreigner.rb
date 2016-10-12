@@ -1,3 +1,3 @@
 class Foreigner < ActiveRecord::Base
-  has_many    :reviews
+  has_many    :review
 end
