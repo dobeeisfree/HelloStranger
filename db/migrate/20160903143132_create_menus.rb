@@ -4,10 +4,6 @@ class CreateMenus < ActiveRecord::Migration
 
       t.string      :picture
       t.string      :name
-
-      t.integer     :tag_taste
-      t.integer     :tag_foodstuff
-      t.integer     :tag_cookingmethod
       t.integer     :price
 
       t.boolean     :checked_menu
@@ -15,6 +11,10 @@ class CreateMenus < ActiveRecord::Migration
 
       ## db associations
       t.integer     :store_id
+      t.integer     :foodglossary_id
+      t.integer     :foodstuff_id
+      t.integer     :taste_id
+      t.integer     :cookingmethod_id
 
       t.timestamps null: false
     end

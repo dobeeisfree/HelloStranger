@@ -29,8 +29,8 @@ CREATE TABLE `cookingmethods` (
   `jpn` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `chn` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `checked` tinyint(1) DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -49,10 +49,10 @@ CREATE TABLE `foodglossaries` (
   `jpn` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `chn` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `checked` tinyint(1) DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8192 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,8 +69,8 @@ CREATE TABLE `foodstuffs` (
   `jpn` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `chn` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `checked` tinyint(1) DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -106,18 +106,27 @@ CREATE TABLE `menus` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `picture` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `tag_taste` int(11) DEFAULT NULL,
-  `tag_foodstuff` int(11) DEFAULT NULL,
-  `tag_cookingmethod` int(11) DEFAULT NULL,
   `price` int(11) DEFAULT NULL,
   `checked_menu` tinyint(1) DEFAULT NULL,
   `recommended_menu` tinyint(1) DEFAULT NULL,
   `store_id` int(11) DEFAULT NULL,
+  `foodglossary_id` int(11) DEFAULT NULL,
+  `foodstuff_id` int(11) DEFAULT NULL,
+  `taste_id` int(11) DEFAULT NULL,
+  `cookingmethod_id` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_rails_20b0ce4e50` (`store_id`),
-  CONSTRAINT `fk_rails_20b0ce4e50` FOREIGN KEY (`store_id`) REFERENCES `stores` (`id`)
+  KEY `fk_rails_37ad611b6a` (`foodglossary_id`),
+  KEY `fk_rails_7b67bed59f` (`foodstuff_id`),
+  KEY `fk_rails_6ddead576a` (`taste_id`),
+  KEY `fk_rails_49250363ed` (`cookingmethod_id`),
+  CONSTRAINT `fk_rails_20b0ce4e50` FOREIGN KEY (`store_id`) REFERENCES `stores` (`id`),
+  CONSTRAINT `fk_rails_37ad611b6a` FOREIGN KEY (`foodglossary_id`) REFERENCES `foodglossaries` (`id`),
+  CONSTRAINT `fk_rails_49250363ed` FOREIGN KEY (`cookingmethod_id`) REFERENCES `cookingmethods` (`id`),
+  CONSTRAINT `fk_rails_6ddead576a` FOREIGN KEY (`taste_id`) REFERENCES `tastes` (`id`),
+  CONSTRAINT `fk_rails_7b67bed59f` FOREIGN KEY (`foodstuff_id`) REFERENCES `foodstuffs` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -226,8 +235,8 @@ CREATE TABLE `tastes` (
   `jpn` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `chn` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `checked` tinyint(1) DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -241,7 +250,7 @@ CREATE TABLE `tastes` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-10-12  3:05:49
+-- Dump completed on 2016-10-12 19:14:32
 INSERT INTO schema_migrations (version) VALUES ('20160903143132');
 
 INSERT INTO schema_migrations (version) VALUES ('20160903181957');

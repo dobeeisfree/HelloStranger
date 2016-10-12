@@ -54,20 +54,25 @@ ActiveRecord::Schema.define(version: 20161010043959) do
   end
 
   create_table "menus", force: :cascade do |t|
-    t.string   "picture",           limit: 255
-    t.string   "name",              limit: 255
-    t.integer  "tag_taste",         limit: 4
-    t.integer  "tag_foodstuff",     limit: 4
-    t.integer  "tag_cookingmethod", limit: 4
-    t.integer  "price",             limit: 4
+    t.string   "picture",          limit: 255
+    t.string   "name",             limit: 255
+    t.integer  "price",            limit: 4
     t.boolean  "checked_menu"
     t.boolean  "recommended_menu"
-    t.integer  "store_id",          limit: 4
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.integer  "store_id",         limit: 4
+    t.integer  "foodglossary_id",  limit: 4
+    t.integer  "foodstuff_id",     limit: 4
+    t.integer  "taste_id",         limit: 4
+    t.integer  "cookingmethod_id", limit: 4
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
+  add_index "menus", ["cookingmethod_id"], name: "fk_rails_49250363ed", using: :btree
+  add_index "menus", ["foodglossary_id"], name: "fk_rails_37ad611b6a", using: :btree
+  add_index "menus", ["foodstuff_id"], name: "fk_rails_7b67bed59f", using: :btree
   add_index "menus", ["store_id"], name: "fk_rails_20b0ce4e50", using: :btree
+  add_index "menus", ["taste_id"], name: "fk_rails_6ddead576a", using: :btree
 
   create_table "owners", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -127,7 +132,11 @@ ActiveRecord::Schema.define(version: 20161010043959) do
     t.datetime "updated_at"
   end
 
+  add_foreign_key "menus", "cookingmethods"
+  add_foreign_key "menus", "foodglossaries"
+  add_foreign_key "menus", "foodstuffs"
   add_foreign_key "menus", "stores"
+  add_foreign_key "menus", "tastes"
   add_foreign_key "reviews", "foreigners"
   add_foreign_key "reviews", "menus"
   add_foreign_key "stores", "owners"

@@ -3,6 +3,12 @@ class CreateMigration < ActiveRecord::Migration
     # insert schema.rb here
 
     add_foreign_key :menus,      :stores
+    add_foreign_key :menus,      :foodglossaries
+    add_foreign_key :menus,      :foodstuffs
+    add_foreign_key :menus,      :tastes
+    add_foreign_key :menus,      :cookingmethods
+
+
     add_foreign_key :stores,     :owners
     add_foreign_key :reviews,    :menus
     add_foreign_key :reviews,    :foreigners
