@@ -9,7 +9,7 @@ class CreateCookingmethods < ActiveRecord::Migration
       t.boolean   :checked
 
 
-      t.timestamps null: false
+      t.timestamps null: true
     end
   end
 end

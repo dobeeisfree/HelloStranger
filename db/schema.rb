@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 20161010043959) do
     t.string   "jpn",        limit: 255
     t.string   "chn",        limit: 255
     t.boolean  "checked"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "foodglossaries", force: :cascade do |t|
@@ -29,8 +29,8 @@ ActiveRecord::Schema.define(version: 20161010043959) do
     t.string   "jpn",        limit: 255
     t.string   "chn",        limit: 255
     t.boolean  "checked"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "foodstuffs", force: :cascade do |t|
@@ -39,8 +39,8 @@ ActiveRecord::Schema.define(version: 20161010043959) do
     t.string   "jpn",        limit: 255
     t.string   "chn",        limit: 255
     t.boolean  "checked"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "foreigners", force: :cascade do |t|
@@ -123,8 +123,8 @@ ActiveRecord::Schema.define(version: 20161010043959) do
     t.string   "jpn",        limit: 255
     t.string   "chn",        limit: 255
     t.boolean  "checked"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_foreign_key "menus", "stores"
