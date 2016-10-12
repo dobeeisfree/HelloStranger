@@ -4,8 +4,6 @@ class CreateReviews < ActiveRecord::Migration
 
       t.integer      :foreigner_id
       t.integer      :menu_id
-
-			t.boolean		   :is_eval
 			t.string		   :content
 
       t.timestamps null: false

@@ -170,7 +170,6 @@ CREATE TABLE `reviews` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `foreigner_id` int(11) DEFAULT NULL,
   `menu_id` int(11) DEFAULT NULL,
-  `is_eval` tinyint(1) DEFAULT NULL,
   `content` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
@@ -250,7 +249,7 @@ CREATE TABLE `tastes` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-10-12 19:14:32
+-- Dump completed on 2016-10-12 23:58:11
 INSERT INTO schema_migrations (version) VALUES ('20160903143132');
 
 INSERT INTO schema_migrations (version) VALUES ('20160903181957');

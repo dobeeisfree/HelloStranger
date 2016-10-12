@@ -97,7 +97,6 @@ ActiveRecord::Schema.define(version: 20161010043959) do
   create_table "reviews", force: :cascade do |t|
     t.integer  "foreigner_id", limit: 4
     t.integer  "menu_id",      limit: 4
-    t.boolean  "is_eval"
     t.string   "content",      limit: 255
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
