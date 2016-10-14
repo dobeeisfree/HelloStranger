@@ -1,4 +1,4 @@
-$space : 50px;
+$space : 20px;
 // 로그인
 #sign_in_devise {
   width: 30%;
@@ -9,51 +9,29 @@ $space : 50px;
     font-size: 3em;
   }
 }
-// 회원가입 1단계의 전체 디브
-#step1 {
-  width: 30%;
-  margin-top: $space;
-  margin-left: $space * 2;
-}
-// 회원가입의 메세지
-#registrations {
-  text-align: center;
-  // 상단의 이미지
-  .ui.image {
-     position: relative;
-     width: 100%;
-     // 그안의 글자 정렬
-     span {
-       font-weight: bold;
-       font-size: 5.5em;
-       color: rgba(0, 0, 0, 0.7);
-       line-height: 2em;
-
-       position: absolute;
-       top: 200px;
-       left: 0px;
-       right: 0px;
-       width: 100%;
-     }
-   }
-}
-
 // 회원가입의 메세지
 .ui.floating.message {
   margin: 0 auto;
 }
-.step2 {
-  margin-top: $space !important;
-}
-#step2 {
-  width: 60%;
-  margin-top: $space;
-  margin-left: $space * 2;
-}
 
 #confirm {
   width: 30%;
-  padding-top: $space * 2;
+  //padding-top: $space * 2;
   padding-bottom: $space;
   margin: 0 auto;
+}
+
+.ui.grid.owner-register-form {
+  margin-top: $space * 2;
+  margin-left :auto;
+  margin-right :auto;
+
+  // 상태바
+  #status {
+    padding-left : $space*3;
+  }
+  // 회원가입 전체 디브
+  .eight.wide.column.owner-account {
+    width: 30%;
+  }
 }

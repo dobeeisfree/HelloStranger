@@ -1,17 +1,89 @@
-<%= form_for(@store) do |f| %>
-  <% if @store.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@store.errors.count, "error") %> prohibited this store from being saved:</h2>
+<div class="ui store-body container">
+  <%= form_for(@store, html:{class: "ui form store-new"} ) do |f| %>
+    <% if @store.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@store.errors.count, "error") %> prohibited this store from being saved:</h2>
+        <ul>
+        <% @store.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-      <ul>
-      <% @store.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+    <h4 class="ui dividing header">매장정보</h4>
+
+      <div class="fields">
+        <div class="twelve wide field required">
+          <%= f.label :매장명 %>
+          <%= f.text_field :name, placeholder: "상호명을 정확히 입력해주세요" %>
+        </div>
+        <div class="four wide field required">
+          <%= f.label :Catecory %>
+          <select class="ui fluid dropdown">
+            <option value="">가계유형 선택</option>
+            <option value="0">Traditional</option>
+            <option value="1">Rice</option>
+            <option value="2">Noodle</option>
+            <option value="3">BBQ</option>
+            <option value="4">Snack</option>
+            <option value="5">Fast Food</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field required">
+        <%= f.label :사업자등록번호 %>
+        <%= f.text_field :business_id, maxlength: "10", placeholder: "10자리를 공백없이 입력해주세요" %>
+      </div>
+
+      <div class="field required">
+        <%= f.label :Beacon_UUID %>
+        <%= f.text_field :beacon_id, placeholder: "예시) 24DDF411-8CF1-440C-87CD-E368DAF9C93E" %>
+      </div>
+
+      <div class="eight wide field required">
+        <%= f.label :매장주소 %>
+        <div class="ui action input">
+          <%= f.text_field :location, placeholder: "주소를 입력해주세요", class: "ui input" %>
+          <button class="ui disabled button">우편번호 찾기</button>
+        </div>
+      </div>
+
+      <h4 class="ui dividing header">영업시간</h4>
+
+      <div class="fields">
+        <div class="five wide field required">
+          <%= f.label :시작 %>
+          <select class="ui fluid dropdown">
+            <option value="" >시간 선택</option>
+            <% @time_picker.each do |t| %>
+            <option value="<%= t %>"><%= t %></option>
+            <% end %>
+          </select>
+        </div>
+
+        <div class="five wide field required">
+          <%= f.label :종료 %>
+          <select class="ui fluid dropdown">
+            <option value="">시간 선택</option>
+            <% @time_picker.each do |t| %>
+            <option value="<%= t %>"><%= t %></option>
+            <% end %>
+          </select>
+        </div>
+      </div>
+
+      <div class="five wide field">
+        <%= f.label :매장사진 %>
+        <label for="file" class="green ui icon inverted button">
+           <i class="file icon"></i>
+        사진선택
+        </label>
+       <input type="file" id="file" style="display:none">
+      </div>
+      <%= f.submit :등록하기, class: "ui fluid primary button" %>
+
   <% end %>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

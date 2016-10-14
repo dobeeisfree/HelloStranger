@@ -1,7 +1,5 @@
 <header class="ui top fixed  menu">
-  <div class="header item" id="brand">
-    <%= link_to "Hello, stranger!", root_path %>
-  </div>
+  <%= link_to "Hello, stranger!", root_path, class: "header item", id: "brand" %>
   <div class="right menu">
     <a class="item" href="/#about">어바웃</a>
     <% if owner_signed_in? %>
@@ -11,14 +9,19 @@
       <span id="owner-name"><%= current_owner.name %></span>님
       <i class="dropdown icon"></i>
       <div class="menu">
-        <div class="header">오너님 안녕하세요</div>
-        <div class="item">
-          <%= link_to "마이페이지", mypage_path, style: 'color:black', method: 'get' %>
-        </div>
+        <%= link_to(mypage_path, class: "item") do %>
+          <i class="home icon"></i>마이페이지
+        <% end %>
+        <%= link_to(menus_path, class: "item") do %>
+          <i class="edit icon"></i>메뉴판 등록하기
+        <% end %>
+        <%= link_to(root_path, class: "item") do %>
+          <i class="inbox icon"></i>매장현황
+        <% end %>
         <div class="divider"></div>
-        <div class="item">
-         <%= link_to "로그아웃", destroy_owner_session_path, style: 'color:black', method: 'delete' %>
-        </div>
+        <%= link_to(destroy_owner_session_path, method: :delete, class: "item") do %>
+          <i class="sign out icon"></i>로그아웃
+        <% end %>
       </div>
     </div>
     <% else %>
