@@ -25,6 +25,7 @@ class StoresController < ApplicationController
   # POST /stores.json
   def create
     @store = Store.new(store_params)
+    @store.owner_id = current_owner.id
 
     respond_to do |format|
       if @store.save
@@ -67,8 +68,9 @@ class StoresController < ApplicationController
       @store = Store.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # 아래의 파람즈 목록만 허용한다
     def store_params
-      params.fetch(:store, {})
+      params.require(:store).permit(:name, :location, :beacon_id, :business_id,
+       :main_picture, :category, :open_time, :close_time)
     end
 end

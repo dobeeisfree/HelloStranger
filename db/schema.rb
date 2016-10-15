@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20161010043959) do
     t.string   "name",             limit: 255
     t.integer  "price",            limit: 4
     t.boolean  "checked_menu"
-    t.boolean  "recommended_menu"
+    t.boolean  "quick_menu"
     t.integer  "store_id",         limit: 4
     t.integer  "foodglossary_id",  limit: 4
     t.integer  "foodstuff_id",     limit: 4

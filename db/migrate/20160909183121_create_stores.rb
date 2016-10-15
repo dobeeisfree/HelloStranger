@@ -3,8 +3,8 @@ class CreateStores < ActiveRecord::Migration
     create_table :stores do |t|
 
       ## db associations
+      #t.belongs_to  :owner
       t.belongs_to  :owner
-      t.integer     :owner_id
 
       t.string      :name
       t.string      :location
