@@ -14,43 +14,35 @@
 ActiveRecord::Schema.define(version: 20161010043959) do
 
   create_table "cookingmethods", force: :cascade do |t|
-    t.string   "kor",        limit: 255
-    t.string   "eng",        limit: 255
-    t.string   "jpn",        limit: 255
-    t.string   "chn",        limit: 255
-    t.boolean  "checked"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string  "kor",     limit: 255
+    t.string  "eng",     limit: 255
+    t.string  "jpn",     limit: 255
+    t.string  "chn",     limit: 255
+    t.boolean "checked"
   end
 
   create_table "foodglossaries", force: :cascade do |t|
-    t.string   "kor",        limit: 255
-    t.string   "eng",        limit: 255
-    t.string   "jpn",        limit: 255
-    t.string   "chn",        limit: 255
-    t.boolean  "checked"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string  "kor",     limit: 255
+    t.string  "eng",     limit: 255
+    t.string  "jpn",     limit: 255
+    t.string  "chn",     limit: 255
+    t.boolean "checked"
   end
 
   create_table "foodstuffs", force: :cascade do |t|
-    t.string   "kor",        limit: 255
-    t.string   "eng",        limit: 255
-    t.string   "jpn",        limit: 255
-    t.string   "chn",        limit: 255
-    t.boolean  "checked"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string  "kor",     limit: 255
+    t.string  "eng",     limit: 255
+    t.string  "jpn",     limit: 255
+    t.string  "chn",     limit: 255
+    t.boolean "checked"
   end
 
   create_table "foreigners", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "password",   limit: 255
-    t.integer  "lang",       limit: 4
-    t.integer  "keep",       limit: 4
-    t.integer  "for_taboo",  limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string  "name",      limit: 255
+    t.string  "password",  limit: 255
+    t.integer "lang",      limit: 4
+    t.string  "keep",      limit: 255
+    t.integer "for_taboo", limit: 4
   end
 
   create_table "menus", force: :cascade do |t|
@@ -62,6 +54,7 @@ ActiveRecord::Schema.define(version: 20161010043959) do
     t.integer  "store_id",         limit: 4
     t.integer  "foodglossary_id",  limit: 4
     t.integer  "foodstuff_id",     limit: 4
+    t.integer  "foodstuff_id_2",   limit: 4
     t.integer  "taste_id",         limit: 4
     t.integer  "cookingmethod_id", limit: 4
     t.datetime "created_at",                   null: false
@@ -113,8 +106,8 @@ ActiveRecord::Schema.define(version: 20161010043959) do
     t.string   "business_id",  limit: 255
     t.string   "main_picture", limit: 255
     t.integer  "category",     limit: 4
-    t.datetime "open_time"
-    t.datetime "close_time"
+    t.string   "open_time",    limit: 255
+    t.string   "close_time",   limit: 255
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
@@ -122,13 +115,11 @@ ActiveRecord::Schema.define(version: 20161010043959) do
   add_index "stores", ["owner_id"], name: "fk_rails_dabcef777e", using: :btree
 
   create_table "tastes", force: :cascade do |t|
-    t.string   "kor",        limit: 255
-    t.string   "eng",        limit: 255
-    t.string   "jpn",        limit: 255
-    t.string   "chn",        limit: 255
-    t.boolean  "checked"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string  "kor",     limit: 255
+    t.string  "eng",     limit: 255
+    t.string  "jpn",     limit: 255
+    t.string  "chn",     limit: 255
+    t.boolean "checked"
   end
 
   add_foreign_key "menus", "cookingmethods"

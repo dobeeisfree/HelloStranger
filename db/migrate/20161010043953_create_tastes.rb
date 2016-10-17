@@ -7,8 +7,7 @@ class CreateTastes < ActiveRecord::Migration
       t.string    :jpn
       t.string    :chn
       t.boolean   :checked
-
-      t.timestamps null: true
+      
     end
   end
 end

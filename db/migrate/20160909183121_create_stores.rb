@@ -14,8 +14,8 @@ class CreateStores < ActiveRecord::Migration
 
       t.integer     :category
 
-      t.datetime    :open_time
-      t.datetime    :close_time
+      t.string      :open_time
+      t.string      :close_time
 
       t.timestamps  null: false
     end

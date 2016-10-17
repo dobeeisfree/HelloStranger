@@ -13,6 +13,7 @@ class CreateMenus < ActiveRecord::Migration
       t.integer     :store_id
       t.integer     :foodglossary_id
       t.integer     :foodstuff_id
+      t.integer     :foodstuff_id_2 # 두번째 포린키로 지정을 해줘야한다.
       t.integer     :taste_id
       t.integer     :cookingmethod_id
 
