@@ -8,7 +8,7 @@
   </div>
 
   <%= form_tag(menus_path, class: "ui form attached fluid segment") do %>
-    <div class="two fields">
+    <div class="fields">
 
       <div class="four wide field">
         <div class="blurring dimmable image">
@@ -27,12 +27,32 @@
         <label>매장</label>
         <select class="ui fluid dropdown">
           <option value="">매장선택</option>
-          <%# TODO 사용자의 매장 목록을 불러온다 %>
+          <% @stores.reverse.each do |s| %>
+          <option value="<%=s.name%>"><%=s.name%></option>
+          <% end %>
         </select>
       </div>
 
+      <div class="twelve wide field">
+        <label>메뉴명</label>
+        <div class="ui search">
+          <div class="ui icon input">
+            <input class="prompt" name="foodglossary_id" type="text" placeholder="메뉴명을 검색하세요!">
+            <i class="search icon"></i>
+          </div>
+          <div class="results"></div>
+        </div>
+      </div>
 
     </div>
+
+    <div class="five wide field">
+      <div class="ui right labeled input">
+        <input type="text" name="price" placeholder="국내 단위로 숫자만 입력해주세요">
+        <div class="ui basic label">원</div>
+      </div>
+    </div>
+
   <% end %>
 
   <div class="ui three column grid">

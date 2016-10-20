@@ -16,4 +16,8 @@ Rails.application.routes.draw do
   get 'mypage/account' => 'mypage#account'
   get 'mypage/manage_store' => 'mypage#manage_store'
 
+
+  #번역시스템
+  get 'transfer/search_kor_menu_name' => 'transfer#search_kor_menu_name'
+
 end
