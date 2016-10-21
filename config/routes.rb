@@ -18,6 +18,6 @@ Rails.application.routes.draw do
 
 
   #번역시스템
-  get 'transfer/search_kor_menu_name' => 'transfer#search_kor_menu_name'
+  get 'transfer/menu_name' => 'transfer#menu_name'
 
 end
