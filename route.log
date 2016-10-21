@@ -1,0 +1,37 @@
+                   Prefix Verb   URI Pattern                     Controller#Action
+                     root GET    /                               home#index
+        new_owner_session GET    /owners/sign_in(.:format)       devise/sessions#new
+            owner_session POST   /owners/sign_in(.:format)       devise/sessions#create
+    destroy_owner_session DELETE /owners/sign_out(.:format)      devise/sessions#destroy
+           owner_password POST   /owners/password(.:format)      devise/passwords#create
+       new_owner_password GET    /owners/password/new(.:format)  devise/passwords#new
+      edit_owner_password GET    /owners/password/edit(.:format) devise/passwords#edit
+                          PATCH  /owners/password(.:format)      devise/passwords#update
+                          PUT    /owners/password(.:format)      devise/passwords#update
+cancel_owner_registration GET    /owners/cancel(.:format)        devise/registrations#cancel
+       owner_registration POST   /owners(.:format)               devise/registrations#create
+   new_owner_registration GET    /owners/sign_up(.:format)       devise/registrations#new
+  edit_owner_registration GET    /owners/edit(.:format)          devise/registrations#edit
+                          PATCH  /owners(.:format)               devise/registrations#update
+                          PUT    /owners(.:format)               devise/registrations#update
+                          DELETE /owners(.:format)               devise/registrations#destroy
+                    menus GET    /menus(.:format)                menus#index
+                          POST   /menus(.:format)                menus#create
+                 new_menu GET    /menus/new(.:format)            menus#new
+                edit_menu GET    /menus/:id/edit(.:format)       menus#edit
+                     menu GET    /menus/:id(.:format)            menus#show
+                          PATCH  /menus/:id(.:format)            menus#update
+                          PUT    /menus/:id(.:format)            menus#update
+                          DELETE /menus/:id(.:format)            menus#destroy
+                   stores GET    /stores(.:format)               stores#index
+                          POST   /stores(.:format)               stores#create
+                new_store GET    /stores/new(.:format)           stores#new
+               edit_store GET    /stores/:id/edit(.:format)      stores#edit
+                    store GET    /stores/:id(.:format)           stores#show
+                          PATCH  /stores/:id(.:format)           stores#update
+                          PUT    /stores/:id(.:format)           stores#update
+                          DELETE /stores/:id(.:format)           stores#destroy
+                   mypage GET    /mypage(.:format)               mypage#account
+           mypage_account GET    /mypage/account(.:format)       mypage#account
+      mypage_manage_store GET    /mypage/manage_store(.:format)  mypage#manage_store
+       transfer_menu_name GET    /transfer/menu_name(.:format)   transfer#menu_name
