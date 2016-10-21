@@ -2,6 +2,7 @@ class CreateMenus < ActiveRecord::Migration
   def change
     create_table :menus do |t|
 
+      t.belongs_to  :store
       t.string      :picture
       t.string      :name
       t.integer     :price

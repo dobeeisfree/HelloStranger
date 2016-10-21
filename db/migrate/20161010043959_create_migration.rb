@@ -13,6 +13,8 @@ class CreateMigration < ActiveRecord::Migration
     add_foreign_key :reviews,    :menus
     add_foreign_key :reviews,    :foreigners
 
+    execute '' # TODO foodstuff_id_2를 두번째 포린키로 지정
+
   end
 
   def self.down
