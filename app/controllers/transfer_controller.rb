@@ -9,7 +9,7 @@ class TransferController < ApplicationController
     if params.has_key?(:q)
       @food_glossary_kor = Hash.new
       @food_glossary_kor["results"] = Array.new
-      Foodglossary.all.each do |f|
+      Foodglossary.all.reverse.each do |f|
         if f.kor.include? params[:q]
           @food_glossary_kor["results"].push("id" => f.id, "kor" => f.kor)
         end
@@ -20,7 +20,7 @@ class TransferController < ApplicationController
     else
       error_for_params
     end
-    
+
   end
 
   def taste

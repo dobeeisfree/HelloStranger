@@ -12,7 +12,6 @@ jQuery(document).ready ->
         url: '//localhost:3000/transfer/menu_name?q={query}'
       cache: false
       searchFullText: false
-      searchFields: 'kor'
       onResults: (response) ->
         html = ''
         if response != undefined
@@ -21,14 +20,14 @@ jQuery(document).ready ->
             text = text['kor']
             console.log(text)
             html += '<a class="result"><div class="content">'
-            html += text + '</div>'
+            html += '<div class="title">' + text + '</div>'
             html += '' + '</div></a>'
             return index < 6
           $('.ui.foodglossary.search div.results').html(html)
         return false
       onResultsAdd: (html) ->
         if $('div.results a').length == 0
-          return '결과가 없네요'
+          return 'default'
         else
           return false
   # ---
