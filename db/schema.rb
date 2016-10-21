@@ -46,12 +46,12 @@ ActiveRecord::Schema.define(version: 20161010043959) do
   end
 
   create_table "menus", force: :cascade do |t|
+    t.integer  "store_id",         limit: 4
     t.string   "picture",          limit: 255
     t.string   "name",             limit: 255
     t.integer  "price",            limit: 4
     t.boolean  "checked_menu"
     t.boolean  "quick_menu"
-    t.integer  "store_id",         limit: 4
     t.integer  "foodglossary_id",  limit: 4
     t.integer  "foodstuff_id",     limit: 4
     t.integer  "foodstuff_id_2",   limit: 4
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 20161010043959) do
   add_index "menus", ["cookingmethod_id"], name: "fk_rails_49250363ed", using: :btree
   add_index "menus", ["foodglossary_id"], name: "fk_rails_37ad611b6a", using: :btree
   add_index "menus", ["foodstuff_id"], name: "fk_rails_7b67bed59f", using: :btree
+  add_index "menus", ["foodstuff_id_2"], name: "menus_foodstuffs__fk", using: :btree
   add_index "menus", ["store_id"], name: "fk_rails_20b0ce4e50", using: :btree
   add_index "menus", ["taste_id"], name: "fk_rails_6ddead576a", using: :btree
 
@@ -125,6 +126,7 @@ ActiveRecord::Schema.define(version: 20161010043959) do
   add_foreign_key "menus", "cookingmethods"
   add_foreign_key "menus", "foodglossaries"
   add_foreign_key "menus", "foodstuffs"
+  add_foreign_key "menus", "foodstuffs", column: "foodstuff_id_2", name: "menus_foodstuffs__fk"
   add_foreign_key "menus", "stores"
   add_foreign_key "menus", "tastes"
   add_foreign_key "reviews", "foreigners"
