@@ -9,6 +9,49 @@
 -- Table structure for table `cookingmethods`
 --
 
+DROP TABLE IF EXISTS `diaries`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `diaries` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `menu_id` int(11) DEFAULT NULL,
+  `foreigner_id` int(11) DEFAULT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_rails_18d8377028` (`menu_id`),
+  KEY `fk_rails_4322272df7` (`store_id`),
+  KEY `fk_rails_33f01abd9f` (`foreigner_id`),
+  CONSTRAINT `fk_rails_18d8377028` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`id`),
+  CONSTRAINT `fk_rails_33f01abd9f` FOREIGN KEY (`foreigner_id`) REFERENCES `foreigners` (`id`),
+  CONSTRAINT `fk_rails_4322272df7` FOREIGN KEY (`store_id`) REFERENCES `stores` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
+DROP TABLE IF EXISTS `orders`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `menu_id` int(11) DEFAULT NULL,
+  `foreigner_id` int(11) DEFAULT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_rails_1bee5e9459` (`menu_id`),
+  KEY `fk_rails_f0be2fda72` (`store_id`),
+  KEY `fk_rails_52cfd378e4` (`foreigner_id`),
+  CONSTRAINT `fk_rails_1bee5e9459` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`id`),
+  CONSTRAINT `fk_rails_52cfd378e4` FOREIGN KEY (`foreigner_id`) REFERENCES `foreigners` (`id`),
+  CONSTRAINT `fk_rails_f0be2fda72` FOREIGN KEY (`store_id`) REFERENCES `stores` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
 DROP TABLE IF EXISTS `cookingmethods`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -86,14 +129,15 @@ DROP TABLE IF EXISTS `menus`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `menus` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) DEFAULT NULL,
   `picture` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `price` int(11) DEFAULT NULL,
   `checked_menu` tinyint(1) DEFAULT NULL,
-  `recommended_menu` tinyint(1) DEFAULT NULL,
-  `store_id` int(11) DEFAULT NULL,
+  `quick_menu` tinyint(1) DEFAULT NULL,
   `foodglossary_id` int(11) DEFAULT NULL,
   `foodstuff_id` int(11) DEFAULT NULL,
+  `foodstuff_id_2` int(11) DEFAULT NULL,
   `taste_id` int(11) DEFAULT NULL,
   `cookingmethod_id` int(11) DEFAULT NULL,
   `created_at` datetime NOT NULL,
@@ -104,11 +148,13 @@ CREATE TABLE `menus` (
   KEY `fk_rails_7b67bed59f` (`foodstuff_id`),
   KEY `fk_rails_6ddead576a` (`taste_id`),
   KEY `fk_rails_49250363ed` (`cookingmethod_id`),
+  KEY `menus_foodstuffs__fk` (`foodstuff_id_2`),
   CONSTRAINT `fk_rails_20b0ce4e50` FOREIGN KEY (`store_id`) REFERENCES `stores` (`id`),
   CONSTRAINT `fk_rails_37ad611b6a` FOREIGN KEY (`foodglossary_id`) REFERENCES `foodglossaries` (`id`),
   CONSTRAINT `fk_rails_49250363ed` FOREIGN KEY (`cookingmethod_id`) REFERENCES `cookingmethods` (`id`),
   CONSTRAINT `fk_rails_6ddead576a` FOREIGN KEY (`taste_id`) REFERENCES `tastes` (`id`),
-  CONSTRAINT `fk_rails_7b67bed59f` FOREIGN KEY (`foodstuff_id`) REFERENCES `foodstuffs` (`id`)
+  CONSTRAINT `fk_rails_7b67bed59f` FOREIGN KEY (`foodstuff_id`) REFERENCES `foodstuffs` (`id`),
+  CONSTRAINT `menus_foodstuffs__fk` FOREIGN KEY (`foodstuff_id_2`) REFERENCES `foodstuffs` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -248,5 +294,9 @@ INSERT INTO schema_migrations (version) VALUES ('20161010043929');
 
 INSERT INTO schema_migrations (version) VALUES ('20161010043953');
 
-INSERT INTO schema_migrations (version) VALUES ('20161010043959');
+INSERT INTO schema_migrations (version) VALUES ('20161022102317');
+
+INSERT INTO schema_migrations (version) VALUES ('20161022105811');
+
+INSERT INTO schema_migrations (version) VALUES ('20161023043959');
 
