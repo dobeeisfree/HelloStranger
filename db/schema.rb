@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161010043959) do
+ActiveRecord::Schema.define(version: 20161023043959) do
 
   create_table "cookingmethods", force: :cascade do |t|
     t.string  "kor",     limit: 255
@@ -20,6 +20,18 @@ ActiveRecord::Schema.define(version: 20161010043959) do
     t.string  "chn",     limit: 255
     t.boolean "checked"
   end
+
+  create_table "diaries", force: :cascade do |t|
+    t.integer  "menu_id",      limit: 4
+    t.integer  "foreigner_id", limit: 4
+    t.integer  "store_id",     limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "diaries", ["foreigner_id"], name: "fk_rails_33f01abd9f", using: :btree
+  add_index "diaries", ["menu_id"], name: "fk_rails_18d8377028", using: :btree
+  add_index "diaries", ["store_id"], name: "fk_rails_4322272df7", using: :btree
 
   create_table "foodglossaries", force: :cascade do |t|
     t.string  "kor",     limit: 255
@@ -67,6 +79,19 @@ ActiveRecord::Schema.define(version: 20161010043959) do
   add_index "menus", ["foodstuff_id_2"], name: "menus_foodstuffs__fk", using: :btree
   add_index "menus", ["store_id"], name: "fk_rails_20b0ce4e50", using: :btree
   add_index "menus", ["taste_id"], name: "fk_rails_6ddead576a", using: :btree
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "menu_id",      limit: 4
+    t.integer  "foreigner_id", limit: 4
+    t.integer  "store_id",     limit: 4
+    t.integer  "quantity",     limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "orders", ["foreigner_id"], name: "fk_rails_52cfd378e4", using: :btree
+  add_index "orders", ["menu_id"], name: "fk_rails_1bee5e9459", using: :btree
+  add_index "orders", ["store_id"], name: "fk_rails_f0be2fda72", using: :btree
 
   create_table "owners", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -123,12 +148,18 @@ ActiveRecord::Schema.define(version: 20161010043959) do
     t.boolean "checked"
   end
 
+  add_foreign_key "diaries", "foreigners"
+  add_foreign_key "diaries", "menus"
+  add_foreign_key "diaries", "stores"
   add_foreign_key "menus", "cookingmethods"
   add_foreign_key "menus", "foodglossaries"
   add_foreign_key "menus", "foodstuffs"
   add_foreign_key "menus", "foodstuffs", column: "foodstuff_id_2", name: "menus_foodstuffs__fk"
   add_foreign_key "menus", "stores"
   add_foreign_key "menus", "tastes"
+  add_foreign_key "orders", "foreigners"
+  add_foreign_key "orders", "menus"
+  add_foreign_key "orders", "stores"
   add_foreign_key "reviews", "foreigners"
   add_foreign_key "reviews", "menus"
   add_foreign_key "stores", "owners"
