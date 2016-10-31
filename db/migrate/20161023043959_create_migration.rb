@@ -13,12 +13,6 @@ class CreateMigration < ActiveRecord::Migration
     add_foreign_key :reviews,    :menus
     add_foreign_key :reviews,    :foreigners
 
-
-    add_foreign_key :orders,     :menus
-    add_foreign_key :orders,     :stores
-    add_foreign_key :orders,     :foreigners
-
-    add_foreign_key :diaries,    :menus
     add_foreign_key :diaries,    :stores
     add_foreign_key :diaries,    :foreigners
 
