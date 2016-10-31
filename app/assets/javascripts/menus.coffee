@@ -23,8 +23,7 @@ jQuery(document).ready ->
             html += '<div class="title">' + text + '</div>'
             html += '' + '</div></a>'
             return index < 6
-          $('.ui.foodglossary.search div.results').html(html)
-        return false
+        $('.ui.foodglossary.search div.results').html(html)
       onResultsAdd: (html) ->
         if $('div.results a').length == 0
           return 'default'
