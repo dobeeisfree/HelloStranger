@@ -11,6 +11,10 @@ class Owners::RegistrationsController < Devise::RegistrationsController
   # 매장 주인이라면, 반드시 하나의 매장을 가지고 있어야한다.
   def required
     @store = Store.new
+    @store.owner_id = current_owner.id
+    if @store.save
+      redirect_to root_path
+    end
   end
 
   # POST /resource
@@ -56,7 +60,8 @@ class Owners::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up.
   def after_sign_up_path_for(resource)
-    # super(resource)
+    super(resource)
+    puts resource
     stored_location_for(resource) || owners_confirm_path
   end
 
