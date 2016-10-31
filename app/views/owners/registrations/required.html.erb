@@ -1,0 +1,32 @@
+<div class="ui grid owner-register-form">
+  <div class="four wide column" id="status">
+    <div class="ui ordered vertical steps">
+      <div class="completed step">
+        <div class="content">
+          <div class="title">1단계</div>
+          <div class="description">오너 계정을 설정합니다.</div>
+        </div>
+      </div>
+      <div class="active step">
+        <div class="content">
+          <div class="title">2단계</div>
+          <div class="description">하나의 매장을 등록합니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="eight wide column owner-account">
+    <div class="ui attached message">
+      <div class="header">
+        매장 등록을 해주세요!
+      </div>
+      <p>매장 주인이라면, 반드시 하나의 매장은 있어야합니다.</p>
+    </div>
+    <%= form_for(@store, html:{class: "ui form attached fluid segment"}) do |s| %>
+
+      <%= s.submit :계정생성, class: "huge ui fluid primary button" %>
+
+    <% end %>
+  </div>
+</div>

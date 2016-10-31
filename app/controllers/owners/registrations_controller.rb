@@ -3,9 +3,15 @@ class Owners::RegistrationsController < Devise::RegistrationsController
 # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    super
+  end
+
+  # GET /resource/confirm
+  # 매장 주인이라면, 반드시 하나의 매장을 가지고 있어야한다.
+  def required
+    @store = Store.new
+  end
 
   # POST /resource
   # def create
@@ -49,9 +55,10 @@ class Owners::RegistrationsController < Devise::RegistrationsController
   # end
 
   # The path used after sign up.
-  # def after_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+  def after_sign_up_path_for(resource)
+    # super(resource)
+    stored_location_for(resource) || owners_confirm_path
+  end
 
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)
