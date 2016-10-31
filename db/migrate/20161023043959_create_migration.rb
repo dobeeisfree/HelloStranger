@@ -32,6 +32,7 @@ class CreateMigration < ActiveRecord::Migration
     drop_table :owners
     drop_table :reviews
     drop_table :stores
+    drop_table :diaries
 
     drop_table :cookingmethods
     drop_table :foodglossaries

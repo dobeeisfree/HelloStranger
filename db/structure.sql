@@ -30,28 +30,6 @@ CREATE TABLE `diaries` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 
-DROP TABLE IF EXISTS `orders`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `orders` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `menu_id` int(11) DEFAULT NULL,
-  `foreigner_id` int(11) DEFAULT NULL,
-  `store_id` int(11) DEFAULT NULL,
-  `quantity` int(11) DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_rails_1bee5e9459` (`menu_id`),
-  KEY `fk_rails_f0be2fda72` (`store_id`),
-  KEY `fk_rails_52cfd378e4` (`foreigner_id`),
-  CONSTRAINT `fk_rails_1bee5e9459` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`id`),
-  CONSTRAINT `fk_rails_52cfd378e4` FOREIGN KEY (`foreigner_id`) REFERENCES `foreigners` (`id`),
-  CONSTRAINT `fk_rails_f0be2fda72` FOREIGN KEY (`store_id`) REFERENCES `stores` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
-
 DROP TABLE IF EXISTS `cookingmethods`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -265,16 +243,6 @@ CREATE TABLE `tastes` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
 -- Dump completed on 2016-10-12 23:58:11
 INSERT INTO schema_migrations (version) VALUES ('20160903143132');
 
@@ -294,9 +262,6 @@ INSERT INTO schema_migrations (version) VALUES ('20161010043929');
 
 INSERT INTO schema_migrations (version) VALUES ('20161010043953');
 
-INSERT INTO schema_migrations (version) VALUES ('20161022102317');
-
 INSERT INTO schema_migrations (version) VALUES ('20161022105811');
 
 INSERT INTO schema_migrations (version) VALUES ('20161023043959');
-
