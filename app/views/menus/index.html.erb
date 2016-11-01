@@ -26,10 +26,10 @@
 
       <div class="twelve wide field">
         <label>매장</label>
-        <select class="ui fluid dropdown">
+        <select class="ui fluid dropdown" name="menu[store_id]">
           <option value="">매장선택</option>
           <% @stores.reverse.each do |s| %>
-          <option value="<%=s.name%>"><%=s.name%></option>
+          <option value="<%=s.id%>"><%=s.name%></option>
           <% end %>
         </select>
       </div>
@@ -38,21 +38,69 @@
         <label>메뉴명</label>
         <div class="ui foodglossary search">
           <div class="ui icon input">
-            <input class="prompt" name="foodglossary_id" type="text" placeholder="메뉴명을 검색하세요!">
+            <input type="hidden" name="menu[foodglossary_id]" id="foodglossary_id">
+            <input class="prompt" type="text" placeholder="메뉴명을 검색하세요!">
             <i class="search icon"></i>
           </div>
           <div class="results"></div>
         </div>
       </div>
-
     </div>
 
-    <div class="five wide field">
-      <div class="ui right labeled input">
-        <input type="text" name="price" placeholder="국내 단위로 숫자만 입력해주세요">
-        <div class="ui basic label">원</div>
+    <div class="fields">
+      <div class="five wide field">
+        <div class="ui right labeled input">
+          <input type="text" name="menu[price]" placeholder="국내 단위로 숫자만 입력해주세요">
+          <div class="ui basic label">원</div>
+        </div>
       </div>
     </div>
+
+    <h3>설명</h3>
+    <div class="fields">
+      <div class="three wide field">
+        <label>맛</label>
+        <div class="ui taste search">
+          <div class="ui icon input">
+            <input class="prompt" name="menu[taste_id]" type="text" placeholder="...">
+            <i class="search icon"></i>
+          </div>
+          <div class="results taste"></div>
+        </div>
+      </div>
+      <div class="three wide field">
+        <label>주재료1</label>
+        <div class="ui foodstuff search">
+          <div class="ui icon input">
+            <input class="prompt" name="menu[foodstuff_id]" type="text" placeholder="...">
+            <i class="search icon"></i>
+          </div>
+          <div class="results foodstuff_1"></div>
+        </div>
+      </div>
+      <div class="three wide field">
+        <label>주재료2</label>
+        <div class="ui foodstuff search">
+          <div class="ui icon input">
+            <input class="prompt" name="menu[foodstuff_id_2]" type="text" placeholder="...">
+            <i class="search icon"></i>
+          </div>
+          <div class="results foodstuff_2"></div>
+        </div>
+      </div>
+      <div class="three wide field">
+        <label>조리법</label>
+        <div class="ui cookingmethod search">
+          <div class="ui icon input">
+            <input class="prompt" name="menu[cookingmethod_id]" type="text" placeholder="...">
+            <i class="search icon"></i>
+          </div>
+          <div class="results cookingmethod"></div>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="ui primary button">등록하기</button>
 
   <% end %>
 
@@ -64,18 +112,19 @@
           <img src="http://semantic-ui.com/images/avatar/large/daniel.jpg">
         </div>
         <div class="content">
-          <span class="header"><%= m.name %></span>
+          <span class="header"><%= m.id %></span>
           <div class="description">
-            <p><%= m.tag_taste %></p>
-            <p><%= m.tag_foodstuff %></p>
-            <p><%= m.tag_cookingmethod %></p>
+            <p><%= m.foodglossary_id %></p>
+            <p><%= m.foodstuff_id %></p>
+            <p><%= m.foodstuff_id_2 %></p>
+            <p><%= m.cookingmethod_id %></p>
           </div>
           <div class="meta">
             <span><%= m.price %></span>
           </div>
         </div>
         <div class="extra content">
-          <% if m.recommended_menu == true %>
+          <% if m.checked_menu == true %>
           <i class="orange star icon"></i>
           추천 메뉴
           <% else %>

@@ -11,14 +11,10 @@
 </p>
 
 <p>
-  <strong>Name:</strong>
-  <%= @menu.name %>
+  <strong>Store ID:</strong>
+  <%= @menu.store_id %>
 </p>
 
-<p>
-  <strong>Recommended menu:</strong>
-  <%= @menu.recommended_menu %>
-</p>
 
 <%= link_to 'Edit', edit_menu_path(@menu) %> |
 <%= link_to 'Back', menus_path %>

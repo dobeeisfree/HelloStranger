@@ -11,7 +11,9 @@ class MenusController < ApplicationController
       redirect_to new_store_path
     end
     @stores = Owner.find_by(id: current_owner.id).stores
-    @menus = Menu.all #TODO 매장별 선택이 가능하면 그에 따라 가져와야한다
+
+    #TODO 매장별 선택이 가능하면 그에 따라 가져와야한다
+    @menus = Menu.all
 
   end
 
@@ -36,7 +38,7 @@ class MenusController < ApplicationController
 
     respond_to do |format|
       if @menu.save
-        format.html { redirect_to @menu, notice: 'Menu was successfully created.' }
+        format.html { redirect_to menus_path, notice: 'Menu was successfully created.' }
         format.json { render :show, status: :created, location: @menu }
       else
         format.html { render :new }
@@ -77,6 +79,7 @@ class MenusController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def menu_params
-      params.require(:menu).permit(:picture, :price, :name, :recommended_menu)
+      params.require(:menu).permit(:store_id, :picture, :price, :foodglossary_id,
+       :foodstuff_id, :foodstuff_id_2, :taste_id, :cookingmethod_id)
     end
 end
