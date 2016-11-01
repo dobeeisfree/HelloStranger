@@ -11,10 +11,22 @@ class Owners::RegistrationsController < Devise::RegistrationsController
   # 매장 주인이라면, 반드시 하나의 매장을 가지고 있어야한다.
   def required
     @store = Store.new
-    # TODO 파람즈별 저장
-    @store.owner_id = current_owner.id
-    if @store.save
-      redirect_to root_path
+    if params.has_key?(:beacon_id)
+      @store = Store.new(require_store)
+      @store.owner_id = current_owner.id
+
+      respond_to do |format|
+        if @store.save
+          format.html { redirect_to root_path, notice: 'Store was successfully created.' }
+          format.json { render :show, status: :created, location: @store }
+        else
+          @owner = Owner.find_by(id: current_owner.id)
+          @owner.destroy
+          format.html { render :new }
+          format.json { render json: @store.errors, status: :unprocessable_entity }
+        end
+      end
+      
     end
   end
 
@@ -34,9 +46,9 @@ class Owners::RegistrationsController < Devise::RegistrationsController
   # end
 
   # DELETE /resource
-  # def destroy
-  #   super
-  # end
+  def destroy
+    super
+  end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
@@ -70,4 +82,9 @@ class Owners::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+  private
+    def require_store
+      params.require(:store).permit(:name, :location, :beacon_id, :business_id,
+       :main_picture, :category, :open_time, :close_time)
+    end
 end
