@@ -15,6 +15,7 @@ cancel_owner_registration GET    /owners/cancel(.:format)        owners/registra
                           PATCH  /owners(.:format)               owners/registrations#update
                           PUT    /owners(.:format)               owners/registrations#update
                           DELETE /owners(.:format)               owners/registrations#destroy
+           owners_confirm GET    /owners/confirm(.:format)       owners/registrations#required
                     menus GET    /menus(.:format)                menus#index
                           POST   /menus(.:format)                menus#create
                  new_menu GET    /menus/new(.:format)            menus#new

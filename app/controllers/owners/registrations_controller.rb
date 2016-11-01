@@ -11,6 +11,7 @@ class Owners::RegistrationsController < Devise::RegistrationsController
   # 매장 주인이라면, 반드시 하나의 매장을 가지고 있어야한다.
   def required
     @store = Store.new
+    # TODO 파람즈별 저장
     @store.owner_id = current_owner.id
     if @store.save
       redirect_to root_path
