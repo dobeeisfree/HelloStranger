@@ -5,11 +5,14 @@ class MenusController < ApplicationController
   # GET /menus
   # GET /menus.json
   def index
+
     if current_owner.stores.empty?
       flash[:alert] = "매장을 등록한 후, 메뉴판을 등록해주세요!"
       redirect_to new_store_path
     end
-    @menus = Menu.all
+    @stores = Owner.find_by(id: current_owner.id).stores
+    @menus = Menu.all #TODO 매장별 선택이 가능하면 그에 따라 가져와야한다
+
   end
 
   # GET /menus/1

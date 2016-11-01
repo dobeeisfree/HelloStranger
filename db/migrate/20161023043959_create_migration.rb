@@ -13,6 +13,15 @@ class CreateMigration < ActiveRecord::Migration
     add_foreign_key :reviews,    :menus
     add_foreign_key :reviews,    :foreigners
 
+    add_foreign_key :diaries,    :stores
+    add_foreign_key :diaries,    :foreigners
+
+
+    # 번역테이블의 csv파일을 직접 로드
+    execute "LOAD DATA LOCAL INFILE '#{Rails.root}/db/local-sql/foodnames.csv' INTO TABLE foodglossaries FIELDS TERMINATED BY ',';"
+    # foodstuff_id_2를 두번째 포린키로 지정
+    execute "ALTER TABLE helloStranger_development.menus ADD CONSTRAINT menus_foodstuffs__fk FOREIGN KEY (foodstuff_id_2) REFERENCES foodstuffs (id);"
+
   end
 
   def self.down
@@ -23,6 +32,7 @@ class CreateMigration < ActiveRecord::Migration
     drop_table :owners
     drop_table :reviews
     drop_table :stores
+    drop_table :diaries
 
     drop_table :cookingmethods
     drop_table :foodglossaries

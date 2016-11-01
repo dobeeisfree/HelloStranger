@@ -1,0 +1,100 @@
+<div class="ui grid owner-register-form">
+  <div class="four wide column" id="status">
+    <div class="ui ordered vertical steps">
+      <div class="completed step">
+        <div class="content">
+          <div class="title">1단계</div>
+          <div class="description">오너 계정을 설정합니다.</div>
+        </div>
+      </div>
+      <div class="active step">
+        <div class="content">
+          <div class="title">2단계</div>
+          <div class="description">하나의 매장을 등록합니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="eight wide column owner-account">
+    <div class="ui attached message">
+      <div class="header">
+        매장 등록을 해주세요!
+      </div>
+      <p>매장 주인이라면, 반드시 하나의 매장은 있어야합니다.</p>
+    </div>
+    <%= form_for(@store, html:{class: "ui form attached fluid segment"}) do |s| %>
+      <% if alert %>
+      <div class="ui positive message">
+        <div class="header"><%= alert %></div>
+      </div>
+      <% end %>
+      <div class="required field">
+        <%= s.label :매장명 %>
+        <div class="ui left icon input">
+        <%= s.text_field :name, autofocus: true, placeholder: "이름을 입력해주세요" %>
+          <i class="home icon"></i>
+        </div>
+      </div>
+      <div class="required field">
+        <%= s.label :Catecory %>
+        <select class="ui fluid dropdown">
+          <option value="">매장유형 선택</option>
+          <option value="0">Traditional</option>
+          <option value="1">Rice</option>
+          <option value="2">Noodle</option>
+          <option value="3">BBQ</option>
+          <option value="4">Snack</option>
+          <option value="5">Fast Food</option>
+        </select>
+      </div>
+      <div class="required field">
+        <%= s.label :사업자등록번호 %>
+        <%= s.text_field :business_id, maxlength: "10", placeholder: "10자리를 공백없이 입력해주세요" %>
+      </div>
+      <div class="required field">
+        <%= s.label :Beacon_UUID %>
+        <%= s.text_field :beacon_id, placeholder: "예시) 24DDF411-8CF1-440C-87CD-E368DAF9C93E" %>
+      </div>
+      <div class="required field">
+        <%= s.label :매장주소 %>
+        <div class="ui action input">
+          <%= s.text_field :location, placeholder: "주소를 입력해주세요", class: "ui input" %>
+          <button class="ui disabled button">우편번호 찾기</button>
+        </div>
+      </div>
+      <div class="required field">
+        <h4 class="ui dividing header">영업시간</h4>
+        <div class="fields">
+          <div class="six wide field required">
+            <%= s.label :시작 %>
+            <select class="ui fluid dropdown">
+              <option value="" >시간 선택</option>
+              <% @time_picker.each do |t| %>
+              <option value="<%= t %>"><%= t %></option>
+              <% end %>
+            </select>
+          </div>
+          <div class="five wide field required">
+            <%= s.label :종료 %>
+            <select class="ui fluid dropdown">
+              <option value="">시간 선택</option>
+              <% @time_picker.each do |t| %>
+              <option value="<%= t %>"><%= t %></option>
+              <% end %>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="required field">
+        <%= s.label :매장사진 %>
+        <label for="file" class="green ui icon inverted button">
+           <i class="file icon"></i>
+        사진선택
+        </label>
+       <input type="file" id="file" style="display:none">
+      </div>
+      <%= s.submit :매장확인, class: "huge ui fluid primary button" %>
+    <% end %>
+  </div>
+</div>
