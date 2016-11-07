@@ -26,10 +26,17 @@ Rails.application.routes.draw do
   get 'mypage/manage_store' => 'mypage#manage_store'
 
 
-  #번역시스템
-  get 'transfer/menu_name' => 'transfer#menu_name'
+  #안드로이드를 위한 api
+  scope module: 'api' do
+      namespace :v1 do
+        #번역시스템
+        get 'transfer/menu_name' => 'transfer#menu_name'
+        #테스트용
+        get 'users/foodname_test' => 'users#foodname_test'
+        resources :users
+      end
+  end
   
-  #안드로이드
-  get 'sever/user_sign_up' => 'sever#user_sign_up'
-  get 'sever/foodname_test' => 'sever#foodname_test'
+  
+  
 end
