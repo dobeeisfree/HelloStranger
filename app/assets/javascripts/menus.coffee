@@ -8,8 +8,8 @@ jQuery(document).ready ->
   action_name = $('#action_name').val();
   if action_name == 'index'
     $('.ui.foodglossary.search').search
-      apiSettings:#아래 url는 바뀔 수 있다.
-        url: '//hello-stranger-dobeeisfree.c9users.io/v1/transfer/menu_name?q={query}'
+      apiSettings:
+        url: '/v1/transfer/menu_name?q={query}'
       cache: false
       searchFullText: false
       onResults: (response) ->
