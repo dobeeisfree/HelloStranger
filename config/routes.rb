@@ -28,5 +28,8 @@ Rails.application.routes.draw do
 
   #번역시스템
   get 'transfer/menu_name' => 'transfer#menu_name'
-
+  
+  #안드로이드
+  get 'sever/user_sign_up' => 'sever#user_sign_up'
+  get 'sever/foodname_test' => 'sever#foodname_test'
 end
