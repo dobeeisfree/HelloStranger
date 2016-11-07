@@ -17,10 +17,9 @@ jQuery(document).ready ->
         if response != undefined
           $.each response['results'], (index, result) ->
             text = response['results'].pop()
-            text = text['kor']
             console.log(text)
             html += '<a class="result"><div class="content">'
-            html += '<div class="title">' + text + '</div>'
+            html += '<div class="title">' + text['id'] + '. <small>' + text['kor']  + '</small>' + '</div>'
             html += '' + '</div></a>'
             return index < 6
         $('.ui.foodglossary.search div.results').html(html)
