@@ -10,10 +10,11 @@ class MenusController < ApplicationController
       flash[:alert] = "매장을 등록한 후, 메뉴판을 등록해주세요!"
       redirect_to new_store_path
     end
+    # 오너에게만 보일 것들
+    # 오너의 매장
     @stores = Owner.find_by(id: current_owner.id).stores
-
-    #TODO 매장별 선택이 가능하면 그에 따라 가져와야한다
-    @menus = Menu.all
+    # 오너가 등록한 메뉴
+    @menus = Menu.where(store_id: @stores.ids)
 
   end
 
