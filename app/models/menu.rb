@@ -1,6 +1,7 @@
 class Menu < ActiveRecord::Base
 
   belongs_to  :stores
+  validates_presence_of :store_id
 
   belongs_to  :cookingmethods
   belongs_to  :foodglossaries
