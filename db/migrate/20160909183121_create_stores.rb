@@ -12,7 +12,7 @@ class CreateStores < ActiveRecord::Migration
       t.string      :business_id
 			t.string      :main_picture
 
-      t.integer     :category
+      t.integer     :category , :default => 0
 
       t.string      :open_time
       t.string      :close_time
