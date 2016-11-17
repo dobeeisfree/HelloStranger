@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161023043959) do
+ActiveRecord::Schema.define(version: 20161117174128) do
 
   create_table "cookingmethods", force: :cascade do |t|
     t.string  "kor",     limit: 255
@@ -53,15 +53,14 @@ ActiveRecord::Schema.define(version: 20161023043959) do
   create_table "foreigners", force: :cascade do |t|
     t.string  "name",      limit: 255
     t.string  "password",  limit: 255
-    t.integer "lang",      limit: 4
     t.string  "keep",      limit: 255
-    t.integer "for_taboo", limit: 4
+    t.integer "for_taboo", limit: 4,   default: 0
+    t.integer "lang",      limit: 4,   default: 0, null: false
   end
 
   create_table "menus", force: :cascade do |t|
     t.integer  "store_id",         limit: 4
-    t.string   "picture",          limit: 255
-    t.integer  "price",            limit: 4
+    t.integer  "price",            limit: 4,   default: 2016
     t.boolean  "checked_menu"
     t.boolean  "quick_menu"
     t.integer  "foodglossary_id",  limit: 4
@@ -69,16 +68,17 @@ ActiveRecord::Schema.define(version: 20161023043959) do
     t.integer  "foodstuff_id_2",   limit: 4
     t.integer  "taste_id",         limit: 4
     t.integer  "cookingmethod_id", limit: 4
-    t.integer  "count_kor",        limit: 4
-    t.integer  "count_eng",        limit: 4
-    t.integer  "count_jpn",        limit: 4
-    t.integer  "count_chn",        limit: 4
-    t.integer  "like_kor",         limit: 4
-    t.integer  "like_eng",         limit: 4
-    t.integer  "like_jpn",         limit: 4
-    t.integer  "like_chn",         limit: 4
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.integer  "count_kor",        limit: 4,   default: 0
+    t.integer  "count_eng",        limit: 4,   default: 0
+    t.integer  "count_jpn",        limit: 4,   default: 0
+    t.integer  "count_chn",        limit: 4,   default: 0
+    t.integer  "like_kor",         limit: 4,   default: 0
+    t.integer  "like_eng",         limit: 4,   default: 0
+    t.integer  "like_jpn",         limit: 4,   default: 0
+    t.integer  "like_chn",         limit: 4,   default: 0
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.string   "food_picture",     limit: 255
   end
 
   add_index "menus", ["cookingmethod_id"], name: "fk_rails_49250363ed", using: :btree
@@ -125,12 +125,12 @@ ActiveRecord::Schema.define(version: 20161023043959) do
     t.string   "location",     limit: 255
     t.string   "beacon_id",    limit: 255
     t.string   "business_id",  limit: 255
-    t.string   "main_picture", limit: 255
-    t.integer  "category",     limit: 4
+    t.integer  "category",     limit: 4,   default: 0
     t.string   "open_time",    limit: 255
     t.string   "close_time",   limit: 255
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.string   "main_picture", limit: 255
   end
 
   add_index "stores", ["owner_id"], name: "fk_rails_dabcef777e", using: :btree

@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class DispatchUploader < CarrierWave::Uploader::Base
+class StoreImageUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
@@ -13,7 +13,7 @@ class DispatchUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    "uploads/stores/"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
@@ -44,8 +44,8 @@ class DispatchUploader < CarrierWave::Uploader::Base
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  # def filename
-  #   "something.jpg" if original_filename
-  # end
+  def filename
+    "s_"+[*('a'..'z')].sample(20).join+Time.now.usec.to_s+".jpg" if original_filename
+  end
 
 end
