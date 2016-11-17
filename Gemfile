@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+# for uploading a image
+gem 'carrierwave'
+gem 'fog-aws'
+
 # devise
 gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
