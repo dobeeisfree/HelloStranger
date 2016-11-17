@@ -7,6 +7,11 @@ class StoresController < ApplicationController
     @stores = Store.all
   end
 
+  # POST /stores/upload
+  def upload
+
+  end
+
   # GET /stores/1
   # GET /stores/1.json
   def show
