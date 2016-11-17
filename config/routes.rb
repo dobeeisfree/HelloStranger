@@ -14,7 +14,6 @@ Rails.application.routes.draw do
     get 'owners/confirm', to: 'owners/registrations#required'
   end
 
-  post 'stores/upload' => 'stores#upload'
 
   # 리소스 모음
   # 메뉴
