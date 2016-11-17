@@ -1,4 +1,5 @@
 class Menu < ActiveRecord::Base
+  mount_uploader :food_picture, MenuImageUploader
 
   belongs_to  :stores
   validates_presence_of :store_id
