@@ -23,7 +23,7 @@
       </div>
       <p>매장 주인이라면, 반드시 하나의 매장은 있어야합니다.</p>
     </div>
-    <%= form_for(@store, html:{class: "ui form attached fluid segment"}) do |s| %>
+    <%= form_for(@store, html:{multipart: true, class: "ui form attached fluid segment"}) do |s| %>
       <% if alert %>
       <div class="ui positive message">
         <div class="header"><%= alert %></div>
@@ -87,12 +87,12 @@
         </div>
       </div>
       <div class="required field">
-        <%= s.label :매장사진 %>
-        <label for="file" class="green ui icon inverted button">
-           <i class="file icon"></i>
-        사진선택
-        </label>
-       <input type="file" id="file" style="display:none">
+        <%= s.label :매장사진  %>
+        <p>
+          <%= image_tag(@store.main_picture_url) if @store.main_picture? %>
+          <%= s.file_field :main_picture %>
+          <%= s.hidden_field :main_picture_cache %>
+        </p>
       </div>
       <%= s.submit :매장확인, class: "huge ui fluid primary button" %>
     <% end %>

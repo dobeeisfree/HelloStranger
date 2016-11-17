@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     get 'owners/confirm', to: 'owners/registrations#required'
   end
 
+
   # 리소스 모음
   # 메뉴
   resources :menus

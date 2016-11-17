@@ -3,7 +3,7 @@ class CreateMenus < ActiveRecord::Migration
     create_table :menus do |t|
 
       t.belongs_to  :store
-      t.string      :picture
+      # t.string      :picture
       t.integer     :price , :default => 2016
 
       t.boolean     :checked_menu
