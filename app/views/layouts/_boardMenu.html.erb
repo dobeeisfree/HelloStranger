@@ -18,8 +18,9 @@
      <i class="dropdown icon"></i>
       <div class="menu">
         <% @stores.all.each do |s| %>
-        <!-- TODO 매장마다 뷰가 달라야한다 -->
-        <a class="item"><%=s.name%></a>
+          <%= link_to(board_quick_path(store_id: s.id) , class: "item") do %>
+            <%= s.name %>
+          <% end %>
         <% end %>
       </div>
     </div>
