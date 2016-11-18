@@ -1,0 +1,14 @@
+// quick.html.erb
+.ui.container.boards {
+  margin-top: 7%;
+
+  .inverted.segment {
+    margin: 0 auto;
+    background: rgb(31,224,63);
+    max-width: 60%;
+    .secondary.pointing.menu {
+      border-color: transparent;
+      border-bottom: none;
+    }
+  }
+}

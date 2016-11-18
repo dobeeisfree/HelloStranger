@@ -6,8 +6,8 @@ class CreateMenus < ActiveRecord::Migration
       # t.string      :picture
       t.integer     :price , :default => 2016
 
-      t.boolean     :checked_menu
-      t.boolean     :quick_menu
+      t.boolean     :checked_menu, :default => false
+      t.boolean     :quick_menu,   :default => false
 
       ## db associations
       t.integer     :store_id

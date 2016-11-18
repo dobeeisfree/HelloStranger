@@ -1,0 +1,29 @@
+<div class="ui inverted segment">
+  <div class="ui inverted secondary pointing menu">
+
+    <% if controller.action_name == "quick" %>
+    <%= link_to "퀵 메뉴판", board_quick_path, class: "active item" %>
+    <i class="check circle icon"></i>
+    <%= link_to "메뉴 인기도", board_report_path, class: "item" %>
+    <i class="thumbs up  outline icon"></i>
+    <% else %>
+    <%= link_to "퀵 메뉴판", board_quick_path, class: "item" %>
+    <i class="check circle outline icon"></i>
+    <%= link_to "메뉴 인기도", board_report_path, class: "active item" %>
+    <i class="thumbs up icon"></i>
+    <% end %>
+
+    <div class="ui pointing dropdown link item">
+     <%= @stores.first.name %> &nbsp; <i class="home icon"></i>
+     <i class="dropdown icon"></i>
+      <div class="menu">
+        <% @stores.all.each do |s| %>
+          <%= link_to(board_quick_path(store_id: s.id) , class: "item") do %>
+            <%= s.name %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>
