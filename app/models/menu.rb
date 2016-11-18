@@ -1,13 +1,15 @@
 class Menu < ActiveRecord::Base
   mount_uploader :food_picture, MenuImageUploader
 
-  belongs_to  :stores
   validates_presence_of :store_id
 
-  belongs_to  :cookingmethods
-  belongs_to  :foodglossaries
-  belongs_to  :tastes
-  belongs_to  :foodstuffs
+  # db Associations
+  belongs_to  :store
+  belongs_to  :cookingmethod
+  belongs_to  :foodglossary
+  belongs_to  :taste
+  belongs_to  :foodstuff
 
-  has_many    :reviews, through: :foreigners
+  has_many    :review
+
 end

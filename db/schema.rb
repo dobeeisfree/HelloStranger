@@ -59,15 +59,15 @@ ActiveRecord::Schema.define(version: 20161117174128) do
   end
 
   create_table "menus", force: :cascade do |t|
-    t.integer  "store_id",         limit: 4
+    t.integer  "store_id",         limit: 4,                   null: false
     t.integer  "price",            limit: 4,   default: 2016
-    t.boolean  "checked_menu"
-    t.boolean  "quick_menu"
-    t.integer  "foodglossary_id",  limit: 4
-    t.integer  "foodstuff_id",     limit: 4
-    t.integer  "foodstuff_id_2",   limit: 4
-    t.integer  "taste_id",         limit: 4
-    t.integer  "cookingmethod_id", limit: 4
+    t.boolean  "checked_menu",                 default: false
+    t.boolean  "quick_menu",                   default: false
+    t.integer  "foodglossary_id",  limit: 4,                   null: false
+    t.integer  "foodstuff_id",     limit: 4,                   null: false
+    t.integer  "foodstuff_id_2",   limit: 4,                   null: false
+    t.integer  "taste_id",         limit: 4,                   null: false
+    t.integer  "cookingmethod_id", limit: 4,                   null: false
     t.integer  "count_kor",        limit: 4,   default: 0
     t.integer  "count_eng",        limit: 4,   default: 0
     t.integer  "count_jpn",        limit: 4,   default: 0
@@ -76,8 +76,8 @@ ActiveRecord::Schema.define(version: 20161117174128) do
     t.integer  "like_eng",         limit: 4,   default: 0
     t.integer  "like_jpn",         limit: 4,   default: 0
     t.integer  "like_chn",         limit: 4,   default: 0
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
     t.string   "food_picture",     limit: 255
   end
 
