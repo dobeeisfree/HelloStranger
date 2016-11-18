@@ -1,13 +1,10 @@
-<div class="ui secondary vertical pointing menu">
-  <% if controller.action_name == "account" %>
-  <%= link_to "계정관리", mypage_account_path , class: "item active" %>
-  <% else %>
-  <%= link_to "계정관리", mypage_account_path , class: "item" %>
-  <% end %>
-
-  <% if controller.action_name == "manage_store"%>
-  <%= link_to "매장 관리", mypage_manage_store_path , class: "item active" %>
-  <% else %>
-  <%= link_to "매장 관리", mypage_manage_store_path , class: "item" %>
-  <% end %>
+<div class="ui inverted segment">
+  <div class="ui inverted secondary pointing menu">
+    <a class="active item">
+      퀵 메뉴판
+    </a>
+    <a class="item">
+     메뉴 인기도
+   </a>
+   </div>
 </div>
