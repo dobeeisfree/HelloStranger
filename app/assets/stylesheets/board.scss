@@ -1,3 +1,14 @@
-// Place all the styles related to the board controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+// quick.html.erb
+.ui.container.quick {
+  margin-top: 7%;
+
+  .inverted.segment {
+    margin: 0 auto;
+    background: rgb(31,224,63);
+    max-width: 60%;
+    .secondary.pointing.menu {
+      border-color: transparent;
+      border-bottom: none;
+    }
+  }
+}
