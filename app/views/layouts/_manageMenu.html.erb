@@ -1,13 +1,9 @@
 <div class="ui secondary vertical pointing menu">
   <% if controller.action_name == "account" %>
   <%= link_to "계정관리", mypage_account_path , class: "item active" %>
+  <%= link_to "매장 관리", mypage_manage_store_path , class: "item" %>
   <% else %>
   <%= link_to "계정관리", mypage_account_path , class: "item" %>
-  <% end %>
-
-  <% if controller.action_name == "manage_store"%>
   <%= link_to "매장 관리", mypage_manage_store_path , class: "item active" %>
-  <% else %>
-  <%= link_to "매장 관리", mypage_manage_store_path , class: "item" %>
   <% end %>
 </div>

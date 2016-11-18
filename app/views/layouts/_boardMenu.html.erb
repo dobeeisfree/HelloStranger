@@ -1,10 +1,28 @@
 <div class="ui inverted segment">
   <div class="ui inverted secondary pointing menu">
-    <a class="active item">
-      퀵 메뉴판
-    </a>
-    <a class="item">
-     메뉴 인기도
-   </a>
-   </div>
+
+    <% if controller.action_name == "quick" %>
+    <%= link_to "퀵 메뉴판", board_quick_path, class: "active item" %>
+    <i class="check circle icon"></i>
+    <%= link_to "메뉴 인기도", board_report_path, class: "item" %>
+    <i class="thumbs up  outline icon"></i>
+    <% else %>
+    <%= link_to "퀵 메뉴판", board_quick_path, class: "item" %>
+    <i class="check circle outline icon"></i>
+    <%= link_to "메뉴 인기도", board_report_path, class: "active item" %>
+    <i class="thumbs up icon"></i>
+    <% end %>
+
+    <div class="ui pointing dropdown link item">
+     <%= @stores.first.name %> &nbsp; <i class="home icon"></i>
+     <i class="dropdown icon"></i>
+      <div class="menu">
+        <% @stores.all.each do |s| %>
+        <!-- TODO 매장마다 뷰가 달라야한다 -->
+        <a class="item"><%=s.name%></a>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
 </div>
