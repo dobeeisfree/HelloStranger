@@ -8,6 +8,11 @@ class BoardController < ApplicationController
     else
       @menus = @stores.find(params[:store_id]).menu
     end
+
+    if params[:set_quick]
+      @menu = @menus.find(params[:set_quick])
+      @menu.set_quick(params[:set_quick])
+    end
   end
 
   def report

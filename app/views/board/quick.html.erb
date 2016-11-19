@@ -12,19 +12,19 @@
         <% end %>
       </div>
       <div class="middle aligned content">
-        <div class="header"><%= m.foodglossary_id %></div>
+        <div class="header"><%= Foodglossary.find(m.foodglossary_id).kor %></div>
         <div class="description">
-          <p><%= m.taste_id %></p>
-          <p><%= m.foodstuff_id_2 %></p>
-          <p><%= m.foodstuff_id %></p>
-          <p><%= m.cookingmethod_id %></p>
+          <p><%= Taste.find(m.taste_id).kor %></p>
+          <p><%= Foodstuff.find(m.foodstuff_id_2).kor %></p>
+          <p><%= Foodstuff.find(m.foodstuff_id).kor %></p>
+          <p><%= Cookingmethod.find(m.cookingmethod_id).kor %></p>
         </div>
         <div class="extra">
           <b><%= m.quick_menu %></b>
-          <% unless m.quick_menu %>
-          <div class="ui right floated button">
-            퀵 메뉴판으로 설정
-          </div>
+          <% if m.quick_menu %>
+              <%= link_to "일반 메뉴로 설정", board_quick_path(set_quick: m.id), class: "ui right floated button" %>
+          <% else %>
+              <%= link_to "퀵 메뉴판으로 설정", board_quick_path(set_quick: m.id), class: "ui right floated button" %>
           <% end %>
         </div>
       </div>

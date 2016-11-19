@@ -12,4 +12,15 @@ class Menu < ActiveRecord::Base
 
   has_many    :review
 
+  def set_quick(id)
+    @menu = Menu.find(id)
+    # 토글
+    if @menu.quick_menu == false
+      @menu.update(quick_menu: true)
+    else
+      @menu.update(quick_menu: false)
+    end
+
+    @menu.save
+  end
 end
