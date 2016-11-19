@@ -4,9 +4,9 @@ class BoardController < ApplicationController
   def quick
     if params[:store_id].to_s.blank?
       puts "디폴트"
-      @menus = @stores.first.menus
+      @menus = @stores.first.menu
     else
-      @menus = @stores.find(params[:store_id]).menus
+      @menus = @stores.find(params[:store_id]).menu
     end
   end
 
