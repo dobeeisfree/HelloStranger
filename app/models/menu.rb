@@ -5,10 +5,10 @@ class Menu < ActiveRecord::Base
 
   # db Associations
   belongs_to  :store
-  belongs_to  :cookingmethod
-  belongs_to  :foodglossary
-  belongs_to  :taste
-  belongs_to  :foodstuff
+  has_many  :cookingmethod
+  has_many  :foodglossary
+  has_many  :taste
+  has_many  :foodstuff
 
   has_many    :review
 
