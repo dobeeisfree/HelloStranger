@@ -26,6 +26,10 @@ Rails.application.routes.draw do
   get 'mypage/account' => 'mypage#account'
   get 'mypage/manage_store' => 'mypage#manage_store'
 
+  # 매장 현황
+  get 'board' => 'board#quick'
+  get 'board/quick' => 'board#quick'
+  get 'board/report' => 'board#report'
 
   # for api
   scope module: 'api' do

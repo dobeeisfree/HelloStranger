@@ -12,10 +12,21 @@ class MenusController < ApplicationController
     end
     # 오너에게만 보일 것들
     # 오너의 매장
-    @stores = Owner.find_by(id: current_owner.id).stores
-    # 오너가 등록한 메뉴
-    @menus = Menu.where(store_id: @stores.ids)
+    @stores = Owner.find(current_owner.id).stores
 
+    # 오너가 등록한 메뉴
+    # 매장당 보여야한다
+    if params[:current_store].to_s.blank?
+      # 디폴트 일 때
+      @store = @stores.first
+      @menus = Menu.where(@store.id)
+      puts @menus
+    else
+      # 어떤 매장을 선택했을 때
+      @store = params[:current_store]
+      @menus = Menu.where(params[:current_store])
+      puts @menus
+    end
   end
 
   # GET /menus/1
@@ -42,7 +53,7 @@ class MenusController < ApplicationController
         format.html { redirect_to menus_path, notice: 'Menu was successfully created.' }
         format.json { render :show, status: :created, location: @menu }
       else
-        format.html { render :new }
+        format.html { redirect_to menus_path }
         format.json { render json: @menu.errors, status: :unprocessable_entity }
       end
     end
@@ -80,7 +91,6 @@ class MenusController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def menu_params
-      params.require(:menu).permit(:store_id, :picture, :price, :foodglossary_id,
-       :foodstuff_id, :foodstuff_id_2, :taste_id, :cookingmethod_id)
+      params.require(:menu).permit(:store_id, :food_picture, :price, :foodstuff_id, :foodstuff_id_2, :foodglossary_id, :cookingmethod_id, :taste_id)
     end
 end

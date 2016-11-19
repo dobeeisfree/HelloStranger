@@ -1,0 +1,35 @@
+<div class="ui container boards">
+  <%= render partial: "layouts/boardMenu" %>
+
+  <div class="ui items">
+  <% @menus.all.each do |m| %>
+    <div class="item">
+      <div class="ui small image">
+        <% if m.food_picture.url %>
+        <img src="m.food_picture.url" width="250">
+        <% else %>
+        <img src="//maxcdn.icons8.com/Share/icon/Food//vegetarian_food1600.png" width="250">
+        <% end %>
+      </div>
+      <div class="middle aligned content">
+        <div class="header"><%= Foodglossary.find(m.foodglossary_id).kor %></div>
+        <div class="description">
+          <p><%= Taste.find(m.taste_id).kor %></p>
+          <p><%= Foodstuff.find(m.foodstuff_id_2).kor %></p>
+          <p><%= Foodstuff.find(m.foodstuff_id).kor %></p>
+          <p><%= Cookingmethod.find(m.cookingmethod_id).kor %></p>
+        </div>
+        <div class="extra">
+          <b><%= m.quick_menu %></b>
+          <% if m.quick_menu %>
+              <%= link_to "일반 메뉴로 설정", board_quick_path(set_quick: m.id), class: "ui right floated button" %>
+          <% else %>
+              <%= link_to "퀵 메뉴판으로 설정", board_quick_path(set_quick: m.id), class: "ui right floated button" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  </div>
+
+</div>
