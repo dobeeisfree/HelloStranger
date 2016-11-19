@@ -1,6 +1,12 @@
 <div class="ui container boards">
   <%= render partial: "layouts/boardMenu" %>
 
+  <% if @custom_err_msg.present? %>
+  <div class="ui positive message">
+    <div class="header"><%= @custom_err_msg %></div>
+  </div>
+  <% end %>
+
   <div class="ui items">
   <% @menus.all.each do |m| %>
     <div class="item">
