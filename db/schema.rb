@@ -31,9 +31,6 @@ ActiveRecord::Schema.define(version: 20161117174128) do
     t.datetime "created_at",                 null: false
   end
 
-  add_index "diaries", ["foreigner_id"], name: "fk_rails_33f01abd9f", using: :btree
-  add_index "diaries", ["store_id"], name: "fk_rails_4322272df7", using: :btree
-
   create_table "foodglossaries", force: :cascade do |t|
     t.string  "kor",     limit: 255
     t.string  "eng",     limit: 255
@@ -59,15 +56,15 @@ ActiveRecord::Schema.define(version: 20161117174128) do
   end
 
   create_table "menus", force: :cascade do |t|
-    t.integer  "store_id",         limit: 4
+    t.integer  "store_id",         limit: 4,                   null: false
     t.integer  "price",            limit: 4,   default: 2016
-    t.boolean  "checked_menu"
-    t.boolean  "quick_menu"
-    t.integer  "foodglossary_id",  limit: 4
-    t.integer  "foodstuff_id",     limit: 4
-    t.integer  "foodstuff_id_2",   limit: 4
-    t.integer  "taste_id",         limit: 4
-    t.integer  "cookingmethod_id", limit: 4
+    t.boolean  "checked_menu",                 default: false
+    t.boolean  "quick_menu",                   default: false
+    t.integer  "foodglossary_id",  limit: 4,                   null: false
+    t.integer  "foodstuff_id",     limit: 4,                   null: false
+    t.integer  "foodstuff_id_2",   limit: 4,                   null: false
+    t.integer  "taste_id",         limit: 4,                   null: false
+    t.integer  "cookingmethod_id", limit: 4,                   null: false
     t.integer  "count_kor",        limit: 4,   default: 0
     t.integer  "count_eng",        limit: 4,   default: 0
     t.integer  "count_jpn",        limit: 4,   default: 0
@@ -76,17 +73,10 @@ ActiveRecord::Schema.define(version: 20161117174128) do
     t.integer  "like_eng",         limit: 4,   default: 0
     t.integer  "like_jpn",         limit: 4,   default: 0
     t.integer  "like_chn",         limit: 4,   default: 0
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
     t.string   "food_picture",     limit: 255
   end
-
-  add_index "menus", ["cookingmethod_id"], name: "fk_rails_49250363ed", using: :btree
-  add_index "menus", ["foodglossary_id"], name: "fk_rails_37ad611b6a", using: :btree
-  add_index "menus", ["foodstuff_id"], name: "fk_rails_7b67bed59f", using: :btree
-  add_index "menus", ["foodstuff_id_2"], name: "menus_foodstuffs__fk", using: :btree
-  add_index "menus", ["store_id"], name: "fk_rails_20b0ce4e50", using: :btree
-  add_index "menus", ["taste_id"], name: "fk_rails_6ddead576a", using: :btree
 
   create_table "owners", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -116,9 +106,6 @@ ActiveRecord::Schema.define(version: 20161117174128) do
     t.datetime "updated_at",               null: false
   end
 
-  add_index "reviews", ["foreigner_id"], name: "fk_rails_402b8f23c3", using: :btree
-  add_index "reviews", ["menu_id"], name: "fk_rails_be6d6ab568", using: :btree
-
   create_table "stores", force: :cascade do |t|
     t.integer  "owner_id",     limit: 4
     t.string   "name",         limit: 255
@@ -133,8 +120,6 @@ ActiveRecord::Schema.define(version: 20161117174128) do
     t.string   "main_picture", limit: 255
   end
 
-  add_index "stores", ["owner_id"], name: "fk_rails_dabcef777e", using: :btree
-
   create_table "tastes", force: :cascade do |t|
     t.string  "kor",     limit: 255
     t.string  "eng",     limit: 255
@@ -143,15 +128,4 @@ ActiveRecord::Schema.define(version: 20161117174128) do
     t.boolean "checked"
   end
 
-  add_foreign_key "diaries", "foreigners"
-  add_foreign_key "diaries", "stores"
-  add_foreign_key "menus", "cookingmethods"
-  add_foreign_key "menus", "foodglossaries"
-  add_foreign_key "menus", "foodstuffs"
-  add_foreign_key "menus", "foodstuffs", column: "foodstuff_id_2", name: "menus_foodstuffs__fk"
-  add_foreign_key "menus", "stores"
-  add_foreign_key "menus", "tastes"
-  add_foreign_key "reviews", "foreigners"
-  add_foreign_key "reviews", "menus"
-  add_foreign_key "stores", "owners"
 end

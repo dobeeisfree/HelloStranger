@@ -10,12 +10,12 @@ class CreateMenus < ActiveRecord::Migration
       t.boolean     :quick_menu,   :default => false
 
       ## db associations
-      t.integer     :store_id
-      t.integer     :foodglossary_id
-      t.integer     :foodstuff_id
-      t.integer     :foodstuff_id_2
-      t.integer     :taste_id
-      t.integer     :cookingmethod_id
+      t.integer     :store_id,          null: false
+      t.integer     :foodglossary_id,   null: false
+      t.integer     :foodstuff_id,      null: false
+      t.integer     :foodstuff_id_2,    null: false
+      t.integer     :taste_id,          null: false
+      t.integer     :cookingmethod_id,  null: false
 
       # 주문수
       t.integer     :count_kor , :default => 0
