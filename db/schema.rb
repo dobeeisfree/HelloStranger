@@ -50,9 +50,9 @@ ActiveRecord::Schema.define(version: 20161117174128) do
   create_table "foreigners", force: :cascade do |t|
     t.string  "name",      limit: 255
     t.string  "password",  limit: 255
-    t.string  "keep",      limit: 255
+    t.string  "keep",      limit: 255, default: ""
     t.integer "for_taboo", limit: 4,   default: 0
-    t.integer "lang",      limit: 4,   default: 0, null: false
+    t.integer "lang",      limit: 4,   default: 0,  null: false
   end
 
   create_table "menus", force: :cascade do |t|

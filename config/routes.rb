@@ -37,11 +37,12 @@ Rails.application.routes.draw do
 
         get 'transfer/menu_name' => 'transfer#menu_name'
         get 'users/delete' => 'users#delete'
+        get 'users/keep' => 'users#keep'
         resources :users
 
       end
   end
-  
-  
-  
+
+
+
 end

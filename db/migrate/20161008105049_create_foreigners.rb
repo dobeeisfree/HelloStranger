@@ -6,7 +6,7 @@ class CreateForeigners < ActiveRecord::Migration
       t.string   :password
 
       # store.id를 저장한다
-      t.string   :keep
+      t.string   :keep, :default => ""
 
       # 0 ~ 7 (Skip, Muslim , ... )
       t.integer  :for_taboo, :default => 0
