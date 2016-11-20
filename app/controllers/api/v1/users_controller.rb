@@ -1,7 +1,7 @@
 module Api::V1
   class UsersController < ApiController
     rescue_from (ActiveRecord::RecordNotFound) { |exception| handle_exception(exception, 404) }
-
+    # For Foreigner
 
     # GET /v1/users
     # 모든 유저를 보여준다.
@@ -28,6 +28,7 @@ module Api::V1
       # 회원가입 시 받는 데이터는
       # user_sign_up_params에서 확인
       @user = Foreigner.new(user_sign_up_params)
+
       if @user.save
         render json: @user.to_json
       else
@@ -66,6 +67,22 @@ module Api::V1
       end
     end
 
+    # 사용자의 킵 저장
+    # => 저장만 해..
+    # GET /v1/users/keep
+    def keep
+      # params
+      # => user_id 유저 찾아서
+      # => store_id 를 유저 킵에 저장
+      # output
+      # => 유저의 keep 필드 업데이트
+
+      @user = Foreigner.find(params[:user_id]) unless params[:user_id].to_s.blank?
+      render status: :not_found if @user.nil?
+      @user.keep = @user.keep + "/" + params[:store_id].to_s if @user
+      @user.save if render json: @user.to_json, :status => :ok
+
+    end
 
     protected
       def handle_exception(ex, status)
