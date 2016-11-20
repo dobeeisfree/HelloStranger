@@ -77,9 +77,10 @@ module Api::V1
       # output
       # => 유저의 keep 필드 업데이트
 
-      @user = Foreigner.find(params[:user_id])
-      @user.keep = @user.keep + '/' + params[:store_id].to_s if @user
-      render @user, status: :ok if @user.save
+      @user = Foreigner.find(params[:user_id]) unless params[:user_id].to_s.blank?
+      render status: :not_found if @user.nil?
+      @user.keep = @user.keep + "/" + params[:store_id].to_s if @user
+      @user.save if render json: @user.to_json, :status => :ok
 
     end
 
