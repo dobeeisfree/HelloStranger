@@ -23,3 +23,13 @@ c_jpn = %w(沸騰 炒め 書き込み 揚げる)
 c_chn = %w(耙 轰动 烤 油炸)
 
 4.times { Cookingmethod.create(kor: c_kor.sample, eng: c_eng.sample, jpn: c_jpn.sample, chn: c_chn.sample, checked: false) }
+
+
+
+
+
+
+# 오너
+Owner.create(email: "j@j.com", password: "123123", name: "줍이", contact_number: "212321")
+Owner.create(email: "s@s.com", password: "123123", name: "세지니", contact_number: "212321")
+Owner.create(email: "h@h.com", password: "123123", name: "호준", contact_number: "212321")
