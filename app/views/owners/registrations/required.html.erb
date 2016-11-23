@@ -68,7 +68,7 @@
         <div class="fields">
           <div class="six wide field required">
             <%= s.label :시작 %>
-            <select class="ui fluid dropdown">
+            <select class="ui fluid dropdown" name="store[open_time]">
               <option value="" >시간 선택</option>
               <% @time_picker.each do |t| %>
               <option value="<%= t %>"><%= t %></option>
@@ -77,7 +77,7 @@
           </div>
           <div class="five wide field required">
             <%= s.label :종료 %>
-            <select class="ui fluid dropdown">
+            <select class="ui fluid dropdown" name="store[close_time]">
               <option value="">시간 선택</option>
               <% @time_picker.each do |t| %>
               <option value="<%= t %>"><%= t %></option>
@@ -91,7 +91,6 @@
         <p>
           <%= image_tag(@store.main_picture_url) if @store.main_picture? %>
           <%= s.file_field :main_picture %>
-          <%= s.hidden_field :main_picture_cache %>
         </p>
       </div>
       <%= s.submit :매장확인, class: "huge ui fluid primary button" %>

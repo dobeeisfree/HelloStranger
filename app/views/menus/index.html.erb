@@ -13,24 +13,20 @@
     <p id="notice"><%= notice %></p>
   </div>
 
-  <%= form_tag(menus_path, class: "ui form attached fluid segment") do %>
+
+<%= form_for(@menu, class: "ui form attached fluid segment", html: { multipart: true }) do |f| %>
     <div class="fields">
 
       <div class="four wide field">
-        <div class="blurring dimmable image">
-          <div class="ui dimmer">
-            <div class="content">
-              <div class="center">
-                <div class="ui inverted button">이미지 선택하기</div>
-              </div>
-            </div>
-          </div>
-          <img class="ui fluid image" src="http://semantic-ui.com/images/wireframe/image.png">
-        </div>
+        <%= f.label :매장사진  %>
+        <p>
+          <%= image_tag(@menu.food_picture_url) if @menu.food_picture? %>
+          <%= f.file_field :food_picture %>
+        </p>
       </div>
 
       <div class="twelve wide field">
-        <label>매장</label>
+        <%= f.label :매장  %>
         <select class="ui fluid dropdown" name="menu[store_id]">
           <option value="">매장선택</option>
           <% @stores.reverse.each do |s| %>
@@ -40,11 +36,11 @@
       </div>
 
       <div class="twelve wide field">
-        <label>메뉴명</label>
+        <%= f.label :메뉴명  %>
         <div class="ui foodglossary search">
           <div class="ui icon input">
-            <input type="hidden" id="foodglossary_id">
-            <input class="prompt" name="menu[foodglossary_id]" type="text" placeholder="메뉴명을 검색하세요!">
+            <%= f.hidden_field :foodglossary_id %>
+            <%= f.text_field :foodglossary_id, class: "prompt", placeholder: "메뉴명을 검색하세요!"%>
             <i class="search icon"></i>
           </div>
           <div class="results"></div>
@@ -55,7 +51,7 @@
     <div class="fields">
       <div class="five wide field">
         <div class="ui right labeled input">
-          <input type="text" name="menu[price]" placeholder="국내 단위로 숫자만 입력해주세요">
+          <%= f.text_field :price, placeholder: "국내 단위로 숫자만 입력해주세요" %>
           <div class="ui basic label">원</div>
         </div>
       </div>
@@ -64,48 +60,51 @@
     <h3>설명</h3>
     <div class="fields">
       <div class="three wide field">
-        <label>맛</label>
+        <%= f.label :맛  %>
         <div class="ui taste search">
           <div class="ui icon input">
-            <input class="prompt" name="menu[taste_id]" type="text" placeholder="...">
+            <%= f.hidden_field :taste_id %>
+            <%= f.text_field :taste_id, class: "prompt", placeholder: "..."%>
             <i class="search icon"></i>
           </div>
           <div class="results taste"></div>
         </div>
       </div>
       <div class="three wide field">
-        <label>주재료1</label>
+        <%= f.label :주재료1  %>
         <div class="ui foodstuff search">
           <div class="ui icon input">
-            <input class="prompt" name="menu[foodstuff_id]" type="text" placeholder="...">
+            <%= f.hidden_field :foodstuff_id %>
+            <%= f.text_field :foodstuff_id, class: "prompt", placeholder: "..."%>
             <i class="search icon"></i>
           </div>
           <div class="results foodstuff_1"></div>
         </div>
       </div>
       <div class="three wide field">
-        <label>주재료2</label>
+        <%= f.label :주재료2  %>
         <div class="ui foodstuff search">
           <div class="ui icon input">
-            <input class="prompt" name="menu[foodstuff_id_2]" type="text" placeholder="...">
+            <%= f.hidden_field :foodstuff_id_2 %>
+            <%= f.text_field :foodstuff_id_2, class: "prompt", placeholder: "..."%>
             <i class="search icon"></i>
           </div>
           <div class="results foodstuff_2"></div>
         </div>
       </div>
       <div class="three wide field">
-        <label>조리법</label>
+        <%= f.label :조리법  %>
         <div class="ui cookingmethod search">
           <div class="ui icon input">
-            <input class="prompt" name="menu[cookingmethod_id]" type="text" placeholder="...">
+            <%= f.hidden_field :cookingmethod_id %>
+            <%= f.text_field :cookingmethod_id, class: "prompt", placeholder: "..."%>
             <i class="search icon"></i>
           </div>
           <div class="results cookingmethod"></div>
         </div>
       </div>
     </div>
-
-    <button type="submit" class="ui primary button">등록하기</button>
+    <%= f.submit :등록하기, class: "ui primary button" %>
 
   <% end %>
 
@@ -129,7 +128,11 @@
     <div class="column">
       <div class="ui card">
         <div class="image">
+          <% if m.food_picture_url %>
+          <img src="<%=m.food_picture.url%>">
+          <% else %>
           <img src="http://semantic-ui.com/images/avatar/large/daniel.jpg">
+          <% end %>
         </div>
         <div class="content">
           <span class="header"><%= Foodglossary.find(m.foodglossary_id).kor %></span>
