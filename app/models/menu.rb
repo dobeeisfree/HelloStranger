@@ -2,6 +2,7 @@ class Menu < ActiveRecord::Base
   mount_uploader :food_picture, MenuImageUploader
 
   validates_presence_of :store_id
+  validates :foodstuff_id, :foodstuff_id_2, :foodglossary_id, :taste_id, :presence => true
 
   # db Associations
   belongs_to  :store

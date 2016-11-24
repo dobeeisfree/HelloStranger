@@ -3,5 +3,10 @@
     <div class="four wide column">
       <%= render partial: "layouts/manageMenu" %>
     </div>
+    <% @stores.each do |s| %>
+      <% if s.main_picture.url %>
+      <img src="<%= s.main_picture.url %>">
+      <% end %>
+    <% end %>
   </div>
 </div>
