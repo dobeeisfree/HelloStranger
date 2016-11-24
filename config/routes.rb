@@ -35,10 +35,27 @@ Rails.application.routes.draw do
   scope module: 'api' do
       namespace :v1 do
 
+        # transfer
         get 'transfer/menu_name' => 'transfer#menu_name'
+
+        # users
         get 'users/delete' => 'users#delete'
-        get 'users/keep' => 'users#keep'
+        get 'users/login' => 'users#login'
+        get 'users/logout' => 'users#logout'
+        get 'users/check_auth_token' => 'users#check_auth_token'
         resources :users
+
+        # streets
+        get 'streets/manu_pan' => 'streets#manu_pan'
+        get 'streets/all_around_menus' => 'streets#all_around_menus'
+
+        # keep
+        get 'keep/index' => 'keep#index'
+        get 'keep/save' => 'keep#save'
+        get 'keep/delete_all' => 'keep#delete_all'
+
+        # inside
+        get 'inside/order_sheet' => 'inside#order_sheet'
 
       end
   end
