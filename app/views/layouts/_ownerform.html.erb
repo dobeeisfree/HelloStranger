@@ -1,0 +1,50 @@
+<div class="required field">
+  <%= f.label :이름 %>
+  <div class="ui left icon input">
+  <%= f.text_field :name, autofocus: true, placeholder: "이름을 입력해주세요" %>
+    <i class="user icon"></i>
+  </div>
+</div>
+
+<div class="required field">
+  <%= f.label :이메일 %>
+  <div class="ui left icon input">
+  <%= f.email_field :email, autofocus: true, placeholder: "이메일을 입력해주세요" %>
+    <i class="mail icon"></i>
+  </div>
+</div>
+
+<div class="required field">
+  <%= f.label :비밀번호 %>
+  <div class="ui left icon input">
+  <%= f.password_field :password, autocomplete: "off", placeholder: "비밀번호를 입력해주세요" %>
+    <i class="lock icon"></i>
+  </div>
+</div>
+
+<div class="required field">
+  <div class="ui left icon input">
+  <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "비밀번호를 한 번 더 입력해주세요" %>
+    <i class="lock icon"></i>
+  </div>
+</div>
+
+<% if owner_edit == true %>
+  <div class="required field">
+    <%= f.label :현재_비밀번호 %> <p>(오너 정보가 변경된다면 필요합니다.)</p>
+    <div class="ui left icon input">
+      <%= f.password_field :current_password, autocomplete: "off" %>
+      <i class="lock icon"></i>
+    </div>
+  </div>
+<% end %>
+
+<div class="required field">
+  <%= f.label :연락처 %>
+  <div class="ui left icon input">
+  <%= f.text_field :contact_number, maxlength: "11", autofocus: true, placeholder: "개인 전화번호를 '-'를 생락하여 입력해주세요" %>
+    <i class="text telephone icon"></i>
+  </div>
+</div>
+
+<%= f.submit :확인 , class: "huge ui fluid primary button" %>

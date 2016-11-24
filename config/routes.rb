@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     get 'owners/confirm', to: 'owners/registrations#required'
   end
 
+
   # 리소스 모음
   # 메뉴
   resources :menus
@@ -25,18 +26,23 @@ Rails.application.routes.draw do
   get 'mypage/account' => 'mypage#account'
   get 'mypage/manage_store' => 'mypage#manage_store'
 
+  # 매장 현황
+  get 'board' => 'board#quick'
+  get 'board/quick' => 'board#quick'
+  get 'board/report' => 'board#report'
 
-  #안드로이드를 위한 api
+  # for api
   scope module: 'api' do
       namespace :v1 do
-        #번역시스템
+
         get 'transfer/menu_name' => 'transfer#menu_name'
-        #테스트용
-        get 'users/foodname_test' => 'users#foodname_test'
+        get 'users/delete' => 'users#delete'
+        get 'users/keep' => 'users#keep'
         resources :users
+
       end
   end
-  
-  
-  
+
+
+
 end

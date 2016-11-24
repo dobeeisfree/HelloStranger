@@ -1,3 +1,26 @@
 <div class="ui container mypage">
-  <h1>계정관리</h1>
+  <div class="ui grid owner-edit form">
+    <div class="four wide column">
+      <%= render partial: "layouts/manageMenu" %>
+    </div>
+    <div class="nine wide column owner-account">
+      <div class="ui attached message">
+        <div class="header">계정관리</div>
+        <p>매장 주인의 정보가 바뀌었나요?</p>
+      </div>
+      <div class="ui form attached fluid segment">
+        <%= form_for(@owner, url: registration_path(@owner), html: { method: :put }) do |f| %>
+          <%= devise_error_messages! %>
+          <%= render partial: "layouts/ownerform", locals: {f: f, owner_edit: true} %>
+        <% end %>
+      </div>
+    </div>
+    <div class="three wide column">
+      <i>계정을 탈퇴하시겠습니까?</i>
+      <hr>
+      <%= button_to registration_path(resource_name), class: "ui fluid grey basic button", data: { confirm: "Are you sure?" }, method: :delete do %>
+        <i class="trash outline icon"></i>회원 탈퇴
+      <% end %>
+    </div>
+  </div>
 </div>

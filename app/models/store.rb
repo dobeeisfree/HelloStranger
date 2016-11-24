@@ -1,4 +1,6 @@
 class Store < ActiveRecord::Base
-  has_many    :menus
+  mount_uploader :main_picture, StoreImageUploader
+
+  has_many    :menu
   belongs_to  :owner
 end
