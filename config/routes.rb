@@ -40,11 +40,15 @@ Rails.application.routes.draw do
         get 'users/delete' => 'users#delete'
         get 'users/login' => 'users#login'
         get 'users/logout' => 'users#logout'
-        get 'users/save_keep' => 'users#save_keep'
         get 'users/check_auth_token' => 'users#check_auth_token'
         resources :users
 
-        get 'around/beacon_stores' => 'around#beacon_stores'
+        get 'streets/around_menus' => 'streets#around_menus'
+
+        get 'keep/index' => 'keep#index'
+        get 'keep/save' => 'keep#save'
+        get 'keep/delete_all' => 'keep#delete_all'
+
       end
   end
 

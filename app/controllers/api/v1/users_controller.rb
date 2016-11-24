@@ -42,12 +42,22 @@ module Api::V1
 
     # GET /v1/users/login
     def login
-      # params
-      # =>name, password
       # 안드로이드에서 아이디와 비밀번호로 요청
       # 서버에서는 토큰을 발급하고 세션에 저장한다.
+
+      # params
+      # =>name, password
+
+      # 파라미터 값 유효 검사
+      @msg = Hash.new
+      @msg['name'] = '이름이 없어요!' if params[:name].present?
+      @msg['password'] = '비밀번호가 없어요!' if params[:password].present?
+      @msg = nil if params.has_key? (:name) && params.has_key? (:password)
+      render json: @msg.to_json, status: :not_found unless @msg.nil?
+
       @user = Foreigner.find_by(name: params[:name], password: params[:password])
       if @user.present?
+        # 토큰을 발급한다.
         set_auth_token(@user)
         render json: @user, status: :ok
       else
@@ -62,24 +72,32 @@ module Api::V1
     # GET /v1/users/logout
     def logout
     # 토큰을 해제한다.
+
     # params
     # => id
+
       @user = Foreigner.find(params[:id])
       render status: :not_found if @user.nil?
+
       @user.auth_token = nil if @user.present?
       render status: :ok
+
     end
 
 
     # GET /v1/users/check_auth_token
     def check_auth_token
       # 발급된 토큰이 있으면 로그인 된것이다.
-      # 안드로이드에 특정 메세지값 반환.
+      # 안드로이드에 특정 메세지값 반환. => 혹시나 모를 메세지용!
+
       # params
-      # => auth_token 으로 유효함을 확인
+      # => auth_token
+
       @msg = "hello, stranger!" if params[:auth_token]
       @msg = "Please, login again" if params[:auth_token].blank?
+
       render json: @msg
+
     end
 
 
@@ -112,21 +130,6 @@ module Api::V1
         @user.destroy
         render status: :no_content
       end
-    end
-
-
-    # GET /v1/users/keep
-    def save_keep
-      # params
-      # => user_id 유저 찾아서
-      # => store_id 를 유저 킵에 저장
-      # => 유저의 keep 필드 업데이트
-
-      @user = Foreigner.find(params[:user_id]) unless params[:user_id].to_s.blank?
-      render status: :not_found if @user.nil?
-      @user.keep = @user.keep + "/" + params[:store_id].to_s if @user
-      @user.save if render json: @user.to_json, :status => :ok
-
     end
 
 
