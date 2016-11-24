@@ -36,10 +36,15 @@ Rails.application.routes.draw do
       namespace :v1 do
 
         get 'transfer/menu_name' => 'transfer#menu_name'
+
         get 'users/delete' => 'users#delete'
-        get 'users/keep' => 'users#keep'
+        get 'users/login' => 'users#login'
+        get 'users/logout' => 'users#logout'
+        get 'users/save_keep' => 'users#save_keep'
+        get 'users/check_auth_token' => 'users#check_auth_token'
         resources :users
 
+        get 'around/beacon_stores' => 'around#beacon_stores'
       end
   end
 
