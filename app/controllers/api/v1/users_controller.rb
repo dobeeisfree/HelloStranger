@@ -52,7 +52,7 @@ module Api::V1
       @msg = Hash.new
       @msg['name'] = '이름이 없어요!' if params[:name].present?
       @msg['password'] = '비밀번호가 없어요!' if params[:password].present?
-      @msg = nil if params.has_key? (:name) && params.has_key? (:password)
+      @msg = nil if @msg
       render json: @msg.to_json, status: :not_found unless @msg.nil?
 
       @user = Foreigner.find_by(name: params[:name], password: params[:password])

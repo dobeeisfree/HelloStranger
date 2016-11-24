@@ -4,8 +4,12 @@ module Api::V1
 
     # GET /v1/keep/index
     def index
+      # 유저가 킵을 눌러을 때,
+      # 나오는 가게들을 반환한다.
+
       # params
       # => user_id
+
       # 중복된 값을 없애서 리스트를 만든다.
       @keep_list = Foreigner.find(params[:user_id]).keep.split('/').uniq! if params[:user_id].present?
       render status: :not_found if params[:user_id].nil?
@@ -16,7 +20,7 @@ module Api::V1
       end
 
       render json: @stores.to_json, status: :ok if @stores
-      render json: nothing, status: :ok if @stores.nil?
+      render :nothing => true , status: :ok if @stores.nil?
     end
 
 
