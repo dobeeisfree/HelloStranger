@@ -35,8 +35,8 @@ Rails.application.routes.draw do
   scope module: 'api' do
       namespace :v1 do
 
-        # transfer
-        get 'transfer/menu_name' => 'transfer#menu_name'
+        # searching
+        get 'search/menu_name' => 'search#menu_name'
 
         # users
         get 'users/delete' => 'users#delete'
@@ -56,6 +56,9 @@ Rails.application.routes.draw do
 
         # inside
         get 'inside/order_sheet' => 'inside#order_sheet'
+
+        # transfer
+        get 'transfer/menu_pan' => 'transfer#menu_pan'
 
       end
   end

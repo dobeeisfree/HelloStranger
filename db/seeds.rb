@@ -37,3 +37,12 @@ Store.create(owner_id: 2, name: "호나우두", location: "서울숲", beacon_id
 Store.create(owner_id: 3, name: "맥도날두", location: "용산역", beacon_id: [*('a'..'z')].sample(20).join+Time.now.usec.to_s, category: 3, open_time: "06:00", close_time: "05:00")
 Store.create(owner_id: 3, name: "치킨나라", location: "여의도", beacon_id: [*('a'..'z')].sample(20).join+Time.now.usec.to_s, category: 4, open_time: "10:00", close_time: "17:00")
 Store.create(owner_id: 3, name: "까불이", location: "인천", beacon_id: [*('a'..'z')].sample(20).join+Time.now.usec.to_s, category: 5, open_time: "11:00", close_time: "15:00")
+
+
+# 메뉴
+Store.all.count.times do |m|
+  Menu.create(store_id: m+1, price: 9000, checked_menu: true, quick_menu: true, foodglossary_id: 3000, foodstuff_id: 1, foodstuff_id_2: 2, taste_id: 3, cookingmethod_id: 4)
+  Menu.create(store_id: m+1, price: 5000, checked_menu: true, quick_menu: true, foodglossary_id: 100, foodstuff_id: 2, foodstuff_id_2: 1, taste_id: 1, cookingmethod_id: 1)
+  Menu.create(store_id: m+1, price: 4000, checked_menu: true, quick_menu: true, foodglossary_id: 1000, foodstuff_id: 1, foodstuff_id_2: 2, taste_id: 2, cookingmethod_id: 2)
+  Menu.create(store_id: m+1, price: 2000, checked_menu: true, quick_menu: true, foodglossary_id: 2000, foodstuff_id: 4, foodstuff_id_2: 3, taste_id: 3, cookingmethod_id: 3)
+end

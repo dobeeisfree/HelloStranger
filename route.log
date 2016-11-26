@@ -1,47 +1,60 @@
-                   Prefix Verb   URI Pattern                       Controller#Action
-                     root GET    /                                 home#index
-        new_owner_session GET    /owners/sign_in(.:format)         owners/sessions#new
-            owner_session POST   /owners/sign_in(.:format)         owners/sessions#create
-    destroy_owner_session DELETE /owners/sign_out(.:format)        owners/sessions#destroy
-           owner_password POST   /owners/password(.:format)        owners/passwords#create
-       new_owner_password GET    /owners/password/new(.:format)    owners/passwords#new
-      edit_owner_password GET    /owners/password/edit(.:format)   owners/passwords#edit
-                          PATCH  /owners/password(.:format)        owners/passwords#update
-                          PUT    /owners/password(.:format)        owners/passwords#update
-cancel_owner_registration GET    /owners/cancel(.:format)          owners/registrations#cancel
-       owner_registration POST   /owners(.:format)                 owners/registrations#create
-   new_owner_registration GET    /owners/sign_up(.:format)         owners/registrations#new
-  edit_owner_registration GET    /owners/edit(.:format)            owners/registrations#edit
-                          PATCH  /owners(.:format)                 owners/registrations#update
-                          PUT    /owners(.:format)                 owners/registrations#update
-                          DELETE /owners(.:format)                 owners/registrations#destroy
-           owners_confirm GET    /owners/confirm(.:format)         owners/registrations#required
-                    menus GET    /menus(.:format)                  menus#index
-                          POST   /menus(.:format)                  menus#create
-                 new_menu GET    /menus/new(.:format)              menus#new
-                edit_menu GET    /menus/:id/edit(.:format)         menus#edit
-                     menu GET    /menus/:id(.:format)              menus#show
-                          PATCH  /menus/:id(.:format)              menus#update
-                          PUT    /menus/:id(.:format)              menus#update
-                          DELETE /menus/:id(.:format)              menus#destroy
-                   stores GET    /stores(.:format)                 stores#index
-                          POST   /stores(.:format)                 stores#create
-                new_store GET    /stores/new(.:format)             stores#new
-               edit_store GET    /stores/:id/edit(.:format)        stores#edit
-                    store GET    /stores/:id(.:format)             stores#show
-                          PATCH  /stores/:id(.:format)             stores#update
-                          PUT    /stores/:id(.:format)             stores#update
-                          DELETE /stores/:id(.:format)             stores#destroy
-                   mypage GET    /mypage(.:format)                 mypage#account
-           mypage_account GET    /mypage/account(.:format)         mypage#account
-      mypage_manage_store GET    /mypage/manage_store(.:format)    mypage#manage_store
-    v1_transfer_menu_name GET    /v1/transfer/menu_name(.:format)  api/v1/transfer#menu_name
-   v1_users_foodname_test GET    /v1/users/foodname_test(.:format) api/v1/users#foodname_test
-                 v1_users GET    /v1/users(.:format)               api/v1/users#index
-                          POST   /v1/users(.:format)               api/v1/users#create
-              new_v1_user GET    /v1/users/new(.:format)           api/v1/users#new
-             edit_v1_user GET    /v1/users/:id/edit(.:format)      api/v1/users#edit
-                  v1_user GET    /v1/users/:id(.:format)           api/v1/users#show
-                          PATCH  /v1/users/:id(.:format)           api/v1/users#update
-                          PUT    /v1/users/:id(.:format)           api/v1/users#update
-                          DELETE /v1/users/:id(.:format)           api/v1/users#destroy
+                     Prefix Verb   URI Pattern                            Controller#Action
+                       root GET    /                                      home#index
+          new_owner_session GET    /owners/sign_in(.:format)              owners/sessions#new
+              owner_session POST   /owners/sign_in(.:format)              owners/sessions#create
+      destroy_owner_session DELETE /owners/sign_out(.:format)             owners/sessions#destroy
+             owner_password POST   /owners/password(.:format)             owners/passwords#create
+         new_owner_password GET    /owners/password/new(.:format)         owners/passwords#new
+        edit_owner_password GET    /owners/password/edit(.:format)        owners/passwords#edit
+                            PATCH  /owners/password(.:format)             owners/passwords#update
+                            PUT    /owners/password(.:format)             owners/passwords#update
+  cancel_owner_registration GET    /owners/cancel(.:format)               owners/registrations#cancel
+         owner_registration POST   /owners(.:format)                      owners/registrations#create
+     new_owner_registration GET    /owners/sign_up(.:format)              owners/registrations#new
+    edit_owner_registration GET    /owners/edit(.:format)                 owners/registrations#edit
+                            PATCH  /owners(.:format)                      owners/registrations#update
+                            PUT    /owners(.:format)                      owners/registrations#update
+                            DELETE /owners(.:format)                      owners/registrations#destroy
+             owners_confirm GET    /owners/confirm(.:format)              owners/registrations#required
+                      menus GET    /menus(.:format)                       menus#index
+                            POST   /menus(.:format)                       menus#create
+                   new_menu GET    /menus/new(.:format)                   menus#new
+                  edit_menu GET    /menus/:id/edit(.:format)              menus#edit
+                       menu GET    /menus/:id(.:format)                   menus#show
+                            PATCH  /menus/:id(.:format)                   menus#update
+                            PUT    /menus/:id(.:format)                   menus#update
+                            DELETE /menus/:id(.:format)                   menus#destroy
+                     stores GET    /stores(.:format)                      stores#index
+                            POST   /stores(.:format)                      stores#create
+                  new_store GET    /stores/new(.:format)                  stores#new
+                 edit_store GET    /stores/:id/edit(.:format)             stores#edit
+                      store GET    /stores/:id(.:format)                  stores#show
+                            PATCH  /stores/:id(.:format)                  stores#update
+                            PUT    /stores/:id(.:format)                  stores#update
+                            DELETE /stores/:id(.:format)                  stores#destroy
+                     mypage GET    /mypage(.:format)                      mypage#account
+             mypage_account GET    /mypage/account(.:format)              mypage#account
+        mypage_manage_store GET    /mypage/manage_store(.:format)         mypage#manage_store
+                      board GET    /board(.:format)                       board#quick
+                board_quick GET    /board/quick(.:format)                 board#quick
+               board_report GET    /board/report(.:format)                board#report
+        v1_search_menu_name GET    /v1/search/menu_name(.:format)         api/v1/search#menu_name
+            v1_users_delete GET    /v1/users/delete(.:format)             api/v1/users#delete
+             v1_users_login GET    /v1/users/login(.:format)              api/v1/users#login
+            v1_users_logout GET    /v1/users/logout(.:format)             api/v1/users#logout
+  v1_users_check_auth_token GET    /v1/users/check_auth_token(.:format)   api/v1/users#check_auth_token
+                   v1_users GET    /v1/users(.:format)                    api/v1/users#index
+                            POST   /v1/users(.:format)                    api/v1/users#create
+                new_v1_user GET    /v1/users/new(.:format)                api/v1/users#new
+               edit_v1_user GET    /v1/users/:id/edit(.:format)           api/v1/users#edit
+                    v1_user GET    /v1/users/:id(.:format)                api/v1/users#show
+                            PATCH  /v1/users/:id(.:format)                api/v1/users#update
+                            PUT    /v1/users/:id(.:format)                api/v1/users#update
+                            DELETE /v1/users/:id(.:format)                api/v1/users#destroy
+        v1_streets_manu_pan GET    /v1/streets/manu_pan(.:format)         api/v1/streets#manu_pan
+v1_streets_all_around_menus GET    /v1/streets/all_around_menus(.:format) api/v1/streets#all_around_menus
+              v1_keep_index GET    /v1/keep/index(.:format)               api/v1/keep#index
+               v1_keep_save GET    /v1/keep/save(.:format)                api/v1/keep#save
+         v1_keep_delete_all GET    /v1/keep/delete_all(.:format)          api/v1/keep#delete_all
+      v1_inside_order_sheet GET    /v1/inside/order_sheet(.:format)       api/v1/inside#order_sheet
+       v1_transfer_menu_pan GET    /v1/transfer/menu_pan(.:format)        api/v1/transfer#menu_pan

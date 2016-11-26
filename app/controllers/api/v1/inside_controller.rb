@@ -13,44 +13,49 @@ module Api::V1
 
       # 파라미터값 검사
       @msg = Hash.new
-      @msg['user'] = '유저가 없어요!' if params[:user_id].present?
-      @msg['store'] = '매장이 없어요!' if params[:store_id].present?
-      @msg['menu'] = '메뉴가 없어요!' if params[:menu_id].present?
-      @msg = nil if @msg
-      render json: @msg.to_json, status: :not_found unless @msg.nil?
+      @msg['user'] = '존재하지 않아요!' if Foreigner.last.id < params[:user_id].to_i || Foreigner.first.id > params[:user_id].to_i
+      @msg['store'] = '존재하지 않아요!' if Store.last.id < params[:store_id].to_i || Store.first.id > params[:store_id].to_i
+      @msg['menu'] = '존재하지 않아요!' if Menu.last.id < params[:menu_id].to_i || Menu.first.id > params[:menu_id].to_i
+      @msg = nil if @msg == {}
+      render json: @msg.to_json, status: :not_found if @msg
 
 
-      # 해당 메뉴명를 조회
-      @order_menu = Menu.find(params[:menu_id])
-      @order_menu_name = Foodglossary.find(@order_menu.foodglossary_id)
+      if @msg.nil?
+        # 해당 메뉴명를 조회
+        @order_menu = Menu.find(params[:menu_id])
+        @order_menu_name = Foodglossary.find(@order_menu.foodglossary_id)
 
-      # 해당 유저가 어느나라사람인지 조회
-      @where_are_you_from = Foreigner.find(params[:user_id]).lang
-      # 해당 메뉴의 주문수 올리기
-      case @where_are_you_from
-        when 0
-          @order_menu.count_kor = @order_menu.count_kor + 1
-        when 1
-          @order_menu.count_eng = @order_menu.count_eng + 1
-        when 2
-          @order_menu.count_jpn = @order_menu.count_jpn + 1
-        else
-          @order_menu.count_chn = @order_menu.count_chn + 1
+        # 해당 유저가 어느나라사람인지 조회
+        @where_are_you_from = Foreigner.find(params[:user_id]).lang
+
+        @confirm_msg = Hash.new
+        # 해당 메뉴의 주문수 올리기
+        case @where_are_you_from
+          when 0
+            @order_menu.count_kor = @order_menu.count_kor + 1
+          when 1
+            @order_menu.count_eng = @order_menu.count_eng + 1
+          when 2
+            @order_menu.count_jpn = @order_menu.count_jpn + 1
+          when 3
+            @order_menu.count_chn = @order_menu.count_chn + 1
+        end
+        @confirm_msg['count'] = '주문수가 올라갔습니다'if @order_menu.save!
+
+
+        # 주문한 기록을 생성
+        my_food_diary = Diary.new
+        my_food_diary.foreigner_id = params[:user_id]
+        my_food_diary.store_id = params[:store_id]
+        my_food_diary.menu_names_kor = @order_menu_name.kor
+        my_food_diary.menu_names_eng = @order_menu_name.eng
+        my_food_diary.menu_names_jpn = @order_menu_name.jpn
+        my_food_diary.menu_names_chn = @order_menu_name.chn
+        @confirm_msg['diary created'] = '주문 기록이 남겨졌습니다' if my_food_diary.save!
+
+        render json: @confirm_msg.to_json, status: :created
+
       end
-      @order_menu.save!
-
-
-      # 주문한 기록을 생성
-      my_food_diary = Diary.new
-      my_food_diary.foreigner_id = params[:user_id]
-      my_food_diary.store_id = params[:store_id]
-      my_food_diary.menu_names_kor = @order_menu_name.kor
-      my_food_diary.menu_names_eng = @order_menu_name.eng
-      my_food_diary.menu_names_jpn = @order_menu_name.jpn
-      my_food_diary.menu_names_chn = @order_menu_name.chn
-      my_food_diary.save!
-
-      render :nothing => true, status: :created
 
     end
 
