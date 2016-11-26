@@ -9,7 +9,7 @@ jQuery(document).ready ->
   if action_name == 'index'
     $('.ui.foodglossary.search').search
       apiSettings:
-        url: '/v1/transfer/menu_name?q={query}'
+        url: '/v1/search/menu_name?q={query}'
       cache: false
       searchFullText: false
       onResults: (response) ->
