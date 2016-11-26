@@ -1,40 +1,63 @@
 module Api::V1
   class TransferController < ApplicationController
 
-  # semantic-ui API local search 구현.
-  # for menus.coffee
-  
-    def menu_name
-    # foodglossary
-  
-      # 메뉴 파라미터, 유효성 검사
-      if params.has_key?(:q)
-        @food_glossary_kor = Hash.new
-        @food_glossary_kor["results"] = Array.new
-        Foodglossary.all.reverse.each do |f|
-          if f.kor.include? params[:q]
-            @food_glossary_kor["results"].push("id" => f.id, "kor" => f.kor)
-          end
+    # GET /v1/transfer/menu_pan
+    def menu_pan
+      # 해당 메뉴를 원하는 언어로 가져온다
+
+      # params
+      # => menu_id, lang_id
+
+      # 파라미터 값 유효 검사
+      @msg = Hash.new
+      @msg['menu_id'] = '메뉴가 없어요!' if params[:menu_id].present?
+      @msg['lang_id'] = '언어를 지정해주세요!' if params[:lang_id].present?
+      @msg = nil if @msg
+      render json: @msg.to_json, status: :not_found unless @msg.nil?
+
+
+      # 해당 메뉴를 찾아서 검사
+      @menu = Menu.find(params[:menu_id]) if Menu.all.count >= params[:menu_id].to_i
+      render json: @msg.to_json, status: :not_found if @menu.nil?
+
+
+      if @menu
+        # 번역된 것만 담아 보낸다.
+
+        @menu_pan = nil if @menu_pan
+        @menu_pan = Hash.new
+        case params['lang_id'].to_i
+          when 0
+            @menu_pan['foodname'] = Foodglossary.find(@menu.foodglossary_id).kor
+            @menu_pan['foodstuff_1'] = Foodstuff.find(@menu.foodstuff_id).kor
+            @menu_pan['foodstuff_2'] = Foodstuff.find(@menu.foodstuff_id_2).kor
+            @menu_pan['taste'] = Taste.find(@menu.taste_id).kor
+            @menu_pan['cookingmethod'] = Cookingmethod.find(@menu.taste_id).kor
+          when 1
+            @menu_pan['foodname'] = Foodglossary.find(@menu.foodglossary_id).eng
+            @menu_pan['foodstuff_1'] = Foodstuff.find(@menu.foodstuff_id).eng
+            @menu_pan['foodstuff_2'] = Foodstuff.find(@menu.foodstuff_id_2).eng
+            @menu_pan['taste'] = Taste.find(@menu.taste_id).eng
+            @menu_pan['cookingmethod'] = Cookingmethod.find(@menu.taste_id).eng
+          when 2
+            @menu_pan['foodname'] = Foodglossary.find(@menu.foodglossary_id).jpn
+            @menu_pan['foodstuff_1'] = Foodstuff.find(@menu.foodstuff_id).jpn
+            @menu_pan['foodstuff_2'] = Foodstuff.find(@menu.foodstuff_id_2).jpn
+            @menu_pan['taste'] = Taste.find(@menu.taste_id).jpn
+            @menu_pan['cookingmethod'] = Cookingmethod.find(@menu.taste_id).jpn
+          else
+            @menu_pan['foodname'] = Foodglossary.find(@menu.foodglossary_id).chn
+            @menu_pan['foodstuff_1'] = Foodstuff.find(@menu.foodstuff_id).chn
+            @menu_pan['foodstuff_2'] = Foodstuff.find(@menu.foodstuff_id_2).chn
+            @menu_pan['taste'] = Taste.find(@menu.taste_id).chn
+            @menu_pan['cookingmethod'] = Cookingmethod.find(@menu.taste_id).chn
         end
-        puts @food_glossary_kor
-        render json: @food_glossary_kor
-      # 이상한 파라미터가 들어올 경우
-      else
-        error_for_params
+
+        render json: @menu_pan.to_json, status: :ok
+
       end
-  
+
     end
-  
-    def taste
-    end
-  
-    def foodstuff
-    end
-  
-    private
-      def error_for_params
-        render inline: "<br><center>어머 잘못된 요청이군요!<br><%=link_to '홈으로 갈래요', root_path %></center>"
-      end
+
   end
-  
 end
