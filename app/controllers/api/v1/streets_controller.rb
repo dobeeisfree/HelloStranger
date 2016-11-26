@@ -36,14 +36,25 @@ module Api::V1
       @beacon_dna = params[:beacon_dna] if params[:beacon_dna].present?
       render :nothing => true, status: :not_found if @beacon_dna.nil?
 
+      if @beacon_dna
+        @beacon_list = @beacon_dna.split('/')
+        @stores = Array.new
+        @beacon_list.each do |b|
+          @stores << Store.find_by(beacon_id: b)
+        end
 
-      @beacon_list = @beacon_dna.split('/')
-      @stores = Array.new
-      @beacon_list.each do |b|
-        @stores << Store.find_by(beacon_id: b.to_i)
+        # 중복검사와 nil검사
+        @stores.delete(nil)
+        @stores.uniq!
+
+        # 각 store마다 메뉴를 보낸다.
+        @menu_list = Hash.new
+        @stores.each do |m|
+          @menu_list['menu'] = m.menu
+        end
+
+        render json: @menu_list.to_json, status: :ok
       end
-
-      render json: @stores.to_json, status: :ok
 
     end
 
