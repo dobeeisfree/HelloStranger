@@ -10,16 +10,17 @@ module Api::V1
 
       # 파라미터 값 유효 검사
       @msg = Hash.new
-      @msg['menu_id'] = '메뉴가 없어요!' if params[:menu_id].present?
-      @msg['lang_id'] = '언어를 지정해주세요!' if params[:lang_id].present?
-      @msg = nil if @msg
-      render json: @msg.to_json, status: :not_found unless @msg.nil?
+      @msg['menu_id'] = '메뉴가 없어요!' if params[:menu_id].to_i >= Menu.last.id || Menu.first.id >= params[:menu_id].to_i
+      @msg['lang_id'] = '언어를 지정해주세요!' if params[:lang_id].to_i > 3
+      @msg = nil if @msg == {}
+      render json: @msg.to_json, status: :not_found if @msg
 
 
-      # 해당 메뉴를 찾아서 검사
-      @menu = Menu.find(params[:menu_id]) if Menu.all.count >= params[:menu_id].to_i
-      render json: @msg.to_json, status: :not_found if @menu.nil?
-
+      if @msg.nil?
+        # 해당 메뉴를 찾아서 검사
+        @menu = Menu.find(params[:menu_id]) if Menu.last.id >= params[:menu_id].to_i
+        render json: '메뉴가 없어요'.to_json, status: :not_found if @menu.nil?
+      end
 
       if @menu
         # 번역된 것만 담아 보낸다.

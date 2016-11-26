@@ -17,9 +17,10 @@ module Api::V1
 
       # 해당 카테고리의 매장을 비콘아이디로 찾는다.
       @store = category(params[:category]).find_by(beacon_id: params[:beacon_id])
-      @quick_menu_pan = '퀵 메뉴판 정보를 가져올 수 없습니다' if @store.nil?
+      @quick_menu_pan = nil if @store.nil?
+      render json: '퀵 메뉴판 정보를 가져올 수 없습니다'.to_json, status: :not_found if @quick_menu_pan.nil?
       @quick_menu_pan = @store.menu.find_by(quick_menu: true) if @store
-      render json: @quick_menu_pan.to_json, status: :ok
+      render json: @quick_menu_pan.to_json, status: :ok if @quick_menu_pan
 
     end
 
@@ -53,7 +54,8 @@ module Api::V1
           @menu_list['menu'] = m.menu
         end
 
-        render json: @menu_list.to_json, status: :ok
+        render json: @menu_list.to_json, status: :ok if @menu_list != {}
+        render json: '잘못된 요청입니다'.to_json, status: :not_found if @menu_list == {}
       end
 
     end

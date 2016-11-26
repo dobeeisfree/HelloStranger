@@ -9,7 +9,10 @@ module Api::V1
     # 모든 유저를 보여준다.
     def index
       @user = Foreigner.all
-      render json: @user.to_json
+      @user_list = Hash.new
+      @user_list['member'] = @user
+
+      render json: @user_list.to_json
     end
 
 
@@ -46,7 +49,7 @@ module Api::V1
       # 서버에서는 토큰을 발급하고 세션에 저장한다.
 
       # params
-      # =>name, password
+      # => name, password
 
       # 파라미터 값 유효 검사
       @msg = Hash.new
@@ -77,10 +80,10 @@ module Api::V1
     # => id
 
       @user = Foreigner.find(params[:id])
-      render status: :not_found if @user.nil?
+      render nothing: :true,status: :not_found if @user.nil?
 
       @user.auth_token = nil if @user.present?
-      render status: :ok
+      render nothing: :true, status: :ok
 
     end
 
@@ -91,12 +94,17 @@ module Api::V1
       # 안드로이드에 특정 메세지값 반환. => 혹시나 모를 메세지용!
 
       # params
-      # => auth_token
+      # => user_id
 
-      @msg = "hello, stranger!" if params[:auth_token]
-      @msg = "Please, login again" if params[:auth_token].blank?
+      @user = Foreigner.find(params[:user_id]) if params[:user_id].present?
+      render json: '유저를 찾을 수 없습니다'.to_json, status: :not_found if @user.nil?
 
-      render json: @msg
+      if @user
+        @msg = "hello, stranger!" if @user.auth_token
+        @msg = "Please, login again" if @user.auth_token.nil?
+
+        render json: @msg.to_json
+      end
 
     end
 
@@ -127,8 +135,7 @@ module Api::V1
       # => id
       @user = Foreigner.find(params[:id])
       if @user.present?
-        @user.destroy
-        render status: :no_content
+        render nothing: :true, status: :no_content if @user.destroy
       end
     end
 
