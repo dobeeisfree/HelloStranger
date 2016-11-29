@@ -21,12 +21,12 @@ class MenusController < ApplicationController
       # 디폴트 일 때
       @store = @stores.first
       @menus = Menu.where(store_id: @store.id)
-      puts @menus
+      puts @menus.ids
     else
       # 어떤 매장을 선택했을 때
       @store = @stores.find(params[:current_store])
       @menus = Menu.where(store_id: params[:current_store])
-      puts @menus
+      puts @menus.ids
     end
   end
 
@@ -92,6 +92,6 @@ class MenusController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def menu_params
-      params.require(:menu).permit(:store_id, :food_picture, :price, :foodstuff_id, :foodstuff_id_2, :foodglossary_id, :cookingmethod_id, :taste_id)
+      params.require(:menu).permit(:store_id, :picture, :price, :foodstuff_id, :foodstuff_id_2, :foodglossary_id, :cookingmethod_id, :taste_id)
     end
 end

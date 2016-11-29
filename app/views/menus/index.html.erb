@@ -14,14 +14,13 @@
   </div>
 
 
-<%= form_for(@menu, class: "ui form attached fluid segment", html: { multipart: true }) do |f| %>
+<%= form_for(@menu, class: "ui form attached fluid segment") do |f| %>
     <div class="fields">
 
       <div class="four wide field">
         <%= f.label :매장사진  %>
         <p>
-          <%= image_tag(@menu.food_picture_url) if @menu.food_picture? %>
-          <%= f.file_field :food_picture %>
+          <%= f.file_field :picture, multipart: true %>
         </p>
       </div>
 
@@ -128,8 +127,8 @@
     <div class="column">
       <div class="ui card">
         <div class="image">
-          <% if m.food_picture_url %>
-          <img src="<%=m.food_picture.url%>">
+          <% if m.picture.url %>
+          <img src="<%=m.picture.url%>">
           <% else %>
           <img src="http://semantic-ui.com/images/avatar/large/daniel.jpg">
           <% end %>

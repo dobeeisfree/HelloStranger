@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161117174128) do
+ActiveRecord::Schema.define(version: 20161023043959) do
 
   create_table "cookingmethods", force: :cascade do |t|
     t.string  "kor",     limit: 255
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 20161117174128) do
 
   create_table "menus", force: :cascade do |t|
     t.integer  "store_id",         limit: 4,                   null: false
+    t.string   "picture",          limit: 255, default: ""
     t.integer  "price",            limit: 4,   default: 2016
     t.boolean  "checked_menu",                 default: false
     t.boolean  "quick_menu",                   default: false
@@ -75,7 +76,6 @@ ActiveRecord::Schema.define(version: 20161117174128) do
     t.integer  "like_chn",         limit: 4,   default: 0
     t.datetime "created_at",                                   null: false
     t.datetime "updated_at",                                   null: false
-    t.string   "food_picture",     limit: 255
   end
 
   create_table "owners", force: :cascade do |t|
@@ -112,12 +112,12 @@ ActiveRecord::Schema.define(version: 20161117174128) do
     t.string   "location",     limit: 255
     t.string   "beacon_id",    limit: 255
     t.string   "business_id",  limit: 255
+    t.string   "main_picture", limit: 255, default: ""
     t.integer  "category",     limit: 4,   default: 0
     t.string   "open_time",    limit: 255
     t.string   "close_time",   limit: 255
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
-    t.string   "main_picture", limit: 255
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
   end
 
   create_table "tastes", force: :cascade do |t|
