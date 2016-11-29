@@ -20,12 +20,12 @@ class MenusController < ApplicationController
     if params[:current_store].to_s.blank?
       # 디폴트 일 때
       @store = @stores.first
-      @menus = Menu.where(@store.id)
+      @menus = Menu.where(store_id: @store.id)
       puts @menus
     else
       # 어떤 매장을 선택했을 때
       @store = @stores.find(params[:current_store])
-      @menus = Menu.where(params[:current_store])
+      @menus = Menu.where(store_id: params[:current_store])
       puts @menus
     end
   end
