@@ -28,3 +28,6 @@ jQuery(document).ready ->
   #계정의 드롭다운
   $('.ui.pointing.dropdown').dropdown();
   $('.ui.fluid.dropdown').dropdown();
+
+  $('#sessions-new').css 'background-image', "url('/assets/1.jpg')"
+  $('#sessions-new').css 'background-size', "cover"

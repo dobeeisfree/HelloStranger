@@ -1,4 +1,4 @@
-<div class="ui basic sign_in modal" id="sign_in_devise">
+<div class="ui basic sign_in not_modal">
   <%= form_for(:owner, url: session_path(:owner), html:{class: "ui form"}) do |f| %>
     <h1>로그인</h1>
     <div class="field">
@@ -26,5 +26,5 @@
     <%= f.submit "로그인", class: "yellow ui fluid inverted button" %>
   <% end %>
   <br>
-  <%= render "devise/shared/links" %>
+  <%= render "owners/shared/links" %>
 </div>

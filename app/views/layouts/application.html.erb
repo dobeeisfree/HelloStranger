@@ -11,12 +11,9 @@
   <%= csrf_meta_tags %>
 </head>
 
-  <body>
-
-    <input type="hidden" name="<%=params[:controller]%>" value="<%=params[:controller]%>">
-    <%= render partial: "layouts/header" %>
-    <%= render partial: "/owners/sessions/new" %>
-
+  <body id="<%=controller.controller_name%>-<%=controller.action_name%>">
+    <%= render partial: "layouts/header" unless controller.controller_name == 'sessions' %>
+    <%= render partial: "layouts/sessionNew" %>
     <%= yield %>
   </body>
 </html>
