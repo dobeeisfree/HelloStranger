@@ -3,10 +3,48 @@
     <div class="four wide column">
       <%= render partial: "layouts/manageMenu" %>
     </div>
-    <% @stores.each do |s| %>
-      <% if s.main_picture.url %>
-      <img src="<%= s.main_picture.url %>">
+    <div class="eleven wide column">
+      <% if notice %>
+      <div class="ui positive message">
+        <i class="close icon"></i>
+        <div class="header"><%= notice %></div>
+      </div>
       <% end %>
-    <% end %>
+      <%= link_to(new_store_path, class: "ui fluid large primary animated button") do%>
+        <div class="visible content">등록하기</div>
+        <div class="hidden content">
+         <i class="write icon"></i>
+        </div>
+      <% end %>
+      <div class="ui divided items">
+        <% @stores.each do |s| %>
+        <div class="item">
+          <div class="image">
+            <% if s.main_picture != "" %>
+            <img src="<%= s.main_picture %>">
+            <% else %>
+            <img src="http://www.aha-soft.com/free-icons/aha-soft-logistics-icons/icons/store.png">
+            <% end %>
+          </div>
+          <div class="content">
+            <div class="header"><%= s.name %></div>
+            <div class="meta">
+              <i class="marker icon"></i>
+              <span class="cinema"><%=s.location%></span>
+            </div>
+            <div class="description">
+              <p>등록된 메뉴 <%=s.menu.count%>개</p>
+            </div>
+            <div class="extra">
+              <div class="ui small right floated animated icon buttons">
+                <%= link_to "수정", edit_store_path(s), class: "ui green basic button" %>
+                <%= link_to "삭제", s, method: :delete, class: "ui red basic button" %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
