@@ -1,0 +1,36 @@
+<div class="ui three column grid">
+  <% @menus.each do |m| %>
+  <div class="column">
+    <div class="ui card">
+      <div class="image">
+        <% if m.picture.nil? %>
+        <img src="http://semantic-ui.com/images/avatar/large/daniel.jpg">
+        <% else %>
+        <img src="<%= m.picture %>">
+        <% end %>
+      </div>
+      <div class="content">
+        <span class="header"><%= Foodglossary.find(m.foodglossary_id).kor %></span>
+        <div class="description">
+          <p><%= Foodstuff.find(m.foodstuff_id).kor %></p>
+          <p><%= Foodstuff.find(m.foodstuff_id_2).kor %></p>
+          <p><%= Taste.find(m.taste_id).kor %></p>
+          <p><%= Cookingmethod.find(m.cookingmethod_id).kor %></p>
+        </div>
+        <div class="meta">
+          <span><%= m.price %>원</span>
+        </div>
+      </div>
+      <div class="extra content">
+        <% if m.quick_menu == true %>
+        <i class="orange star icon"></i>
+        추천 메뉴
+        <% else %>
+        <i class="orange empty star icon"></i>
+        일반 메뉴
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
