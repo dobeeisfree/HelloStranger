@@ -1,18 +1,26 @@
 <div class="ui container boards">
   <%= render partial: "layouts/boardMenu" %>
 
+  <% if notice %>
+  <div class="ui positive message">
+    <i class="close icon"></i>
+    <div class="header"><%= notice %></div>
+  </div>
+  <% end %>
   <% if @custom_err_msg.present? %>
   <div class="ui positive message">
+    <i class="close icon"></i>
     <div class="header"><%= @custom_err_msg %></div>
   </div>
   <% end %>
 
   <div class="ui items">
+  <hr>
   <% @menus.all.each do |m| %>
     <div class="item">
       <div class="ui small image">
-        <% if m.food_picture.url %>
-        <img src="m.food_picture.url" width="250">
+        <% if m.picture != "" %>
+        <img src="<%=m.picture%>" width="250">
         <% else %>
         <img src="//maxcdn.icons8.com/Share/icon/Food//vegetarian_food1600.png" width="250">
         <% end %>
@@ -26,7 +34,11 @@
           <p><%= Cookingmethod.find(m.cookingmethod_id).kor %></p>
         </div>
         <div class="extra">
-          <b><%= m.quick_menu %></b>
+          <h3><%= m.quick_menu %></h3>
+          <div class="ui small left floated animated icon buttons">
+            <%= link_to "수정", edit_menu_path(m), class: "ui green basic button" %>
+            <%= link_to "삭제", m, method: :delete, class: "ui red basic button" %>
+          </div>
           <% if m.quick_menu %>
               <%= link_to "일반 메뉴로 설정", board_quick_path(set_quick: m.id), class: "ui right floated button" %>
           <% else %>
@@ -35,6 +47,7 @@
         </div>
       </div>
     </div>
+    <hr>
   <% end %>
   </div>
 

@@ -1,29 +1,103 @@
-<%= form_for(@menu) do |f| %>
-  <% if @menu.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@menu.errors.count, "error") %> prohibited this menu from being saved:</h2>
-
-      <ul>
-      <% @menu.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+<div class="ui grid menuForm">
+  <% if notice %>
+  <div class="ui positive message">
+    <i class="close icon"></i>
+    <div class="header"><%= notice %></div>
+  </div>
   <% end %>
+  <div class="ui attached menu message">
+    <i class="home icon"></i>
+    <div class="header">메뉴를 등록합니다</div>
+  </div>
+  <%= form_for(@menu, html:{multipart: true, class: "ui form attached fluid segment"}) do |f| %>
 
-  <div class="field">
-    <%= f.label :store_id %><br>
-    <%= f.text_field :store_id %>
-  </div>
-  <div class="field">
-    <%= f.label :food_picture %><br>
-    <%= f.text_field :food_picture %>
-  </div>
-  <div class="field">
-    <%= f.label :price %><br>
-    <%= f.number_field :price %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+    <div class="fields">
+      <div class="five wide field">
+        <%= f.label :매장  %>
+        <select class="ui fluid dropdown" name="menu[store_id]">
+          <option value="">매장선택</option>
+          <% @stores.reverse.each do |s| %>
+          <option value="<%=s.id%>"><%=s.name%></option>
+          <% end %>
+        </select>
+      </div>
+      <div class="four wide field">
+        <%= f.label :메뉴명  %>
+        <div class="ui foodglossary search">
+          <div class="ui icon input">
+            <%= f.hidden_field :foodglossary_id %>
+            <%= f.text_field :foodglossary_id, class: "prompt", placeholder: "메뉴명을 검색하세요!"%>
+            <i class="search icon"></i>
+          </div>
+          <div class="results"></div>
+        </div>
+      </div>
+      <div class="three wide field">
+        <%= f.label :가격  %>
+        <div class="ui right labeled input">
+          <%= f.text_field :price, placeholder: "국내 단위로 숫자만 입력해주세요" %>
+          <div class="ui basic label">원</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>설명</h3>
+    <hr>
+    <div class="fields">
+      <div class="four wide field">
+        <%= f.label :맛  %>
+        <div class="ui taste search">
+          <div class="ui icon input">
+            <%= f.hidden_field :taste_id %>
+            <%= f.text_field :taste_id, class: "prompt", placeholder: "..."%>
+            <i class="search icon"></i>
+          </div>
+          <div class="results taste"></div>
+        </div>
+      </div>
+      <div class="four wide field">
+        <%= f.label :주재료1  %>
+        <div class="ui foodstuff search">
+          <div class="ui icon input">
+            <%= f.hidden_field :foodstuff_id %>
+            <%= f.text_field :foodstuff_id, class: "prompt", placeholder: "..."%>
+            <i class="search icon"></i>
+          </div>
+          <div class="results foodstuff_1"></div>
+        </div>
+      </div>
+      <div class="four wide field">
+        <%= f.label :주재료2  %>
+        <div class="ui foodstuff search">
+          <div class="ui icon input">
+            <%= f.hidden_field :foodstuff_id_2 %>
+            <%= f.text_field :foodstuff_id_2, class: "prompt", placeholder: "..."%>
+            <i class="search icon"></i>
+          </div>
+          <div class="results foodstuff_2"></div>
+        </div>
+      </div>
+      <div class="four wide field">
+        <%= f.label :조리법  %>
+        <div class="ui cookingmethod search">
+          <div class="ui icon input">
+            <%= f.hidden_field :cookingmethod_id %>
+            <%= f.text_field :cookingmethod_id, class: "prompt", placeholder: "..."%>
+            <i class="search icon"></i>
+          </div>
+          <div class="results cookingmethod"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="seven wide field">
+      <%= f.label :메뉴_사진  %>
+      <%= image_tag(@menu.picture) if @menu.picture? %>
+      <%= f.file_field :main_picture %>
+    </div>
+
+    <%= f.submit :등록하기, class: "ui primary big button" %>
+
+
+  <% end %>
+</div>

@@ -1,0 +1,14 @@
+<div class="ui big menu">
+  <div class="item">메뉴 목록</div>
+  <div class="item"><%=@store.name%></div>
+  <div class="menu">
+    <div class="ui pointing dropdown item">
+      매장 선택 <i class="dropdown icon"></i>
+      <div class="menu">
+        <% @stores.reverse.each do |s| %>
+        <%= link_to s.name, menus_path(current_store: s.id), class: "item" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

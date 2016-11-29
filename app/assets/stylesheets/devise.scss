@@ -9,6 +9,15 @@ $space : 20px;
     font-size: 3em;
   }
 }
+.ui.basic.sign_in.not_modal {
+  padding-top : 10%;
+  margin : 0 auto;
+  max-width: 40%;
+  font-weight: bold;
+  label, h1 {
+    color:white;
+  }
+}
 // 회원가입의 메세지
 .ui.floating.message {
   margin: 0 auto;

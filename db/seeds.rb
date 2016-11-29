@@ -22,9 +22,9 @@ c_chn = %w(耙 轰动 烤 油炸)
 
 
 # 오너
-Owner.create(email: "j@j.com", password: "123123", name: "줍이", contact_number: "212321")
-Owner.create(email: "s@s.com", password: "123123", name: "세지니", contact_number: "212321")
-Owner.create(email: "h@h.com", password: "123123", name: "호준", contact_number: "212321")
+Owner.create(email: "j@j.com", password: "123123", name: "줍이", contact_number: "01021243218")
+Owner.create(email: "s@s.com", password: "123123", name: "세지니", contact_number: "01022123218")
+Owner.create(email: "h@h.com", password: "123123", name: "호준", contact_number: "01023123216")
 
 
 # 매장
@@ -43,6 +43,6 @@ Store.create(owner_id: 3, name: "까불이", location: "인천", beacon_id: [*('
 Store.all.count.times do |m|
   Menu.create(store_id: m+1, price: 9000, checked_menu: true, quick_menu: true, foodglossary_id: 3000, foodstuff_id: 1, foodstuff_id_2: 2, taste_id: 3, cookingmethod_id: 4)
   Menu.create(store_id: m+1, price: 5000, checked_menu: true, quick_menu: true, foodglossary_id: 100, foodstuff_id: 2, foodstuff_id_2: 1, taste_id: 1, cookingmethod_id: 1)
-  Menu.create(store_id: m+1, price: 4000, checked_menu: true, quick_menu: true, foodglossary_id: 1000, foodstuff_id: 1, foodstuff_id_2: 2, taste_id: 2, cookingmethod_id: 2)
-  Menu.create(store_id: m+1, price: 2000, checked_menu: true, quick_menu: true, foodglossary_id: 2000, foodstuff_id: 4, foodstuff_id_2: 3, taste_id: 3, cookingmethod_id: 3)
+  Menu.create(store_id: m+1, price: 4000, checked_menu: true, quick_menu: false, foodglossary_id: 1000, foodstuff_id: 1, foodstuff_id_2: 2, taste_id: 2, cookingmethod_id: 2)
+  Menu.create(store_id: m+1, price: 2000, checked_menu: true, quick_menu: false, foodglossary_id: 2000, foodstuff_id: 4, foodstuff_id_2: 3, taste_id: 3, cookingmethod_id: 3)
 end

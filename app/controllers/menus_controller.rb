@@ -20,13 +20,13 @@ class MenusController < ApplicationController
     if params[:current_store].to_s.blank?
       # 디폴트 일 때
       @store = @stores.first
-      @menus = Menu.where(@store.id)
-      puts @menus
+      @menus = Menu.where(store_id: @store.id)
+      puts @menus.ids
     else
       # 어떤 매장을 선택했을 때
       @store = @stores.find(params[:current_store])
-      @menus = Menu.where(params[:current_store])
-      puts @menus
+      @menus = Menu.where(store_id: params[:current_store])
+      puts @menus.ids
     end
   end
 
@@ -51,7 +51,7 @@ class MenusController < ApplicationController
 
     respond_to do |format|
       if @menu.save
-        format.html { redirect_to menus_path, notice: 'Menu was successfully created.' }
+        format.html { redirect_to menus_path, notice: '메뉴가 성공적으로 등록되었습니다.' }
         format.json { render :show, status: :created, location: @menu }
       else
         format.html { redirect_to menus_path }
@@ -65,7 +65,7 @@ class MenusController < ApplicationController
   def update
     respond_to do |format|
       if @menu.update(menu_params)
-        format.html { redirect_to @menu, notice: 'Menu was successfully updated.' }
+        format.html { redirect_to @menu, notice: '메뉴가 성공적으로 업데이트 되었습니다.' }
         format.json { render :show, status: :ok, location: @menu }
       else
         format.html { render :edit }
@@ -79,7 +79,7 @@ class MenusController < ApplicationController
   def destroy
     @menu.destroy
     respond_to do |format|
-      format.html { redirect_to menus_url, notice: 'Menu was successfully destroyed.' }
+      format.html { redirect_to board_path, notice: '메뉴가 성공적으로 삭제되었습니다.' }
       format.json { head :no_content }
     end
   end
@@ -92,6 +92,6 @@ class MenusController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def menu_params
-      params.require(:menu).permit(:store_id, :food_picture, :price, :foodstuff_id, :foodstuff_id_2, :foodglossary_id, :cookingmethod_id, :taste_id)
+      params.require(:menu).permit(:store_id, :picture, :price, :foodstuff_id, :foodstuff_id_2, :foodglossary_id, :cookingmethod_id, :taste_id)
     end
 end

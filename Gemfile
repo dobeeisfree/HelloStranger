@@ -1,9 +1,10 @@
 source 'https://rubygems.org'
 
+gem "figaro"
 # for uploading a image
-gem 'carrierwave'
+gem 'carrierwave', git:"https://github.com/carrierwaveuploader/carrierwave.git"
 gem 'fog-aws'
-
+# gem 'carrierwave-aws'
 # devise
 gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

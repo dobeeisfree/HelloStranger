@@ -28,3 +28,14 @@ jQuery(document).ready ->
   #계정의 드롭다운
   $('.ui.pointing.dropdown').dropdown();
   $('.ui.fluid.dropdown').dropdown();
+
+  # 로그인 실패시 가는 곳에 다른 배경을 준다.
+  $('#sessions-new').css 'background-image', "url('/assets/1.jpg')"
+  $('#sessions-new').css 'background-size', "cover"
+
+  $
+
+  # message 알림 시
+  $('.message .close').on 'click', ->
+    $(this).closest('.message').transition 'fade'
+    return
