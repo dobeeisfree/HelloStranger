@@ -10,7 +10,7 @@ class CreateStores < ActiveRecord::Migration
       t.string      :location
       t.string      :beacon_id
       t.string      :business_id
-			t.string      :main_picture, :default => ""
+			# t.string      :main_picture, :default => ""
 
       t.integer     :category , :default => 0
 

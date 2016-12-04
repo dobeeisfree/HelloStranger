@@ -1,5 +1,5 @@
 class Menu < ActiveRecord::Base
-
+  mount_uploader :picture, FoodUploader
   validates_presence_of :store_id
   validates :foodstuff_id, :foodstuff_id_2, :foodglossary_id, :taste_id, :presence => true
 

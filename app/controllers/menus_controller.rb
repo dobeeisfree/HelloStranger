@@ -47,7 +47,15 @@ class MenusController < ApplicationController
   # POST /menus
   # POST /menus.json
   def create
+
+    # if params[:picture]
+    # file = params[:picture]
+    # s3 = FoodUploader.new
+    # s3.store!(file)
+    # end
+
     @menu = Menu.new(menu_params)
+    # @menu.picture = s3.url
 
     respond_to do |format|
       if @menu.save
