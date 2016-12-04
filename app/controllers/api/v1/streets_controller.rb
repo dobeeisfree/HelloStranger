@@ -54,6 +54,9 @@ module Api::V1
           @menu_list['menu'] = m.menu
         end
 
+        # 안드로이드에서 중복된 beacon_dna를 업데이트 하고 싶을 때
+        @mene_list['uniq_beacon_dna'] = @beacon_list.uniq!
+
         render json: @menu_list.to_json, status: :ok if @menu_list != {}
         render json: '잘못된 요청입니다'.to_json, status: :not_found if @menu_list == {}
       end

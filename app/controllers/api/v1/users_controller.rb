@@ -44,32 +44,46 @@ module Api::V1
 
 
     # GET /v1/users/login
-    # def login
+    def login
       # 안드로이드에서 아이디와 비밀번호로 요청
-      # 서버에서는 토큰을 발급하고 세션에 저장한다.
-
+      # 서버에서는 토큰을 발급하고 세션에 저장한다. => 하지않음
+      #
       # params
       # => name, password
+      # 안드로이드에게 유저 객체를 주기위한 용도
 
-      # # 파라미터 값 유효 검사
-      # @msg = Hash.new
-      # @msg['name'] = '이름이 없어요!' if params[:name].present?
-      # @msg['password'] = '비밀번호가 없어요!' if params[:password].present?
-      # @msg = nil if @msg
-      # render json: @msg.to_json, status: :not_found unless @msg.nil?
-      #
-      # @user = Foreigner.find_by(name: params[:name], password: params[:password])
-      # if @user.present?
-      #   # 토큰을 발급한다.
-      #   set_auth_token(@user)
-      #   render json: @user, status: :ok
-      # else
-      #   @msg = Hash.new
-      #   @msg["error"] = "유저를 찾을 수 없습니다."
-      #   render json: @msg, status: :not_found
-      # end
-    #
-    # end
+      # 파라미터 값 유효 검사
+      @msg = Hash.new
+      @msg['name'] = '이름이 없어요!' if params[:name].present?
+      @msg['password'] = '비밀번호가 없어요!' if params[:password].present?
+      @msg = nil if @msg
+      render json: @msg.to_json, status: :not_found unless @msg.nil?
+
+      @user = Foreigner.find_by(name: params[:name], password: params[:password])
+      if @user.present?
+        # 토큰을 발급한다.
+        # set_auth_token(@user)
+        render json: @user, status: :ok
+      else
+        @msg = Hash.new
+        @msg["error"] = "유저를 찾을 수 없습니다."
+        render json: @msg, status: :not_found
+      end
+
+    end
+
+    def taboo_set
+      # 타부를 설정해 유저 모델을 업데이트한다.
+      # params
+      # => user_id, taboo_id
+      @user = Foreigner.find(params[:user_id]) if params[:user_id].present?
+      @user.for_taboo = params[:taboo_id].to_i if @user && params[:taboo_id].present?
+      if @user.save!
+        render nothing: :true, status: :ok
+      else
+        render nothing: :true, status: :not_found
+      end
+    end
 
 
     # GET /v1/users/logout
