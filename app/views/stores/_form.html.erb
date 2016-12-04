@@ -83,7 +83,9 @@
 
       <div class="field">
         <%= f.label :매장_사진  %>
-        <%= image_tag(@store.main_picture) if @store.main_picture? %>
+        <% if @store.main_picture? %>
+        <img src="<%=@store.main_picture%>" width="50">
+        <% end %>
         <%= f.file_field :main_picture %>
         <%= f.hidden_field :main_picture_cache %>
         <%= f.label :매장사진 %>
