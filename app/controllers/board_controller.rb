@@ -1,5 +1,6 @@
 class BoardController < ApplicationController
   before_action :set_stores
+  before_action :authenticate_owner!
 
   def quick
 
@@ -51,7 +52,7 @@ class BoardController < ApplicationController
 
   private
     def set_stores
-      @stores = Owner.find(current_owner.id).stores.all
+      @stores = Owner.find(current_owner.id).stores.all if current_owner
     end
 
 end
