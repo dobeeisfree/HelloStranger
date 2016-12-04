@@ -42,6 +42,7 @@ class MenusController < ApplicationController
 
   # GET /menus/1/edit
   def edit
+    @stores = Owner.find(current_owner.id).stores
   end
 
   # POST /menus
@@ -73,7 +74,7 @@ class MenusController < ApplicationController
   def update
     respond_to do |format|
       if @menu.update(menu_params)
-        format.html { redirect_to @menu, notice: '메뉴가 성공적으로 업데이트 되었습니다.' }
+        format.html { redirect_to board_path, notice: '메뉴가 성공적으로 업데이트 되었습니다.' }
         format.json { render :show, status: :ok, location: @menu }
       else
         format.html { render :edit }
