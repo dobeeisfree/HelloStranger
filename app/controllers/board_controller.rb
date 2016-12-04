@@ -34,19 +34,23 @@ class BoardController < ApplicationController
     @menus = @stores.first.menu if params[:store_id].to_s.blank?
     @menus = @stores.find(params[:store_id]).menu if params[:store_id]
 
-    @max_menu = @menus.count
+    @menus_cnt = @menus.count
 
     # 주문수 별
-    @cnt_jpn = @menus.sorted_by &:count_jpn
-    @cnt_chn = @menus.sorted_by &:count_chn
-    @cnt_kor = @menus.sorted_by &:count_kor
-    @cnt_eng = @menus.sorted_by &:count_eng
+    @menu_select_lang = Array.new
+    @cnt_jpn = @menus.order(:count_jpn)
+    @cnt_chn = @menus.order(:count_chn)
+    @cnt_kor = @menus.order(:count_kor)
+    @cnt_eng = @menus.order(:count_eng)
+    @menu_select_lang = [@cnt_eng, @cnt_kor, @cnt_chn, @cnt_jpn]
 
     # 선호도 별
-    @jpn_like = @menus.sorted_by &:like_jpn
-    @chn_like = @menus.sorted_by &:like_chn
-    @kor_like = @menus.sorted_by &:like_kor
-    @eng_like = @menus.sorted_by &:like_eng
+    @menu_select_like = Array.new
+    @jpn_like = @menus.order(:like_jpn)
+    @chn_like = @menus.order(:like_chn)
+    @kor_like = @menus.order(:like_kor)
+    @eng_like = @menus.order(:like_eng)
+    @menu_select_like = [@eng_like, @kor_like, @chn_like, @jpn_like]
 
   end
 
