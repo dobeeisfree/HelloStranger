@@ -37,12 +37,16 @@ Rails.application.routes.draw do
 
         # searching
         get 'search/menu_name' => 'search#menu_name'
+        get 'search/taste' => 'search#taste'
+        get 'search/foodstuff' => 'search#foodstuff'
+        get 'search/cookingmethod' => 'search#cookingmethod'
 
         # users
         get 'users/delete' => 'users#delete'
         get 'users/login' => 'users#login'
         get 'users/logout' => 'users#logout'
-        get 'users/check_auth_token' => 'users#check_auth_token'
+        get 'users/taboo_set' => 'users#taboo_set'
+        # get 'users/check_auth_token' => 'users#check_auth_token'
         resources :users
 
         # streets

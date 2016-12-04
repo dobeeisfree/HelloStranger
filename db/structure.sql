@@ -3,32 +3,21 @@
 -- Host: localhost    Database: helloStranger_development
 -- ------------------------------------------------------
 -- Server version	5.6.33-0ubuntu0.14.04.1
--- 2016.10.22
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `cookingmethods`
 --
-
-DROP TABLE IF EXISTS `diaries`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `diaries` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `menu_id` int(11) DEFAULT NULL,
-  `foreigner_id` int(11) DEFAULT NULL,
-  `store_id` int(11) DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_rails_18d8377028` (`menu_id`),
-  KEY `fk_rails_4322272df7` (`store_id`),
-  KEY `fk_rails_33f01abd9f` (`foreigner_id`),
-  CONSTRAINT `fk_rails_18d8377028` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`id`),
-  CONSTRAINT `fk_rails_33f01abd9f` FOREIGN KEY (`foreigner_id`) REFERENCES `foreigners` (`id`),
-  CONSTRAINT `fk_rails_4322272df7` FOREIGN KEY (`store_id`) REFERENCES `stores` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
 
 DROP TABLE IF EXISTS `cookingmethods`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -40,6 +29,26 @@ CREATE TABLE `cookingmethods` (
   `jpn` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `chn` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `checked` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `diaries`
+--
+
+DROP TABLE IF EXISTS `diaries`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `diaries` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `foreigner_id` int(11) DEFAULT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `menu_names_kor` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `menu_names_eng` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `menu_names_jpn` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `menu_names_chn` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -77,7 +86,7 @@ CREATE TABLE `foodstuffs` (
   `chn` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `checked` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,9 +100,9 @@ CREATE TABLE `foreigners` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `lang` int(11) DEFAULT NULL,
-  `keep` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `for_taboo` int(11) DEFAULT NULL,
+  `keep` varchar(255) COLLATE utf8_unicode_ci DEFAULT '',
+  `for_taboo` int(11) DEFAULT '0',
+  `lang` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -107,33 +116,28 @@ DROP TABLE IF EXISTS `menus`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `menus` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `store_id` int(11) DEFAULT NULL,
-  `picture` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `price` int(11) DEFAULT NULL,
-  `checked_menu` tinyint(1) DEFAULT NULL,
-  `quick_menu` tinyint(1) DEFAULT NULL,
-  `foodglossary_id` int(11) DEFAULT NULL,
-  `foodstuff_id` int(11) DEFAULT NULL,
-  `foodstuff_id_2` int(11) DEFAULT NULL,
-  `taste_id` int(11) DEFAULT NULL,
-  `cookingmethod_id` int(11) DEFAULT NULL,
+  `store_id` int(11) NOT NULL,
+  `price` int(11) DEFAULT '2016',
+  `checked_menu` tinyint(1) DEFAULT '0',
+  `quick_menu` tinyint(1) DEFAULT '0',
+  `foodglossary_id` int(11) NOT NULL,
+  `foodstuff_id` int(11) NOT NULL,
+  `foodstuff_id_2` int(11) NOT NULL,
+  `taste_id` int(11) NOT NULL,
+  `cookingmethod_id` int(11) NOT NULL,
+  `count_kor` int(11) DEFAULT '0',
+  `count_eng` int(11) DEFAULT '0',
+  `count_jpn` int(11) DEFAULT '0',
+  `count_chn` int(11) DEFAULT '0',
+  `like_kor` int(11) DEFAULT '0',
+  `like_eng` int(11) DEFAULT '0',
+  `like_jpn` int(11) DEFAULT '0',
+  `like_chn` int(11) DEFAULT '0',
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_rails_20b0ce4e50` (`store_id`),
-  KEY `fk_rails_37ad611b6a` (`foodglossary_id`),
-  KEY `fk_rails_7b67bed59f` (`foodstuff_id`),
-  KEY `fk_rails_6ddead576a` (`taste_id`),
-  KEY `fk_rails_49250363ed` (`cookingmethod_id`),
-  KEY `menus_foodstuffs__fk` (`foodstuff_id_2`),
-  CONSTRAINT `fk_rails_20b0ce4e50` FOREIGN KEY (`store_id`) REFERENCES `stores` (`id`),
-  CONSTRAINT `fk_rails_37ad611b6a` FOREIGN KEY (`foodglossary_id`) REFERENCES `foodglossaries` (`id`),
-  CONSTRAINT `fk_rails_49250363ed` FOREIGN KEY (`cookingmethod_id`) REFERENCES `cookingmethods` (`id`),
-  CONSTRAINT `fk_rails_6ddead576a` FOREIGN KEY (`taste_id`) REFERENCES `tastes` (`id`),
-  CONSTRAINT `fk_rails_7b67bed59f` FOREIGN KEY (`foodstuff_id`) REFERENCES `foodstuffs` (`id`),
-  CONSTRAINT `menus_foodstuffs__fk` FOREIGN KEY (`foodstuff_id_2`) REFERENCES `foodstuffs` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `picture` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -162,7 +166,7 @@ CREATE TABLE `owners` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_owners_on_email` (`email`),
   UNIQUE KEY `index_owners_on_reset_password_token` (`reset_password_token`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -179,11 +183,7 @@ CREATE TABLE `reviews` (
   `content` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_rails_be6d6ab568` (`menu_id`),
-  KEY `fk_rails_402b8f23c3` (`foreigner_id`),
-  CONSTRAINT `fk_rails_402b8f23c3` FOREIGN KEY (`foreigner_id`) REFERENCES `foreigners` (`id`),
-  CONSTRAINT `fk_rails_be6d6ab568` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -214,16 +214,14 @@ CREATE TABLE `stores` (
   `location` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `beacon_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `business_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `main_picture` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `category` int(11) DEFAULT NULL,
+  `category` int(11) DEFAULT '0',
   `open_time` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `close_time` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_rails_dabcef777e` (`owner_id`),
-  CONSTRAINT `fk_rails_dabcef777e` FOREIGN KEY (`owner_id`) REFERENCES `owners` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `main_picture` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -241,9 +239,19 @@ CREATE TABLE `tastes` (
   `chn` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `checked` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
--- Dump completed on 2016-10-12 23:58:11
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2016-12-04 15:56:37
 INSERT INTO schema_migrations (version) VALUES ('20160903143132');
 
 INSERT INTO schema_migrations (version) VALUES ('20160903181957');
@@ -265,3 +273,6 @@ INSERT INTO schema_migrations (version) VALUES ('20161010043953');
 INSERT INTO schema_migrations (version) VALUES ('20161022105811');
 
 INSERT INTO schema_migrations (version) VALUES ('20161023043959');
+
+INSERT INTO schema_migrations (version) VALUES ('20161203094226');
+

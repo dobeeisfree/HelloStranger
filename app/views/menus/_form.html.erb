@@ -7,7 +7,11 @@
   <% end %>
   <div class="ui attached menu message">
     <i class="home icon"></i>
+    <% if controller.action_name == 'index' %>
     <div class="header">메뉴를 등록합니다</div>
+    <% elsif controller.action_name == 'edit' %>
+    <div class="header">메뉴를 수정합니다</div>
+    <% end %>
   </div>
   <%= form_for(@menu, html:{multipart: true, class: "ui form attached fluid segment"}) do |f| %>
 
@@ -15,9 +19,13 @@
       <div class="five wide field">
         <%= f.label :매장  %>
         <select class="ui fluid dropdown" name="menu[store_id]">
+          <% if @menu.store_id %>
+          <option value="<%= @menu.store_id %>"><%=  Store.find(@menu.store_id).name %></option>
+          <% else %>
           <option value="">매장선택</option>
-          <% @stores.reverse.each do |s| %>
-          <option value="<%=s.id%>"><%=s.name%></option>
+            <% @stores.reverse.each do |s| %>
+            <option value="<%=s.id%>"><%=s.name%></option>
+            <% end %>
           <% end %>
         </select>
       </div>
@@ -89,11 +97,14 @@
         </div>
       </div>
     </div>
-
+		<!--TODO picture로 바꾸고 s3업로드 테스트 -->
     <div class="seven wide field">
       <%= f.label :메뉴_사진  %>
-      <%= image_tag(@menu.picture) if @menu.picture? %>
-      <%= f.file_field :main_picture %>
+      <% if @menu.picture? %>
+      <img src="<%=@menu.picture%>" width="300">
+      <% end %>
+      <%= f.file_field :picture %>
+      <%= f.hidden_field :picture_cache %>
     </div>
 
     <%= f.submit :등록하기, class: "ui primary big button" %>

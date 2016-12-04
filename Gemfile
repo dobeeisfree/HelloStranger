@@ -2,8 +2,9 @@ source 'https://rubygems.org'
 
 gem "figaro"
 # for uploading a image
-gem 'carrierwave', git:"https://github.com/carrierwaveuploader/carrierwave.git"
-gem 'fog-aws'
+gem 'carrierwave' #, git:"https://github.com/carrierwaveuploader/carrierwave.git"
+gem 'fog', require: 'fog/aws'
+gem 'mini_magick'
 # gem 'carrierwave-aws'
 # devise
 gem 'devise'

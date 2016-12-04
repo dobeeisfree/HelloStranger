@@ -1,6 +1,6 @@
 <div class="ui store-body container">
   <%= form_for(@store, html:{class: "ui form store-new"} ) do |f| %>
-  
+
     <% if alert %>
     <div class="ui positive message">
       <div class="header"><%= alert %></div>
@@ -81,13 +81,14 @@
         </div>
       </div>
 
-      <div class="five wide field">
+      <div class="field">
+        <%= f.label :매장_사진  %>
+        <% if @store.main_picture? %>
+        <img src="<%=@store.main_picture%>" width="50">
+        <% end %>
+        <%= f.file_field :main_picture %>
+        <%= f.hidden_field :main_picture_cache %>
         <%= f.label :매장사진 %>
-        <label for="file" class="green ui icon inverted button">
-           <i class="file icon"></i>
-        사진선택
-        </label>
-       <input type="file" id="file" style="display:none">
       </div>
       <%= f.submit :등록하기, class: "ui fluid primary button" %>
 
