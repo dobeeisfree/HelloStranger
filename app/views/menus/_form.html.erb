@@ -89,11 +89,12 @@
         </div>
       </div>
     </div>
-
+		<!--TODO picture로 바꾸고 s3업로드 테스트 -->
     <div class="seven wide field">
       <%= f.label :메뉴_사진  %>
       <%= image_tag(@menu.picture) if @menu.picture? %>
-      <%= f.file_field :main_picture %>
+      <%= f.file_field :picture %>
+      <%= f.hidden_field :picture_cache %>
     </div>
 
     <%= f.submit :등록하기, class: "ui primary big button" %>
