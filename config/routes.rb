@@ -37,6 +37,9 @@ Rails.application.routes.draw do
 
         # searching
         get 'search/menu_name' => 'search#menu_name'
+        get 'search/taste' => 'search#taste'
+        get 'search/foodstuff' => 'search#foodstuff'
+        get 'search/cookingmethod' => 'search#cookingmethod'
 
         # users
         get 'users/delete' => 'users#delete'
