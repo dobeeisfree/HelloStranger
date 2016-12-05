@@ -43,6 +43,8 @@ module Api::V1
         @beacon_list.each do |b|
           @stores << Store.find_by(beacon_id: b)
         end
+        
+        # puts @beacon_list
 
         # 중복검사와 nil검사
         @stores.delete(nil)
@@ -51,18 +53,28 @@ module Api::V1
         # 각 store마다 메뉴를 보낸다.
         @menu_list = Hash.new
         @stores.each do |m|
-          @menu_list['menu'] = m.menu
+          @menu_list['store_id'] = m.id
+          m.menu.each do |mm|
+            @menu_list['menu'] = m.menu if mm.quick_menu == true
+          end
         end
 
         # 안드로이드에서 중복된 beacon_dna를 업데이트 하고 싶을 때
-        @mene_list['uniq_beacon_dna'] = @beacon_list.uniq!
+        # @mene_list['uniq_beacon_dna'] = @beacon_list.uniq!
 
         render json: @menu_list.to_json, status: :ok if @menu_list != {}
         render json: '잘못된 요청입니다'.to_json, status: :not_found if @menu_list == {}
       end
 
     end
-
+    
+    # GET /v1/streets/get
+    def get_here_store
+      # params
+      # => store_id
+      @store = Store.find(params[:store_id])
+      render json: @store.to_json
+    end
 
     private
     def category(num)

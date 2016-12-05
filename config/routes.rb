@@ -52,7 +52,8 @@ Rails.application.routes.draw do
         # streets
         get 'streets/manu_pan' => 'streets#manu_pan'
         get 'streets/all_around_menus' => 'streets#all_around_menus'
-
+        get 'streets/get_here_store' => 'streets#get_here_store'
+        
         # keep
         get 'keep/index' => 'keep#index'
         get 'keep/save' => 'keep#save'
