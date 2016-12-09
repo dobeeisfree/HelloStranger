@@ -10,7 +10,7 @@ module Api::V1
 
       # 파라미터 값 유효 검사
       @msg = Hash.new
-      @msg['menu_id'] = '메뉴가 없어요!' if params[:menu_id].to_i >= Menu.last.id || Menu.first.id >= params[:menu_id].to_i
+      @msg['menu_id'] = '메뉴가 없어요!' if params[:menu_id].to_i > Menu.last.id || Menu.first.id > params[:menu_id].to_i
       @msg['lang_id'] = '언어를 지정해주세요!' if params[:lang_id].to_i > 3
       @msg = nil if @msg == {}
       render json: @msg.to_json, status: :not_found if @msg

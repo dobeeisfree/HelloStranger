@@ -11,16 +11,21 @@ module Api::V1
       # 파라미터 값 유효 검사
       @msg = Hash.new
       @msg['beacon_id'] = '비콘신호가 발견되지 않아요!' if params[:beacon_id].present?
-      @msg['category'] = '카테고리가 없어요!' if params[:category].present?
-      @msg = nil if @msg
-      render json: @msg.to_json, status: :not_found unless @msg.nil?
+      # @msg['category'] = '카테고리가 없어요!' if params[:category].present?
+      @msg = nil if @msg != {}
+      render json: @msg.to_json, status: :not_found if @msg
 
       # 해당 카테고리의 매장을 비콘아이디로 찾는다.
-      @store = category(params[:category]).find_by(beacon_id: params[:beacon_id])
-      @quick_menu_pan = nil if @store.nil?
-      render json: '퀵 메뉴판 정보를 가져올 수 없습니다'.to_json, status: :not_found if @quick_menu_pan.nil?
+      @store = Store.find_by(beacon_id: params[:beacon_id])
+      
       @quick_menu_pan = @store.menu.find_by(quick_menu: true) if @store
       render json: @quick_menu_pan.to_json, status: :ok if @quick_menu_pan
+      
+      
+      @quick_menu_pan = nil if @store.nil?
+      render json: '퀵 메뉴판 정보를 가져올 수 없습니다'.to_json, status: :not_found if @quick_menu_pan.nil?
+      
+      
 
     end
 
