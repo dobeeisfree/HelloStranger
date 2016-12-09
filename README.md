@@ -11,7 +11,7 @@
 
 <br>
 ## WEB
-<img src="http://cfile10.uf.tistory.com/image/21514740584AB7DB199EB4">
+<img src="http://cfs.tistory.com/custom/blog/65/655698/skin/images/home.png">
 
 웹 사이트 프로젝트는 매장 주인을 위해 만들어졌습니다.  
 매장 주인은 오너로서 가입을 할 수 있고,
