@@ -35,6 +35,8 @@
 기존 번역테이블을 검색할 수 있습니다.
 
 <img src="http://cfile22.uf.tistory.com/image/2770014D584AB8E0169E9D">
+* [TourAPI3.0 에서 추출한 데이터](https://github.com/dobeeisfree/HelloStranger/blob/master/db/local-sql/foodnames.csv)
+* [mysql create table sql](https://github.com/dobeeisfree/HelloStranger/blob/master/db/structure.sql)
 
 <br>
 ## Development
