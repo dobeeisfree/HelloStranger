@@ -9,10 +9,6 @@
 * [웹](https://github.com/dobeeisfree/HelloStranger)
 * [동영상](https://www.youtube.com/watch?v=7hpoo1Dh_qI)
 
-<center>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/7hpoo1Dh_qI" frameborder="0" allowfullscreen></iframe>
-</center>
-
 <br>
 ## WEB
 <img src="http://cfile10.uf.tistory.com/image/21514740584AB7DB199EB4">
