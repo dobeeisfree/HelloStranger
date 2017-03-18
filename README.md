@@ -9,9 +9,9 @@
 매장주인에게는 매장관리를 위한 웹(web)이 제공됩니다.  
 
 
-[모바일](https://github.com/sejinq/HelloStranger)
-[웹](https://github.com/dobeeisfree/HelloStranger)
-[동영상](https://www.youtube.com/watch?v=7hpoo1Dh_qI)
+[모바일](https://github.com/sejinq/HelloStranger)  
+[웹](https://github.com/dobeeisfree/HelloStranger)  
+[동영상](https://www.youtube.com/watch?v=7hpoo1Dh_qI)  
 
 
 ## WEB
@@ -42,7 +42,6 @@
 메뉴명, 맛, 재료, 조리법에는 로컬서치를 구현하여  
 기존 번역테이블을 검색할 수 있습니다.  
 
-
 <img src="http://cfile22.uf.tistory.com/image/2770014D584AB8E0169E9D">
 
 [TourAPI3.0 에서 추출한 데이터](https://github.com/dobeeisfree/HelloStranger/blob/master/db/local-sql/foodnames.csv)  
@@ -64,9 +63,9 @@
 안드로이드가 서버로부터 값을 요구할 때 보는 문서를 작성하였습니다.
 
 ## Wiki
-[For api test user c9](https://github.com/dobeeisfree/HelloStranger/wiki/For-api-test-user-(c9))
-[Server API](https://github.com/dobeeisfree/HelloStranger/wiki/Server-API)
-[데이터베이스 스키마](https://github.com/dobeeisfree/HelloStranger/wiki/데이터-베이스-스키마)
+[For api test user c9](https://github.com/dobeeisfree/HelloStranger/wiki/For-api-test-user-(c9))  
+[Server API](https://github.com/dobeeisfree/HelloStranger/wiki/Server-API)  
+[데이터베이스 스키마](https://github.com/dobeeisfree/HelloStranger/wiki/데이터-베이스-스키마)  
 
 
 __contributor [dobbeeisfree](https://github.com/dobeeisfree)__
